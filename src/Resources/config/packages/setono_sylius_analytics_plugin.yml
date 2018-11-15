@@ -1,0 +1,2 @@
+imports:
+    - { resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/config.yml" }
