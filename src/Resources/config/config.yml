@@ -1,2 +1,4 @@
 imports:
-    - { resource: "@SetonoSyliusSyliusAnalyticsPlugin/Resources/config/resources.yml" }
+    - { resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/resources.yml" }
+    - { resource: resources.yml }
+    - { resource: services.yml }
