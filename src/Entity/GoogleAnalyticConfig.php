@@ -9,7 +9,7 @@ final class GoogleAnalyticConfig implements GoogleAnalyticConfigInterface
     /** @var int */
     protected $id;
 
-    /** @var int */
+    /** @var string */
     protected $trackingId;
 
     public function getId(): ?int
@@ -17,8 +17,13 @@ final class GoogleAnalyticConfig implements GoogleAnalyticConfigInterface
         return $this->id;
     }
 
-    public function getTrackingId(): ?int
+    public function getTrackingId(): ?string
     {
         return $this->trackingId;
+    }
+
+    public function setTrackingId(string $trackingId): void
+    {
+        $this->trackingId = $trackingId;
     }
 }

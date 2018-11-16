@@ -11,7 +11,7 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="trackingId" type="integer" nullable="true" />
+        <field name="trackingId" type="string" nullable="true" />
     </entity>
 
 </doctrine-mapping>
