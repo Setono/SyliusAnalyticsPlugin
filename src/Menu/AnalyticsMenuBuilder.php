@@ -12,7 +12,10 @@ final class AnalyticsMenuBuilder
     {
         $catalogMenu = $event->getMenu()->getChild('catalog');
         $catalogMenu
-            ->addChild('analytics', ['route' => 'setono_sylius_analytics_plugin_admin_analytic_index'])
+            ->addChild('analytics', [
+                'route' => 'setono_sylius_analytics_plugin_admin_analytic_index',
+                'routeParameters' => ['id' => $this->mailChimpConfigContext->getConfig()->getId()],
+                ])
             ->setLabel('setono_sylius_analytics_plugin.ui.analytics_index')
             ->setLabelAttribute('icon', 'bullhorn')
         ;

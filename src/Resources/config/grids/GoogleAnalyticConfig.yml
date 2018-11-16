@@ -1,16 +1,16 @@
 sylius_grid:
     grids:
-        setono_sylius_analytics_plugin_admin_product_analytic:
+        setono_sylius_analytics_plugin_admin_analytic:
             driver:
                 options:
                     class: "%setono_sylius_analytics_plugin.model.analytic.class%"
             fields:
-                name:
+                trackingId:
                     type: string
-                    label: setono_sylius_analytics_plugin.ui.name
+                    label: setono_sylius_analytics_plugin.ui.trackingid
                 enabled:
                     type: twig
-                    label: setono_sylius_analytics_plugin.ui.enabled
+                    label: setono_sylius_product_callouts_plugin.ui.enabled
                     options:
                         template: SyliusUiBundle:Grid/Field:enabled.html.twig
             filters:
