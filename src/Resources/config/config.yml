@@ -2,3 +2,4 @@ imports:
     - { resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/resources.yml" }
     - { resource: resources.yml }
     - { resource: services.yml }
+    - { resource: grids.yml }

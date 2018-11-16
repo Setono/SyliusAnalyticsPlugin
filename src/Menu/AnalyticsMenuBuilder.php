@@ -12,7 +12,7 @@ final class AnalyticsMenuBuilder
     {
         $catalogMenu = $event->getMenu()->getChild('catalog');
         $catalogMenu
-            ->addChild('analytics', ['route' => 'setono_sylius_analytics_plugin_admin_analytics_index'])
+            ->addChild('analytics', ['route' => 'setono_sylius_analytics_plugin_admin_analytic_index'])
             ->setLabel('setono_sylius_analytics_plugin.ui.analytics_index')
             ->setLabelAttribute('icon', 'bullhorn')
         ;

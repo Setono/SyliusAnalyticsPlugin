@@ -1,0 +1,11 @@
+setono_sylius_analytics_plugin_admin_analytic:
+    resource: |
+        section: admin
+        alias: setono_sylius_analytics_plugin.analytic
+        templates: SyliusAdminBundle:Crud
+        permission: true
+        redirect: update
+        grid: setono_sylius_analytics_plugin_admin_analytic
+        vars:
+            all:
+    type: sylius.resource
