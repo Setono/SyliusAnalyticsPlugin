@@ -9,4 +9,6 @@ use Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigInterface;
 interface AnalyticConfigContextInterface
 {
     public const DEFAULT_CODE = 'default';
+
+    public function getConfig(): GoogleAnalyticConfigInterface;
 }

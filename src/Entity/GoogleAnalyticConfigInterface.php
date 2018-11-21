@@ -14,10 +14,4 @@ interface GoogleAnalyticConfigInterface extends ResourceInterface
     public function getId(): ?int;
     public function getTrackingId(): ?string;
     public function setTrackingId(string $trackingId): void;
-    public function getLists(): Collection;
-    public function setLists($lists): void;
-    public function addList(GoogleAnalyticListInterface $googleAnalyticList): void;
-    public function removeList(GoogleAnalyticListInterface $googleAnalyticList): void;
-    public function hasList(GoogleAnalyticListInterface $googleAnalyticList): bool;
-    public function getListForChannelAndLocale(ChannelInterface $channel, LocaleInterface $locale): ?GoogleAnalyticListInterface;
 }
