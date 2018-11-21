@@ -1,3 +1,6 @@
+imports:
+- { resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/event_listener.yml" }
+
 services:
     setono_sylius_analytics_plugin.listener.menu.analytic:
         class: Setono\SyliusAnalyticsPlugin\Menu\AnalyticsMenuBuilder
