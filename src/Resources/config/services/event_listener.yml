@@ -1,7 +1,7 @@
 services:
-    setono_sylius_analytics_plugin.listener.javascript:
+    setono_sylius_analytics_plugin.listener.admin.layout.javascript:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-        - '@SetonoSyliusAnalyticsPlugin/Admin/_javascripts.html.twig'
+        - '@@SetonoSyliusAnalyticsPlugin/Admin/_javascripts.html.twig'
         tags:
         - { name: kernel.event_listener, event: sonata.block.event.sylius.admin.layout.javascripts, method: onBlockEvent }

@@ -1,0 +1,7 @@
+services:
+    setono_sylius_analytics_plugin.context.config:
+        class: Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContext
+        public: true
+        arguments:
+        - "@setono_sylius_analytics_plugin.repository.analytic"
+        - "@setono_sylius_analytics_plugin.factory.analytic"

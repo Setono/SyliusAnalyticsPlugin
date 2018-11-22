@@ -5,3 +5,4 @@ sylius_resource:
             classes:
                 model: Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfig
                 interface: Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigInterface
+                repository: Setono\SyliusAnalyticsPlugin\Repository\AnalyticConfigRepository
