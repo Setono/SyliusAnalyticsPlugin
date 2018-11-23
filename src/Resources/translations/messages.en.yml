@@ -1,0 +1,5 @@
+setono_sylius_analytics_plugin:
+    ui:
+        analytics_index: Google Analytic Index
+        trackingid: TrackingID
+        enabled: Enabled
