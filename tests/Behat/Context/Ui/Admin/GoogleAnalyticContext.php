@@ -8,5 +8,4 @@ use Behat\Behat\Context\Context;
 
 final class GoogleAnalyticContext implements Context
 {
-
 }

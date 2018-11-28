@@ -7,7 +7,6 @@ namespace Setono\SyliusAnalyticsPlugin\Menu;
 use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
-
 final class AnalyticsMenuBuilder
 {
     /** @var AnalyticConfigContextInterface */
@@ -24,7 +23,7 @@ final class AnalyticsMenuBuilder
 
         $catalogMenu
             ->addChild('analytics', [
-                'route' => 'setono_sylius_analytics_plugin_admin_analytic_index',
+                'route' => 'setono_sylius_analytics_plugin_admin_analytic_update',
                 'routeParameters' => ['id' => $this->analyticConfigContext->getConfig()->getId()],
                 ])
             ->setLabel('setono_sylius_analytics_plugin.ui.analytics_index')

@@ -1,0 +1,12 @@
+Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigTranslation:
+    properties:
+        name:
+        - NotBlank:
+              message: 'setono_sylius_facebook_trcking_plugin.google_analytic_config.tracking_id.not_blank'
+              groups: ['setono']
+        - Length:
+              min: 2
+              max: 250
+              minMessage: 'setono_sylius_facebook_trcking_plugin.google_analytic_config.tracking_id.min_length'
+              maxMessage: 'setono_sylius_facebook_trcking_plugin.google_analytic_config.tracking_id.max_length'
+              groups: ['setono']

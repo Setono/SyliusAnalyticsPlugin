@@ -33,7 +33,7 @@ final class AnalyticConfigContext implements AnalyticConfigContextInterface
             $config->setTrackingId(self::DEFAULT_CODE);
             $this->analyticConfigRepository->add($config);
         }
+
         return $config;
     }
-
 }

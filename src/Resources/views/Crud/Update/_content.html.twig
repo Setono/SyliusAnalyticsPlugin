@@ -1,0 +1,21 @@
+<div class="ui segment">
+    {{ form_start(form, {'action': path(configuration.getRouteName('update'), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    <input type="hidden" name="_method" value="PUT" />
+    {% if configuration.vars.templates.form is defined %}
+        {% include configuration.vars.templates.form %}
+    {% else %}
+        {{ form_widget(form) }}
+    {% endif %}
+
+    {{ sonata_block_render_event(event_prefix ~ '.form', {'resource': resource, 'form': form}) }}
+
+    {#TODO#}
+    <div class="ui basic segment">
+        <div class="ui buttons">
+            <button class="ui labeled icon primary button" type="submit" id="sylius_save_changes_button"><i class="save icon"></i> {{ 'sylius.ui.save_changes'|trans }}</button>
+        </div>
+    </div>
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

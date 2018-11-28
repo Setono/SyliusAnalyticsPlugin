@@ -1,0 +1,6 @@
+setono_sylius_analytics_plugin:
+    google_analytic_config:
+        tracking_id:
+            not_blank: Tracking ID cannot be blank.
+            min_length: Tracking ID must be at least {{ limit }} characters long.
+            max_length: Tracking ID can not be longer than {{ limit }} characters.

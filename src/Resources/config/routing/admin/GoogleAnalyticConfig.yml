@@ -2,10 +2,14 @@ setono_sylius_analytics_plugin_admin_analytic:
     resource: |
         section: admin
         alias: setono_sylius_analytics_plugin.analytic
-        templates: SyliusAdminBundle:Crud
+        templates: SetonoSyliusAnalyticsPlugin:Crud
+        except: ['create', 'delete']
         permission: true
         redirect: update
         grid: setono_sylius_analytics_plugin_admin_analytic
         vars:
             all:
+                templates:
+                    form: "@SetonoSyliusAnalyticsPlugin/GoogleAnalyticConfig/Crud/_form.html.twig"
+                    breadcrumb: "@SetonoSyliusAnalyticsPlugin/GoogleAnalyticConfig/Crud/_breadcrumb.html.twig"
     type: sylius.resource
