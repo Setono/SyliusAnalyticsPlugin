@@ -14,12 +14,10 @@ final class GoogleAnalyticEventListener
      * @var string
      */
     private $template;
+
     /** @var AnalyticConfigContextInterface */
     private $AnalyticConfigContext;
 
-    /**
-     * @param string $template
-     */
     public function __construct(string $template, AnalyticConfigContextInterface $AnalyticConfigContext)
     {
         $this->template = $template;
@@ -35,7 +33,9 @@ final class GoogleAnalyticEventListener
         $block->setId(uniqid('', true));
         $block->setSettings(array_replace($event->getSettings(), [
             'template' => $this->template,
-            'config' => $this->AnalyticConfigContext->getConfig(),
+            'attr' => [
+                'config' => $this->AnalyticConfigContext->getConfig(),
+                ],
         ]));
         $block->setType('sonata.block.service.template');
         $event->addBlock($block);

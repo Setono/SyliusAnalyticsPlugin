@@ -1,2 +1,2 @@
 imports:
-    - { resource: "suites/ui/managing_google_analytic.yml" }
+    - suites/ui/managing_google_analytic.yml

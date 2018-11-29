@@ -5,7 +5,7 @@ Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfig:
           message: 'setono_sylius_analytics_plugin.google_analytic_config.tracking_id.unique'
           groups: ['setono']
     properties:
-        pixelCode:
+        trackingId:
         - NotBlank:
               message: 'setono_sylius_facebook_trcking_plugin.google_analytic_config.tracking_id.not_blank'
               groups: ['setono']

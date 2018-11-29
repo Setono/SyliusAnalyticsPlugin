@@ -8,6 +8,9 @@ sylius_grid:
                 trackingId:
                     type: string
                     label: setono_sylius_analytics_plugin.ui.trackingid
+                name:
+                    type: string
+                    label: setono_sylius_analytics_plugin.ui.name
                 enabled:
                     type: twig
                     label: setono_sylius_product_callouts_plugin.ui.enabled
