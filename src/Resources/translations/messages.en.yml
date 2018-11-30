@@ -5,3 +5,4 @@ setono_sylius_analytics_plugin:
         tracking_id: TrackingID
         enabled: Enabled
         edit_analytic: Edit Analytic Config
+        name: Name

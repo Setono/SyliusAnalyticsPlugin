@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Entity;
 
-use Setono\SyliusFacebookTrackingPlugin\Entity\GoogleAnalyticConfigTranslation;
-use Setono\SyliusFacebookTrackingPlugin\Entity\GoogleAnalyticConfigTranslationInterface;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
@@ -48,7 +46,7 @@ class GoogleAnalyticConfig implements GoogleAnalyticConfigInterface
         return $this->trackingId;
     }
 
-    public function setTrackingId(string $trackingId): void
+    public function setTrackingId(?string $trackingId): void
     {
         $this->trackingId = $trackingId;
     }

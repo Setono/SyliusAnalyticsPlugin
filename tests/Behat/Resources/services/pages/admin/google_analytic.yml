@@ -1,7 +1,0 @@
-services:
-    setono_sylius_analytics.behat.page.admin.analytics.create:
-        class: Tests\Setono\SyliusAnalyticslugin\Behat\Page\Admin\GoogleAnalytic\CreatePage
-        parent: sylius.behat.page.admin.crud.create
-        public: false
-        arguments:
-        - 'setono_sylius_analytics_plugin_admin_analytics_create'

@@ -1,2 +1,2 @@
 imports:
-    - { resource: "admin/google_analytic.yml" }
+    - { resource: "admin/google_analytic_config.yml" }

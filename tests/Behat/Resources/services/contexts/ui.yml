@@ -2,7 +2,8 @@ services:
     setono_sylius_analytics.behat.context.ui.admin.analytics:
         class: Tests\Setono\SyliusAnalyticsPlugin\Behat\Context\Ui\Admin\GoogleAnalyticContext
         arguments:
-        - "@setono_sylius_analytics.behat.page.admin.analytics.create"
-        - "@sylius.behat.notification_checker"
+            - "@setono_sylius_analytics.behat.page.admin.analytics.update"
+            - "@sylius.behat.notification_checker"
+            - "@__symfony__.setono_sylius_analytics_plugin.context.config"
         tags:
-        - { name: fob.context_service }
+            - { name: fob.context_service }

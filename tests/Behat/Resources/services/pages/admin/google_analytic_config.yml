@@ -1,0 +1,7 @@
+services:
+    setono_sylius_analytics.behat.page.admin.analytics.update:
+        class: Tests\Setono\SyliusAnalyticsPlugin\Behat\Page\Admin\GoogleAnalyticConfig\UpdatePage
+        parent: sylius.behat.page.admin.crud.update
+        public: false
+        arguments:
+            - 'setono_sylius_analytics_plugin_admin_analytic_update'
