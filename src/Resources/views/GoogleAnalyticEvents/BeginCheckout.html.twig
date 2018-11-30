@@ -1,5 +1,7 @@
 <script>
-    $(document).bind("ajaxSuccess", function() {
-        gtag('event', 'begin_checkout');
-    });
+    window.onload = function () {
+        $('.ui.huge.primary.fluid.labeled.icon.button').click(function () {
+            gtag('event', 'begin_checkout');
+        });
+    }
 </script>
