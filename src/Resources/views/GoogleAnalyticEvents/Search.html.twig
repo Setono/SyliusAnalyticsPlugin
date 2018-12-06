@@ -1,3 +1,7 @@
 <script>
-    gtag('event', 'remove_from_cart', { search_term : 'Google Analytic Search' });
+    window.onload = function () {
+        $('.ui.primary.icon.labeled.button').click(function () {
+            gtag('event', 'search', {search_term: 'Google Analytic Search'});
+        });
+    }
 </script>

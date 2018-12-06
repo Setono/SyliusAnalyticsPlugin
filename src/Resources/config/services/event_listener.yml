@@ -28,6 +28,16 @@ services:
         tags:
         - { name: kernel.event_listener, event: sylius.shop.cart.summary.before_suggestions, method: onBlockEvent }
 
+    setono_sylius_analytics_plugin.event_listener.google_analytic_checkout_progress:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+        arguments:
+        - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\CheckoutProgress.html.twig'
+        tags:
+        - { name: kernel.event_listener, event: sylius.shop.checkout.address.before_form, method: onBlockEvent }
+        - { name: kernel.event_listener, event: sylius.shop.checkout.select.shipping.before_form, method: onBlockEvent }
+        - { name: kernel.event_listener, event: sylius.shop.checkout.select.payment.before_form, method: onBlockEvent }
+        - { name: kernel.event_listener, event: sylius.shop.checkout.complete.before_summary, method: onBlockEvent }
+
     setono_sylius_analytics_plugin.event_listener.google_analytic_purchase:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
@@ -56,10 +66,26 @@ services:
         tags:
         - { name: kernel.event_listener, event: sylius.shop.register.form, method: onBlockEvent }
 
+    setono_sylius_analytics_plugin.event_listener.google_analytic_search:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+        arguments:
+        - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\Search.html.twig'
+        tags:
+        - { name: kernel.event_listener, event: sylius.shop.product.index.after_search, method: onBlockEvent }
+
     setono_sylius_analytics_plugin.event_listener.google_analytic_select_content:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
         - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\SelectContent.html.twig'
         tags:
         - { name: kernel.event_listener, event: sylius.admin.customer.show.after_information, method: onBlockEvent }
+
+    setono_sylius_analytics_plugin.event_listener.google_analytic_view_item_list:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+        arguments:
+        - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\ViewItemList.html.twig'
+        tags:
+        - { name: kernel.event_listener, event: sylius.shop.product_review.index.after_list, method: onBlockEvent }
+
+
 
