@@ -1,7 +1,9 @@
 <script>
-    $(document).bind("ajaxSuccess", function(){
-        gtag('event', 'add_to_cart', {
-            'event_label' : 'Google Analytic Add to cart'
-        });
-    })
+    window.onload = function () {
+        $(document).bind("ajaxSuccess", function () {
+            gtag('event', 'add_to_cart', {
+                'event_label': 'Google Analytic Add to cart'
+            });
+        })
+    }
 </script>
