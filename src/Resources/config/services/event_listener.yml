@@ -2,31 +2,31 @@ services:
     setono_sylius_analytics_plugin.event_listener.google_analytic:
         class: Setono\SyliusAnalyticsPlugin\EventListener\GoogleAnalyticEventListener
         arguments:
-        - 'SetonoSyliusAnalyticsPlugin::google_analytic.html.twig'
-        - "@setono_sylius_analytics_plugin.context.config"
+            - 'SetonoSyliusAnalyticsPlugin::google_analytic.html.twig'
+            - "@setono_sylius_analytics_plugin.context.config"
         tags:
-        - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.stylesheets, method: onBlockEvent }
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.stylesheets, method: onBlockEvent }
 
     setono_sylius_analytics_plugin.event_listener.google_analytic_add_payment_info:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-        - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\AddPaymentInfo.html.twig'
+            - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\AddPaymentInfo.html.twig'
         tags:
-        - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.checkout.select_payment.before_form, method: onBlockEvent }
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.checkout.select_payment.before_form, method: onBlockEvent }
 
     setono_sylius_analytics_plugin.event_listener.google_analytic_add_to_cart:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-        - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\AddToCart.html.html.twig'
+            - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\AddToCart.html.twig'
         tags:
-        - { name: kernel.event_listener, event: event: sylius.shop.product.show.after_add_to_cart, method: onBlockEvent }
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.product.show.after_add_to_cart, method: onBlockEvent }
 
     setono_sylius_analytics_plugin.event_listener.google_analytic_begin_checkout:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-        - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\BeginCheckout.html.twig'
+            - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\BeginCheckout.html.twig'
         tags:
-        - { name: kernel.event_listener, event: sylius.shop.cart.summary.before_suggestions, method: onBlockEvent }
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.cart.summary.before_suggestions, method: onBlockEvent }
 
     setono_sylius_analytics_plugin.event_listener.google_analytic_checkout_progress:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
@@ -43,14 +43,14 @@ services:
         arguments:
         - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\Purchase.html.twig'
         tags:
-        - { name: kernel.event_listener, event: event: sonata.block.event.sylius.shop.order.thank_you.after_message, method: onBlockEvent }
+        - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.order.thank_you.after_message, method: onBlockEvent }
 
-    setono_sylius_analytics_plugin.event_listener.google_analytic_view_item:
-        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
-        arguments:
-        - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\ViewItem.html.twig'
-        tags:
-        - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.product.show.after_add_to_cart, method: onBlockEvent }
+#    setono_sylius_analytics_plugin.event_listener.google_analytic_view_item:
+#        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+#        arguments:
+#        - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\ViewItem.html.twig'
+#        tags:
+#        - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.product.show.after_add_to_cart, method: onBlockEvent }
 
     setono_sylius_analytics_plugin.event_listener.google_analytic_login:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
@@ -64,7 +64,7 @@ services:
         arguments:
         - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\SignUp.html.twig'
         tags:
-        - { name: kernel.event_listener, event: sylius.shop.register.form, method: onBlockEvent }
+        - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.login.after_register, method: onBlockEvent }
 
     setono_sylius_analytics_plugin.event_listener.google_analytic_search:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
