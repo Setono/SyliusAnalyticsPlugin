@@ -1,3 +1,8 @@
 <script>
-    gtag('event', 'login', { method : 'Google Analytic Login' });
+    window.onload = function () {
+        $(document).bind("ajaxSuccess", function(){
+            gtag('event', 'login', {method: 'Google Analytic Login'});
+            console.log("sent");
+        });
+    };
 </script>

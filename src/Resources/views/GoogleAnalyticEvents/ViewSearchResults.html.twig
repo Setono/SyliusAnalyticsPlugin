@@ -1,3 +1,7 @@
 <script>
-    gtag('event', 'view_search_results', { search_term : 'Google Analytic View Search Results' });
+    window.onload = function () {
+        if(window.location.href.indexOf("search") > -1) {
+            gtag('event', 'view_search_results', { search_term : 'Google Analytic View Search Results' });
+        };
+    };
 </script>
