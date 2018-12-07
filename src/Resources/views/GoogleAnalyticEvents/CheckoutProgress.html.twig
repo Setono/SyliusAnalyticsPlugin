@@ -1,11 +1,21 @@
 <script>
-    {% if( {{ settings.order.checkoutState }} == "addressed") %}
+    {{ dump(settings.order.checkoutState) }}
+    {% if settings.order.checkoutState == "addressed" %}
+    {{ dump(settings.order.checkoutState) }}
     gtag('event', 'checkout_progress');
-    {% if( {{ settings.order.checkoutState }} == "payment_selected") %}
+    console.log("address");
+    {% elseif settings.order.checkoutState == "payment_selected" %}
+    {{ dump(settings.order.checkoutState) }}
+    {{ dump(settings.order) }}
     gtag('event', 'checkout_progress');
-    {% if( {{ settings.order.checkoutState }} == "shipping_selected") %}
+    console.log("payment");
+    {% elseif settings.order.checkoutState == "shipping_selected" %}
+    {{ dump(settings.order.checkoutState) }}
     gtag('event', 'checkout_progress');
-    {% if( {{ settings.order.checkoutState }} == "completed") %}
+    console.log("shipping");
+    {% elseif settings.order.checkoutState == "completed" %}
+    {{ dump(settings.order.checkoutState) }}
     gtag('event', 'checkout_progress');
+    console.log("completed");
     {% endif %}
 </script>
