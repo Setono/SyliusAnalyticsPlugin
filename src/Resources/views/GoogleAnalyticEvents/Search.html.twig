@@ -1,7 +1,7 @@
 <script>
     window.onload = function () {
         $('.ui.primary.icon.labeled.button').click(function () {
-            gtag('event', 'search', {search_term: 'Google Analytic Search'});
+            gtag('event', 'search', { search_term: $('#criteria_search_value').val() });
         });
-    }
+    };
 </script>
