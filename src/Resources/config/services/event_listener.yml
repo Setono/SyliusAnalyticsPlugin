@@ -57,7 +57,7 @@ services:
         arguments:
         - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\Refund.html.twig'
         tags:
-        - { name: kernel.event_listener, event: lorem.ipsum, method: onBlockEvent } #TODO find matching event
+        - { name: kernel.event_listener, event: sonata.block.event.sylius.payment.post_update, method: onBlockEvent } #TODO find matching event
 
     setono_sylius_analytics_plugin.event_listener.google_analytic_remove_from_cart:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
@@ -106,7 +106,7 @@ services:
         arguments:
         - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\ViewPromotion.html.twig'
         tags:
-        - { name: kernel.event_listener, event: lorem.ipsum, method: onBlockEvent } #TODO find matching event
+        - { name: kernel.event_listener, event: sylius.shop.cart.summary.before_coupon, method: onBlockEvent } #TODO find matching event
 
     setono_sylius_analytics_plugin.event_listener.google_analytic_view_search_results:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener

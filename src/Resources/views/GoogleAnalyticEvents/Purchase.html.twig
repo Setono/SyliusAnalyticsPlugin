@@ -1,7 +1,8 @@
 <script>
     gtag('event', 'purchase',
     {
-        value: '{{ settings.order.total }}',
-        currency: '{{ settings.order.currencyCode }}',
+        "transaction_id": '{{ settings.order.number }}',
+        "value": '{{ settings.order.total }}',
+        "currency": '{{ settings.order.currencyCode }}',
     });
 </script>

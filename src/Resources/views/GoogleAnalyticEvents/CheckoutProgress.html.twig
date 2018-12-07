@@ -1,3 +1,11 @@
 <script>
+    {% if( {{ settings.order.checkoutState }} == "addressed") %}
     gtag('event', 'checkout_progress');
+    {% if( {{ settings.order.checkoutState }} == "payment_selected") %}
+    gtag('event', 'checkout_progress');
+    {% if( {{ settings.order.checkoutState }} == "shipping_selected") %}
+    gtag('event', 'checkout_progress');
+    {% if( {{ settings.order.checkoutState }} == "completed") %}
+    gtag('event', 'checkout_progress');
+    {% endif %}
 </script>
