@@ -1,6 +1,6 @@
 <script>
     window.onload = function () {
-        $(document).bind("ajaxSuccess", function(){
+        $('.ui.blue.submit.button').click(function () {
             gtag('event', 'login', {method: 'Google Analytic Login'});
             console.log("sent");
         });

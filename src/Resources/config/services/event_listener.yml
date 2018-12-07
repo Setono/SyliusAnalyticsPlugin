@@ -43,7 +43,7 @@ services:
         arguments:
             - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\Login.html.twig'
         tags:
-            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.before_body, method: onBlockEvent }
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.login.before_register, method: onBlockEvent }
 
     setono_sylius_analytics_plugin.event_listener.google_analytic_purchase:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
