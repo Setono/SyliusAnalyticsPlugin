@@ -52,12 +52,12 @@ services:
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.order.thank_you.after_message, method: onBlockEvent }
 
-    setono_sylius_analytics_plugin.event_listener.google_analytic_refund: #TODO find matching event
+    setono_sylius_analytics_plugin.event_listener.google_analytic_refund: #TODO
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
             - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\Refund.html.twig'
         tags:
-            - { name: kernel.event_listener, event: lorem.ipsum, method: onBlockEvent }
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.payment.post_update, method: onBlockEvent }
 
     setono_sylius_analytics_plugin.event_listener.google_analytic_remove_from_cart:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
@@ -101,12 +101,12 @@ services:
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.product.index.before_pagination, method: onBlockEvent }
 
-    setono_sylius_analytics_plugin.event_listener.google_analytic_view_promotion: #TODO find matching event
+    setono_sylius_analytics_plugin.event_listener.google_analytic_view_promotion: #TODO
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
             - 'SetonoSyliusAnalyticsPlugin::GoogleAnalyticEvents\ViewPromotion.html.twig'
         tags:
-            - { name: kernel.event_listener, event: lorem.ipsum, method: onBlockEvent }
+            - { name: kernel.event_listener, event: sylius.shop.cart.summary.before_coupon, method: onBlockEvent }
 
     setono_sylius_analytics_plugin.event_listener.google_analytic_view_search_results:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
