@@ -1,11 +1,7 @@
 <script>
-    console.log("skrypt się pojawił");
-    window.onload = function () {
-        console.log("skrypt się załadował");
+    window.addEventListener("load", function() {
         $('.ui.blue.submit.button').click(function () {
-            console.log("przed klikiem");
             gtag('event', 'login', {method: 'Google Analytic Login'});
-            console.log("po kliku");
         });
-    }
+    });
 </script>
