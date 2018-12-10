@@ -48,14 +48,6 @@ final class GoogleAnalyticContext implements Context
     }
 
     /**
-     * @When I name it :name
-     */
-    public function iNameIt(string $name): void
-    {
-        $this->updatePage->fillName($name);
-    }
-
-    /**
      * @When I add it
      */
     public function iAddIt(): void

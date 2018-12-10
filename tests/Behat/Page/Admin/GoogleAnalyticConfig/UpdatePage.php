@@ -12,9 +12,4 @@ final class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 	{
 		$this->getDocument()->fillField('google_analytic_config_trackingId', $trackingId);
 	}
-
-	public function fillName(string $name): void
-    {
-        $this->getDocument()->fillField('google_analytic_config_translations_en_US_name', $name);
-    }
 }

@@ -12,6 +12,5 @@ Feature: Adding Google Analytic
   Scenario: Adding product callout
     When I go to the create google analytic page
     And I fill the trackingId with "New Google Tracking"
-    And I name it "Testing"
     And I add it
     Then I should be notified that it has been successfully created

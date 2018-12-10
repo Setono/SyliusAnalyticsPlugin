@@ -10,5 +10,4 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     public function fillTrackingId(string $trackingId): void;
 
-    public function fillName(string $name): void;
 }
