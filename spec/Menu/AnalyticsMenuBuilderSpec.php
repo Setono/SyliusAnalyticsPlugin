@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace spec\Setono\SyliusAnalyticsPlugin\Menu;
 
+use Knp\Menu\ItemInterface;
 use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
+use Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigInterface;
 use Setono\SyliusAnalyticsPlugin\Menu\AnalyticsMenuBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -25,14 +27,19 @@ final class AnalyticsMenuBuilderSpec extends ObjectBehavior
     function it_adds_analytics(
         AnalyticConfigContextInterface $analyticConfigContext,
         MenuBuilderEvent $event,
-        MenuBuilderEvent $catalogMenu
+        ItemInterface $catalogMenu,
+        ItemInterface $menu,
+        GoogleAnalyticConfigInterface $analyticConfig
     ): void {
-        $event->getMenu()->getChild('catalog')->willReturn($catalogMenu);
+        $analyticConfig->getId()->willReturn(1);
+        $analyticConfigContext->getConfig()->willReturn($analyticConfig);
+        $event->getMenu()->willReturn($menu);
+        $menu->getChild('catalog')->willReturn($catalogMenu);
 
         $catalogMenu
             ->addChild('analytics', [
                 'route' => 'setono_sylius_analytics_plugin_admin_analytic_update',
-                'routeParameters' => ['id' => $analyticConfigContext->getConfig()->getId()],
+                'routeParameters' => ['id' => 1],
             ])
             ->willReturn($catalogMenu)
         ;
