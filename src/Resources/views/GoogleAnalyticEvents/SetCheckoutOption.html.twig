@@ -1,3 +1,5 @@
 <script>
-    gtag('event', 'set_checkout_option');
+    gtag('event', 'set_checkout_option', {
+        "checkout_option": '{{ settings.order.checkoutState }}',
+    });
 </script>
