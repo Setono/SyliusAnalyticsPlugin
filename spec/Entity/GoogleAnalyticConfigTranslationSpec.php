@@ -22,12 +22,12 @@ final class GoogleAnalyticConfigTranslationSpec extends ObjectBehavior
         $this->shouldHaveType(GoogleAnalyticConfigTranslationInterface::class);
     }
 
-    function it_has_id(): void
+    function it_has_no_id_by_default(): void
     {
-        $this->getId()->shouldReturn('1');
+        $this->getId()->shouldReturn(null);
     }
 
-    function it_has_name(): void
+    function its_name_is_mutable(): void
     {
         $this->setName('google');
         $this->getName()->shouldReturn('google');

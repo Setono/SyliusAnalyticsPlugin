@@ -7,6 +7,7 @@ namespace spec\Setono\SyliusAnalyticsPlugin\Entity;
 use Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfig;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Doctrine\Common\Collections\Collection;
 use Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigInterface;
 
 
@@ -22,20 +23,23 @@ final class GoogleAnalyticConfigSpec extends ObjectBehavior
         $this->shouldHaveType(GoogleAnalyticConfigInterface::class);
     }
 
-    function it_has_id(): void
+    function it_has_no_id_by_default(): void
     {
-        $this->getId()->shouldReturn('1');
+        $this->getId()->shouldReturn(null);
     }
 
-    function it_has_name(): void
-    {
-        $this->setName('google');
-        $this->getName()->shouldReturn('google');
-    }
-
-    function it_has_tracking_id(): void
+    function it_tracking_id_is_mutable(): void
     {
         $this->setTrackingId('ab12');
         $this->getTrackingId()->shouldReturn('ab12');
     }
+
+    function it_toggles(): void
+    {
+        $this->enable();
+        $this->isEnabled()->shouldReturn(true);
+        $this->disable();
+        $this->isEnabled()->shouldReturn(false);
+    }
+
 }

@@ -36,6 +36,8 @@ final class AnalyticConfigContextSpec extends ObjectBehavior
         GoogleAnalyticConfigInterface $config
     ): void {
         $analyticConfigRepository->findConfig()->willReturn($config);
+
+        $this->getConfig();
     }
 
     function it_creates_new_config_when_config_is_null(
@@ -44,9 +46,11 @@ final class AnalyticConfigContextSpec extends ObjectBehavior
         GoogleAnalyticConfigInterface $config
     ): void {
         $analyticConfigRepository->findConfig()->willReturn(null);
-        $analyticConfigRepository->createNew()->willReturn($config);
+        $analyticConfigFactory->createNew()->willReturn($config);
 
-        $config->setTrackingId('google')->shouldBeCalled;
-        $analyticConfigRepository->add($config)->shouldBeCalled;
+        $config->setTrackingId('default')->shouldBeCalled();
+        $analyticConfigRepository->add($config)->shouldBeCalled();
+
+        $this->getConfig();
     }
 }

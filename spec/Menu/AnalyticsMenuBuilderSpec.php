@@ -38,5 +38,7 @@ final class AnalyticsMenuBuilderSpec extends ObjectBehavior
         ;
         $catalogMenu->setLabel('setono_sylius_analytics_plugin.ui.analytics_index')->willReturn($catalogMenu);
         $catalogMenu->setLabelAttribute('icon', 'bullhorn')->shouldBeCalled();
+
+        $this->addAnalytics($event);
     }
 }
