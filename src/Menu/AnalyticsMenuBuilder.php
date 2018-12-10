@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Menu;
 
+use Knp\Menu\ItemInterface;
 use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
@@ -19,6 +20,7 @@ final class AnalyticsMenuBuilder
 
     public function addAnalytics(MenuBuilderEvent $event): void
     {
+        /** @var ItemInterface $catalogMenu */
         $catalogMenu = $event->getMenu()->getChild('catalog');
 
         $catalogMenu

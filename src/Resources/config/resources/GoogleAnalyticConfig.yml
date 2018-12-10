@@ -7,8 +7,5 @@ sylius_resource:
                 interface: Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigInterface
                 repository: Setono\SyliusAnalyticsPlugin\Repository\AnalyticConfigRepository
                 form: Setono\SyliusAnalyticsPlugin\Form\Type\GoogleAnalyticConfigType
-            translation:
-                classes:
-                    model: Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigTranslation
-                    interface: Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigTranslationInterface
+
 

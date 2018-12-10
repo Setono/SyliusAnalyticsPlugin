@@ -14,13 +14,6 @@ services:
         tags:
         - { name: form.type }
 
-    setono_sylius_analytics_plugin.form.type.translation.google_analytic_config:
-        class: Setono\SyliusAnalyticsPlugin\Form\Type\Translation\GoogleAnalyticConfigTranslationType
-        arguments:
-        - "%setono_sylius_analytics_plugin.model.analytic_translation.class%"
-        - ['setono']
-        tags:
-        - { name: form.type }
 imports:
     - { resource: services/menu.yml }
     - { resource: services/event_listener.yml }
