@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Setono\SyliusAnalyticsPlugin\Entity;
+namespace spec\Setono\SyliusAnalyticsPlugin\Model;
 
 use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfig;
 use PhpSpec\ObjectBehavior;
