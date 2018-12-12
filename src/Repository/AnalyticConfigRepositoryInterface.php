@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Repository;
 
-use Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigInterface;
+use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface AnalyticConfigRepositoryInterface extends RepositoryInterface

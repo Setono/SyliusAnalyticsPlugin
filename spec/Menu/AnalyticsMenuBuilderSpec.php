@@ -6,7 +6,7 @@ namespace spec\Setono\SyliusAnalyticsPlugin\Menu;
 
 use Knp\Menu\ItemInterface;
 use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
-use Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigInterface;
+use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
 use Setono\SyliusAnalyticsPlugin\Menu\AnalyticsMenuBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

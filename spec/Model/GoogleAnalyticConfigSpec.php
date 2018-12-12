@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace spec\Setono\SyliusAnalyticsPlugin\Entity;
 
-use Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfig;
+use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfig;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Doctrine\Common\Collections\Collection;
-use Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigInterface;
+use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
 
 
 final class GoogleAnalyticConfigSpec extends ObjectBehavior

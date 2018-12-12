@@ -1,4 +1,4 @@
-Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfig:
+Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfig:
     constraints:
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
           fields: [trackingId]

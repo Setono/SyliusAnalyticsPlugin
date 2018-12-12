@@ -3,8 +3,8 @@ sylius_resource:
         setono_sylius_analytics_plugin.analytic:
             driver: doctrine/orm
             classes:
-                model: Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfig
-                interface: Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigInterface
+                model: Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfig
+                interface: Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface
                 repository: Setono\SyliusAnalyticsPlugin\Repository\AnalyticConfigRepository
                 form: Setono\SyliusAnalyticsPlugin\Form\Type\GoogleAnalyticConfigType
 

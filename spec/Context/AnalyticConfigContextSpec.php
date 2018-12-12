@@ -8,7 +8,7 @@ use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContext;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
-use Setono\SyliusAnalyticsPlugin\Entity\GoogleAnalyticConfigInterface;
+use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
 use Setono\SyliusAnalyticsPlugin\Repository\AnalyticConfigRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
