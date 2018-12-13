@@ -23,6 +23,6 @@ final class SetonoSyliusAnalyticsPlugin extends AbstractResourceBundle
     }
     protected function getModelNamespace(): string
     {
-        return 'Setono\SyliusFacebookTrackingPlugin\Model';
+        return 'Setono\SyliusAnalyticsPlugin\Model';
     }
 }
