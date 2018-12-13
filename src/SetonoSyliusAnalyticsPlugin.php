@@ -21,6 +21,7 @@ final class SetonoSyliusAnalyticsPlugin extends AbstractResourceBundle
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         ];
     }
+
     protected function getModelNamespace(): string
     {
         return 'Setono\SyliusAnalyticsPlugin\Model';

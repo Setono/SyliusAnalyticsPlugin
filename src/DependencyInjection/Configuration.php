@@ -30,6 +30,7 @@ final class Configuration implements ConfigurationInterface
         ;
 
         $this->addResourcesSection($rootNode);
+
         return $treeBuilder;
     }
 
