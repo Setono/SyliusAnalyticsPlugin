@@ -1,12 +1,11 @@
 setono_sylius_analytics_plugin_admin_analytic:
     resource: |
         section: admin
-        alias: setono_sylius_analytics_plugin.analytic
+        alias: setono_sylius_analytics.analytic
         templates: SetonoSyliusAnalyticsPlugin:Crud
         except: ['create', 'delete']
         permission: true
         redirect: update
-        grid: setono_sylius_analytics_plugin_admin_analytic
         vars:
             all:
                 templates:

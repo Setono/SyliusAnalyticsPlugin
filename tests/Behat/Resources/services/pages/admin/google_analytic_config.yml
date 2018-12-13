@@ -4,4 +4,4 @@ services:
         parent: sylius.behat.page.admin.crud.update
         public: false
         arguments:
-            - 'setono_sylius_analytics_plugin_admin_analytic_update'
+            - 'setono_sylius_analytics_admin_analytic_update'

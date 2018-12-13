@@ -11,14 +11,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class GoogleAnalyticConfigType extends AbstractResourceType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var GoogleAnalyticConfigInterface $GoogleAnalyticConfig */
         $GoogleAnalyticConfig = $builder->getData();
 
         $builder
             ->add('trackingId', TextType::class, [
-                'label' => 'setono_sylius_analytics_plugin.ui.tracking_id',
+                'label' => 'setono_sylius_analytics.ui.tracking_id',
             ])
         ;
     }

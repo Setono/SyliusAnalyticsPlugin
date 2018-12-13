@@ -7,7 +7,7 @@ namespace Setono\SyliusAnalyticsPlugin\Repository;
 use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class AnalyticConfigRepository extends EntityRepository implements AnalyticConfigRepositoryInterface
+class GoogleGoogleAnalyticConfigRepository extends EntityRepository implements GoogleAnalyticConfigRepositoryInterface
 {
     public function findConfig(): ?GoogleAnalyticConfigInterface
     {

@@ -1,4 +1,4 @@
-setono_sylius_analytics_plugin:
+setono_sylius_analytics:
     ui:
         analytics: Analytics
         analytics_index: Google Analytic Index

@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\Context;
 
 use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
-use Setono\SyliusAnalyticsPlugin\Repository\AnalyticConfigRepositoryInterface;
+use Setono\SyliusAnalyticsPlugin\Repository\GoogleAnalyticConfigRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class AnalyticConfigContext implements AnalyticConfigContextInterface
 {
-    /** @var AnalyticConfigRepositoryInterface */
+    /** @var GoogleAnalyticConfigRepositoryInterface */
     private $analyticConfigRepository;
 
     /** @var FactoryInterface */
     private $analyticConfigFactory;
 
     public function __construct(
-        AnalyticConfigRepositoryInterface $analyticConfigRepository,
+        GoogleAnalyticConfigRepositoryInterface $analyticConfigRepository,
         FactoryInterface $analyticConfigFactory
     ) {
         $this->analyticConfigRepository = $analyticConfigRepository;
