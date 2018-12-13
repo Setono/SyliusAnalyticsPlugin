@@ -4,7 +4,7 @@ imports:
 - { resource: services/context.yml }
 
 services:
-    setono_sylius_analytics_plugin.listener.menu.analytic:
+    setono_sylius_analytics_plugin.listener.menu.google_analytic_config:
         class: Setono\SyliusAnalyticsPlugin\Menu\AnalyticsMenuBuilder
         arguments:
             - "@setono_sylius_analytics_plugin.context.config"

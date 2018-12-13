@@ -25,10 +25,10 @@ final class AnalyticsMenuBuilder
 
         $catalogMenu
             ->addChild('analytics', [
-                'route' => 'setono_sylius_analytics_admin_analytic_update',
+                'route' => 'setono_sylius_analytics_admin_google_analytic_config_update',
                 'routeParameters' => ['id' => $this->analyticConfigContext->getConfig()->getId()],
                 ])
-            ->setLabel('setono_sylius_analytics.ui.analytics_index')
+            ->setLabel('setono_sylius_analytics.ui.google_analytic_config_index')
             ->setLabelAttribute('icon', 'bullhorn')
         ;
     }

@@ -7,7 +7,7 @@ namespace Setono\SyliusAnalyticsPlugin\DependencyInjection;
 use Setono\SyliusAnalyticsPlugin\Form\Type\GoogleAnalyticConfigType;
 use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfig;
 use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
-use Setono\SyliusAnalyticsPlugin\Repository\GoogleGoogleAnalyticConfigRepository;
+use Setono\SyliusAnalyticsPlugin\Repository\GoogleAnalyticConfigRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
@@ -53,7 +53,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(GoogleAnalyticConfig::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(GoogleAnalyticConfigInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->defaultValue(GoogleGoogleAnalyticConfigRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(GoogleAnalyticConfigRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(GoogleAnalyticConfigType::class)->cannotBeEmpty()->end()
                                     ->end()

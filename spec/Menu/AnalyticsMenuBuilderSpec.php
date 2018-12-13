@@ -38,12 +38,12 @@ final class AnalyticsMenuBuilderSpec extends ObjectBehavior
 
         $catalogMenu
             ->addChild('analytics', [
-                'route' => 'setono_sylius_analytics_admin_analytic_update',
+                'route' => 'setono_sylius_analytics_admin_google_analytic_config_update',
                 'routeParameters' => ['id' => 1],
             ])
             ->willReturn($catalogMenu)
         ;
-        $catalogMenu->setLabel('setono_sylius_analytics.ui.analytics_index')->willReturn($catalogMenu);
+        $catalogMenu->setLabel('setono_sylius_analytics.ui.google_analytic_config_index')->willReturn($catalogMenu);
         $catalogMenu->setLabelAttribute('icon', 'bullhorn')->shouldBeCalled();
 
         $this->addAnalytics($event);

@@ -1,5 +1,5 @@
 services:
-    setono_sylius_analytics_plugin.listener.menu.analytic:
+    setono_sylius_analytics_plugin.listener.menu.google_analytic_config:
         class: Setono\SyliusAnalyticsPlugin\Menu\AnalyticsMenuBuilder
         tags:
             - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addAnalytics}
