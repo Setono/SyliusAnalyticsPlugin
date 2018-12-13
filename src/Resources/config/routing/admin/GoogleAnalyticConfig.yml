@@ -1,7 +1,7 @@
 setono_sylius_analytics_plugin_admin_analytic:
     resource: |
         section: admin
-        alias: setono_sylius_analytics.analytic
+        alias: setono_sylius_analytics.google_analytics_config
         templates: SetonoSyliusAnalyticsPlugin:Crud
         except: ['create', 'delete']
         permission: true

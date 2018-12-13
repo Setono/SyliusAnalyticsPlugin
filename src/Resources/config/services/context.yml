@@ -3,5 +3,5 @@ services:
         class: Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContext
         public: true
         arguments:
-        - "@setono_sylius_analytics.repository.analytic"
-        - "@setono_sylius_analytics.factory.analytic"
+        - "@setono_sylius_analytics.repository.google_analytics_config"
+        - "@setono_sylius_analytics.factory.google_analytics_config"

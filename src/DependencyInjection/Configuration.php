@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\SyliusFacebookTrackingPlugin\DependencyInjection;
+namespace Setono\SyliusAnalyticsPlugin\DependencyInjection;
 
 use Setono\SyliusAnalyticsPlugin\Form\Type\GoogleAnalyticConfigType;
 use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfig;
