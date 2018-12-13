@@ -1,4 +1,4 @@
-setono_sylius_analytics_plugin_admin_google_analytic_config:
+setono_sylius_analytics_admin_google_analytics_config:
     resource: |
         section: admin
         alias: setono_sylius_analytics.google_analytics_config
