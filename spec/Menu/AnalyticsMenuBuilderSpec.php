@@ -38,7 +38,7 @@ final class AnalyticsMenuBuilderSpec extends ObjectBehavior
 
         $catalogMenu
             ->addChild('analytics', [
-                'route' => 'setono_sylius_analytics_admin_google_analytic_config_update',
+                'route' => 'setono_sylius_analytics_admin_google_analytics_config_update',
                 'routeParameters' => ['id' => 1],
             ])
             ->willReturn($catalogMenu)
