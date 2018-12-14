@@ -10,6 +10,6 @@ final class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
 	public function fillTrackingId(string $trackingId): void
 	{
-		$this->getDocument()->fillField('google_analytic_config_trackingId', $trackingId);
+		$this->getDocument()->fillField('google_analytics_config_trackingId', $trackingId);
 	}
 }
