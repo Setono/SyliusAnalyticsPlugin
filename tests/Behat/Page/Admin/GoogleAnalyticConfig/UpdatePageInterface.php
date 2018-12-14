@@ -8,6 +8,6 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    public function fillTrackingId(string $trackingId): void;
+    public function fillTrackingId(?string $trackingId): void;
 
 }
