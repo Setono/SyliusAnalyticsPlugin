@@ -6,8 +6,6 @@ namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\HttpKernel;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class SearchEventListener
 {
@@ -25,7 +23,7 @@ final class SearchEventListener
             return;
         }
 
-        if (!$this->session->has('google_analytics_events'))  {
+        if (!$this->session->has('google_analytics_events')) {
             $this->session->set('google_analytics_events', []);
         }
 
@@ -34,7 +32,5 @@ final class SearchEventListener
         $googleAnalyticsEvents[] = ['name' => 'Search'];
 
         $this->session->set('google_analytics_events', $googleAnalyticsEvents);
-
     }
-
 }
