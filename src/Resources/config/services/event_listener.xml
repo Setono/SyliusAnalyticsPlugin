@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic" class="Setono\SyliusAnalyticsPlugin\EventListener\GoogleAnalyticEventListener">
+            <argument type="string">SetonoSyliusAnalyticsPlugin::google_analytic_init.html.twig</argument>
+            <argument type="service" id="setono_sylius_analytics_plugin.context.config"/>
+            <tag name="kernel.event_listener" event="sonata.block.event.sylius.shop.layout.javascripts" method="onBlockEvent"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_add_payment_info" class="Setono\SyliusAnalyticsPlugin\EventListener\AddPaymentInfoEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.order.post_payment" method="addPaymentInfo"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_add_to_cart" class="Setono\SyliusAnalyticsPlugin\EventListener\AddToCartEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.order_item.post_add" method="addToCart"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_begin_checkout" class="Setono\SyliusAnalyticsPlugin\EventListener\BeginCheckoutEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.order.pre_address" method="beginCheckout"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_checkout_progress" class="Setono\SyliusAnalyticsPlugin\EventListener\CheckoutProgressEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.order.post_address" method="checkoutProgress"/>
+            <tag name="kernel.event_listener" event="sylius.order.post_select_shipping" method="checkoutProgress"/>
+            <tag name="kernel.event_listener" event="sylius.order.post_payment" method="checkoutProgress"/>
+            <tag name="kernel.event_listener" event="sylius.order.post_complete" method="checkoutProgress"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_login" class="Setono\SyliusAnalyticsPlugin\EventListener\LoginEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="security.interactive_login" method="login"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_purchase" class="Setono\SyliusAnalyticsPlugin\EventListener\PurchaseEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.order.post_complete" method="purchase"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_remove_from_cart" class="Setono\SyliusAnalyticsPlugin\EventListener\RemoveFromCartEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.order_item.post_remove" method="removeFromCart"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_search" class="Setono\SyliusAnalyticsPlugin\EventListener\SearchEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_select_content" class="Setono\SyliusAnalyticsPlugin\EventListener\SelectContentEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.layout.after_content" method="selectContent"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_set_checkout_option" class="Setono\SyliusAnalyticsPlugin\EventListener\SetCheckoutOptionEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.order.post_address" method="setCheckoutOption"/>
+            <tag name="kernel.event_listener" event="sylius.order.post_select_shipping" method="setCheckoutOption"/>
+            <tag name="kernel.event_listener" event="sylius.order.post_payment" method="setCheckoutOption"/>
+            <tag name="kernel.event_listener" event="sylius.order.post_complete" method="setCheckoutOption"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_sign_up" class="Setono\SyliusAnalyticsPlugin\EventListener\SignUpEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="signUp"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_view_item" class="Setono\SyliusAnalyticsPlugin\EventListener\ViewItemEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.product.show" method="viewItem"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_view_item_list" class="Setono\SyliusAnalyticsPlugin\EventListener\ViewItemListEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.product.index" method="viewItemList"/>
+        </service>
+
+        <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_view_search_results" class="Setono\SyliusAnalyticsPlugin\EventListener\ViewSearchResultsEventListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.product.index.after_search" method="viewSearchResults"/>
+        </service>
+    </services>
+</container>

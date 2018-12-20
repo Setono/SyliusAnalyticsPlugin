@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="setono_sylius_analytics_plugin.form.type.google_analytic_config.validation_groups" type="collection">
+            <parameter>setono</parameter>
+        </parameter>
+    </parameters>
+    <services>
+        <service id="setono_sylius_analytics_plugin.form.type.google_analytic_config" class="Setono\SyliusAnalyticsPlugin\Form\Type\GoogleAnalyticConfigType">
+            <argument>%setono_sylius_analytics.model.google_analytics_config.class%</argument>
+            <argument>%setono_sylius_analytics_plugin.form.type.google_analytic_config.validation_groups%</argument>
+            <tag name="form.type"/>
+        </service>
+    </services>
+</container>
