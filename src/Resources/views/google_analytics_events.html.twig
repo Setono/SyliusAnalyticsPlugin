@@ -14,8 +14,6 @@
                     "checkout_state": '{{ event.options.checkout_state }}',
                     "value": '{{ event.options.value }}',
                 });
-            {% elseif event.name == "SetCheckoutOption" and app.request.uri matches '/search/' %}
-            gtag('event', '{{ event.name }}');
                 {% endif %}
         {% else %}
         gtag('event', '{{ event.name }}');

@@ -27,10 +27,12 @@ final class SearchEventListener
             $this->session->set('google_analytics_events', []);
         }
 
-        $googleAnalyticsEvents = $this->session->get('google_analytics_events');
+        if (preg_match('/search/', $event->getRequest()->getUri())) {
+            $googleAnalyticsEvents = $this->session->get('google_analytics_events');
 
-        $googleAnalyticsEvents[] = ['name' => 'Search'];
+            $googleAnalyticsEvents[] = ['name' => 'Search'];
 
-        $this->session->set('google_analytics_events', $googleAnalyticsEvents);
+            $this->session->set('google_analytics_events', $googleAnalyticsEvents);
+        }
     }
 }

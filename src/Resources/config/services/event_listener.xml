@@ -53,7 +53,7 @@
 
         <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_select_content" class="Setono\SyliusAnalyticsPlugin\EventListener\SelectContentEventListener">
             <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.layout.after_content" method="selectContent"/>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
         </service>
 
         <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_set_checkout_option" class="Setono\SyliusAnalyticsPlugin\EventListener\SetCheckoutOptionEventListener">
@@ -81,7 +81,7 @@
 
         <service id="setono_sylius_analytics_plugin.event_listener.google_analytic_view_search_results" class="Setono\SyliusAnalyticsPlugin\EventListener\ViewSearchResultsEventListener">
             <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.product.index.after_search" method="viewSearchResults"/>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
         </service>
     </services>
 </container>
