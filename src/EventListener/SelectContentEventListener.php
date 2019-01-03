@@ -26,7 +26,7 @@ final class SelectContentEventListener
         if (!$this->session->has('google_analytics_events')) {
             $this->session->set('google_analytics_events', []);
         }
-        if (preg_match('/taxons/', $event->getRequest()->getUri())) {
+        if (false !== strpos($event->getRequest()->getUri(), 'taxons')) {
             $googleAnalyticsEvents = $this->session->get('google_analytics_events');
 
             $googleAnalyticsEvents[] = ['name' => 'SelectContent'];

@@ -7,6 +7,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpFoundation\Request;
 
 class SearchEventListenerSpec extends ObjectBehavior
 {
@@ -31,12 +32,17 @@ class SearchEventListenerSpec extends ObjectBehavior
 
     function it_add_search_event(
         SessionInterface $session,
-        GetResponseEvent $event
+        GetResponseEvent $event,
+        Request $request
     ): void
     {
         $event->isMasterRequest()->willReturn(true);
 
         $session->has('google_analytics_events')->willReturn(true);
+
+        $event->getRequest()->willReturn($request);
+
+        $request->getUri()->willReturn('search');
 
         $session->get('google_analytics_events')->shouldBeCalled();
 
@@ -47,12 +53,17 @@ class SearchEventListenerSpec extends ObjectBehavior
 
     function it_assign_event_to_session_before_add(
         SessionInterface $session,
-        GetResponseEvent $event
+        GetResponseEvent $event,
+        Request $request
     ): void
     {
         $event->isMasterRequest()->willReturn(true);
 
         $session->has('google_analytics_events')->willReturn(false);
+
+        $event->getRequest()->willReturn($request);
+
+        $request->getUri()->willReturn('search');
 
         $session->set('google_analytics_events', [])->shouldBeCalled();
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -20,7 +19,8 @@ final class ViewSearchResultsEventListener
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $request = Request::createFromGlobals();
+        $request = $event->getRequest();
+
         $search = $request->query->get('criteria');
         $search_value = $search['search']['value'];
 
@@ -33,6 +33,8 @@ final class ViewSearchResultsEventListener
         }
 
         if (false !== strpos($event->getRequest()->getUri(), $search_value)) {
+            $this->session->set('google_analytics_events', []);
+
             $googleAnalyticsEvents = $this->session->get('google_analytics_events');
 
             $googleAnalyticsEvents[] = ['name' => 'ViewSearchResults'];
