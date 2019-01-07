@@ -10,9 +10,7 @@ use Sonata\BlockBundle\Model\Block;
 
 final class GoogleAnalyticEventListener
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $template;
 
     /** @var AnalyticConfigContextInterface */

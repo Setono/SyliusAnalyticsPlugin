@@ -8,9 +8,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class CheckoutProgressEventListener
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $template;
 
     /** @var SessionInterface */

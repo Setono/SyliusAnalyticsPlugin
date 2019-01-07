@@ -7,9 +7,7 @@ namespace Setono\SyliusAnalyticsPlugin\Model;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
-interface GoogleAnalyticConfigInterface extends
-    ResourceInterface,
-    ToggleableInterface
+interface GoogleAnalyticConfigInterface extends ResourceInterface, ToggleableInterface
 {
     public function getId(): ?int;
 

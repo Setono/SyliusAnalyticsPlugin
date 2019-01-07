@@ -8,9 +8,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class AddToCartEventListener
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $template;
 
     /** @var SessionInterface */
