@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Menu;
 
-use Knp\Menu\ItemInterface;
 use Setono\SyliusAnalyticsPlugin\Context\AnalyticsConfigContextInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
@@ -20,10 +19,13 @@ final class AnalyticsMenuBuilder
 
     public function addAnalytics(MenuBuilderEvent $event): void
     {
-        /** @var ItemInterface $catalogMenu */
-        $catalogMenu = $event->getMenu()->getChild('catalog');
+        $menu = $event->getMenu()->getChild('configuration');
 
-        $catalogMenu
+        if($menu === null) {
+            return;
+        }
+
+        $menu
             ->addChild('analytics', [
                 'route' => 'setono_sylius_analytics_admin_google_analytics_config_update',
                 'routeParameters' => ['id' => $this->analyticsConfigContext->getConfig()->getId()],
