@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace spec\Setono\SyliusAnalyticsPlugin\Context;
 
 use PhpSpec\ObjectBehavior;
-use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContext;
-use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
-use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
-use Setono\SyliusAnalyticsPlugin\Repository\GoogleAnalyticConfigRepositoryInterface;
+use Setono\SyliusAnalyticsPlugin\Context\AnalyticsConfigContext;
+use Setono\SyliusAnalyticsPlugin\Context\AnalyticsConfigContextInterface;
+use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfigInterface;
+use Setono\SyliusAnalyticsPlugin\Repository\AnalyticsConfigRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class AnalyticConfigContextSpec extends ObjectBehavior
+final class AnalyticsConfigContextSpec extends ObjectBehavior
 {
     function let(
-        GoogleAnalyticConfigRepositoryInterface $analyticConfigRepository,
+        AnalyticsConfigRepositoryInterface $analyticConfigRepository,
         FactoryInterface $analyticConfigFactory
     ): void {
         $this->beConstructedWith($analyticConfigRepository, $analyticConfigFactory);
@@ -22,17 +22,17 @@ final class AnalyticConfigContextSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(AnalyticConfigContext::class);
+        $this->shouldHaveType(AnalyticsConfigContext::class);
     }
 
     function it_implements_analytic_config_context_interface(): void
     {
-        $this->shouldHaveType(AnalyticConfigContextInterface::class);
+        $this->shouldHaveType(AnalyticsConfigContextInterface::class);
     }
 
     function it_gets_config(
-        GoogleAnalyticConfigRepositoryInterface $analyticConfigRepository,
-        GoogleAnalyticConfigInterface $config
+        AnalyticsConfigRepositoryInterface $analyticConfigRepository,
+        AnalyticsConfigInterface $config
     ): void {
         $analyticConfigRepository->findConfig()->willReturn($config);
 
@@ -40,9 +40,9 @@ final class AnalyticConfigContextSpec extends ObjectBehavior
     }
 
     function it_creates_new_config_when_config_is_null(
-        GoogleAnalyticConfigRepositoryInterface $analyticConfigRepository,
+        AnalyticsConfigRepositoryInterface $analyticConfigRepository,
         FactoryInterface $analyticConfigFactory,
-        GoogleAnalyticConfigInterface $config
+        AnalyticsConfigInterface $config
     ): void {
         $analyticConfigRepository->findConfig()->willReturn(null);
         $analyticConfigFactory->createNew()->willReturn($config);

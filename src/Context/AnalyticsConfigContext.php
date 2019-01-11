@@ -4,31 +4,31 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Context;
 
-use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
-use Setono\SyliusAnalyticsPlugin\Repository\GoogleAnalyticConfigRepositoryInterface;
+use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfigInterface;
+use Setono\SyliusAnalyticsPlugin\Repository\AnalyticsConfigRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class AnalyticConfigContext implements AnalyticConfigContextInterface
+final class AnalyticsConfigContext implements AnalyticsConfigContextInterface
 {
-    /** @var GoogleAnalyticConfigRepositoryInterface */
+    /** @var AnalyticsConfigRepositoryInterface */
     private $analyticConfigRepository;
 
     /** @var FactoryInterface */
     private $analyticConfigFactory;
 
     public function __construct(
-        GoogleAnalyticConfigRepositoryInterface $analyticConfigRepository,
+        AnalyticsConfigRepositoryInterface $analyticConfigRepository,
         FactoryInterface $analyticConfigFactory
     ) {
         $this->analyticConfigRepository = $analyticConfigRepository;
         $this->analyticConfigFactory = $analyticConfigFactory;
     }
 
-    public function getConfig(): GoogleAnalyticConfigInterface
+    public function getConfig(): AnalyticsConfigInterface
     {
         $config = $this->analyticConfigRepository->findConfig();
         if (null === $config) {
-            /** @var GoogleAnalyticConfigInterface $config */
+            /** @var AnalyticsConfigInterface $config */
             $config = $this->analyticConfigFactory->createNew();
             $config->setTrackingId(self::DEFAULT_CODE);
             $this->analyticConfigRepository->add($config);

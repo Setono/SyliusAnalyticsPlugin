@@ -5,26 +5,26 @@ declare(strict_types=1);
 namespace spec\Setono\SyliusAnalyticsPlugin\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
-use Setono\SyliusAnalyticsPlugin\EventListener\GoogleAnalyticEventListener;
+use Setono\SyliusAnalyticsPlugin\Context\AnalyticsConfigContextInterface;
+use Setono\SyliusAnalyticsPlugin\EventListener\AnalyticsEventListener;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 
-final class GoogleAnalyticEventListenerSpec extends ObjectBehavior
+final class AnalyticsEventListenerSpec extends ObjectBehavior
 {
-    function let(AnalyticConfigContextInterface $AnalyticConfigContext): void
+    function let(AnalyticsConfigContextInterface $AnalyticConfigContext): void
     {
         $this->beConstructedWith('template', $AnalyticConfigContext);
     }
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(GoogleAnalyticEventListener::class);
+        $this->shouldHaveType(AnalyticsEventListener::class);
     }
 
     function itWorksOnBlockEvent(
         string $template,
-        AnalyticConfigContextInterface $AnalyticConfigContext,
+        AnalyticsConfigContextInterface $AnalyticConfigContext,
         BlockEvent $event,
         Block $block
     ): void {

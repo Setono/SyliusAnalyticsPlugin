@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\DependencyInjection;
 
-use Setono\SyliusAnalyticsPlugin\Form\Type\GoogleAnalyticConfigType;
-use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfig;
-use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
-use Setono\SyliusAnalyticsPlugin\Repository\GoogleAnalyticConfigRepository;
+use Setono\SyliusAnalyticsPlugin\Form\Type\AnalyticsConfigType;
+use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfig;
+use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfigInterface;
+use Setono\SyliusAnalyticsPlugin\Repository\AnalyticsConfigRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
@@ -51,12 +51,12 @@ final class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(GoogleAnalyticConfig::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(GoogleAnalyticConfigInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(AnalyticsConfig::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(AnalyticsConfigInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->defaultValue(GoogleAnalyticConfigRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(AnalyticsConfigRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                        ->scalarNode('form')->defaultValue(GoogleAnalyticConfigType::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('form')->defaultValue(AnalyticsConfigType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace spec\Setono\SyliusAnalyticsPlugin\Model;
 
 use PhpSpec\ObjectBehavior;
-use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfig;
-use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
+use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfig;
+use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfigInterface;
 
-final class GoogleAnalyticConfigSpec extends ObjectBehavior
+final class AnalyticsConfigSpec extends ObjectBehavior
 {
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(GoogleAnalyticConfig::class);
+        $this->shouldHaveType(AnalyticsConfig::class);
     }
 
     function it_implements_google_analytic_config_interface(): void
     {
-        $this->shouldHaveType(GoogleAnalyticConfigInterface::class);
+        $this->shouldHaveType(AnalyticsConfigInterface::class);
     }
 
     function it_has_no_id_by_default(): void

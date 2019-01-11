@@ -1,2 +1,14 @@
-setono_sylius_analytics_admin_google_analytics_config:
-    resource: admin/GoogleAnalyticConfig.yml
+setono_sylius_analytics_admin_analytics_config:
+    resource: |
+        section: admin
+        alias: setono_sylius_analytics.analytics_config
+        templates: SetonoSyliusAnalyticsPlugin:Crud
+        except: ['create', 'delete']
+        permission: true
+        redirect: update
+        vars:
+            all:
+                templates:
+                    form: "@SetonoSyliusAnalyticsPlugin/AnalyticsConfig/Crud/_form.html.twig"
+                    breadcrumb: "@SetonoSyliusAnalyticsPlugin/AnalyticsConfig/Crud/_breadcrumb.html.twig"
+    type: sylius.resource
