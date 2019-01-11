@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace spec\Setono\SyliusAnalyticsPlugin\EventListener;
 
+use PhpSpec\ObjectBehavior;
 use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
 use Setono\SyliusAnalyticsPlugin\EventListener\GoogleAnalyticEventListener;
-use PhpSpec\ObjectBehavior;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
-use Prophecy\Argument;
 
 final class GoogleAnalyticEventListenerSpec extends ObjectBehavior
 {

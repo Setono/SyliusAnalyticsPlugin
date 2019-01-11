@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace spec\Setono\SyliusAnalyticsPlugin\Context;
 
-use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContext;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContext;
 use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
 use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
 use Setono\SyliusAnalyticsPlugin\Repository\GoogleAnalyticConfigRepositoryInterface;

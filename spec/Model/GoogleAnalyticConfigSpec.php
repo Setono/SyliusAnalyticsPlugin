@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace spec\Setono\SyliusAnalyticsPlugin\Model;
 
-use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfig;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Doctrine\Common\Collections\Collection;
+use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfig;
 use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
-
 
 final class GoogleAnalyticConfigSpec extends ObjectBehavior
 {
@@ -41,5 +38,4 @@ final class GoogleAnalyticConfigSpec extends ObjectBehavior
         $this->disable();
         $this->isEnabled()->shouldReturn(false);
     }
-
 }

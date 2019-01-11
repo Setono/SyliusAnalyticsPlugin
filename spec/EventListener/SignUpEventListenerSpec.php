@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\EventListener\SignUpEventListener;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Setono\SyliusAnalyticsPlugin\EventListener\SignUpEventListener;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SignUpEventListenerSpec extends ObjectBehavior
@@ -20,30 +21,27 @@ class SignUpEventListenerSpec extends ObjectBehavior
     }
 
     function it_add_sign_up_event(
-
         SessionInterface $session
-    ): void
-    {
+    ): void {
         $session->has('google_analytics_events')->willReturn(true);
 
         $session->get('google_analytics_events')->shouldBeCalled();
 
-        $session->set('google_analytics_events' ,[['name' => 'SignUp']])->shouldBeCalled();
+        $session->set('google_analytics_events', [['name' => 'SignUp']])->shouldBeCalled();
 
         $this->signUp();
     }
 
     function it_cannot_add_sign_up_event(
         SessionInterface $session
-    ): void
-    {
+    ): void {
         $session->has('google_analytics_events')->willReturn(false);
 
         $session->set('google_analytics_events', [])->shouldBeCalled();
 
         $session->get('google_analytics_events')->shouldBeCalled();
 
-        $session->set('google_analytics_events' ,[['name' => 'SignUp']])->shouldBeCalled();
+        $session->set('google_analytics_events', [['name' => 'SignUp']])->shouldBeCalled();
 
         $this->signUp();
     }

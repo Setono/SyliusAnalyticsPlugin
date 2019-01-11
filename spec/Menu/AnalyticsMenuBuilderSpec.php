@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace spec\Setono\SyliusAnalyticsPlugin\Menu;
 
 use Knp\Menu\ItemInterface;
-use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
-use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
-use Setono\SyliusAnalyticsPlugin\Menu\AnalyticsMenuBuilder;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
+use Setono\SyliusAnalyticsPlugin\Menu\AnalyticsMenuBuilder;
+use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
 final class AnalyticsMenuBuilderSpec extends ObjectBehavior

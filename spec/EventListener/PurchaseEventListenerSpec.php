@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\EventListener\PurchaseEventListener;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Setono\SyliusAnalyticsPlugin\EventListener\PurchaseEventListener;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -42,9 +43,8 @@ class PurchaseEventListenerSpec extends ObjectBehavior
                 'transaction_id' => 1,
                 'value' => 1,
                 'currency' => 'USD',
-            ]
+            ],
         ]])->shouldBeCalled();
-
 
         $this->purchase($resourceControllerEvent);
     }
@@ -72,10 +72,9 @@ class PurchaseEventListenerSpec extends ObjectBehavior
                 'transaction_id' => 1,
                 'value' => 1,
                 'currency' => 'USD',
-            ]
+            ],
         ]])->shouldBeCalled();
 
         $this->purchase($resourceControllerEvent);
     }
-
 }

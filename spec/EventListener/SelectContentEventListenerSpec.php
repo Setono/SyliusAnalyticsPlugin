@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\EventListener\SelectContentEventListener;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Setono\SyliusAnalyticsPlugin\EventListener\SelectContentEventListener;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpFoundation\Request;
 
 class SelectContentEventListenerSpec extends ObjectBehavior
 {
@@ -23,8 +24,7 @@ class SelectContentEventListenerSpec extends ObjectBehavior
 
     function it_cannot_add_select_content_event_if_not_master_request(
         GetResponseEvent $event
-    ): void
-    {
+    ): void {
         $event->isMasterRequest()->willReturn(false);
 
         $this->onKernelRequest($event);
@@ -34,8 +34,7 @@ class SelectContentEventListenerSpec extends ObjectBehavior
         SessionInterface $session,
         GetResponseEvent $event,
         Request $request
-    ): void
-    {
+    ): void {
         $event->isMasterRequest()->willReturn(true);
 
         $session->has('google_analytics_events')->willReturn(true);
@@ -45,7 +44,7 @@ class SelectContentEventListenerSpec extends ObjectBehavior
         $request->getUri()->willReturn('taxons');
 
         $session->get('google_analytics_events')->shouldBeCalled();
-        $session->set('google_analytics_events' ,[['name' => 'SelectContent']])->shouldBeCalled();
+        $session->set('google_analytics_events', [['name' => 'SelectContent']])->shouldBeCalled();
 
         $this->onKernelRequest($event);
     }
@@ -54,8 +53,7 @@ class SelectContentEventListenerSpec extends ObjectBehavior
         SessionInterface $session,
         GetResponseEvent $event,
         Request $request
-    ): void
-    {
+    ): void {
         $event->isMasterRequest()->willReturn(true);
 
         $session->has('google_analytics_events')->willReturn(false);
@@ -66,7 +64,7 @@ class SelectContentEventListenerSpec extends ObjectBehavior
 
         $session->set('google_analytics_events', [])->shouldBeCalled();
         $session->get('google_analytics_events')->shouldBeCalled();
-        $session->set('google_analytics_events' ,[['name' => 'SelectContent']])->shouldBeCalled();
+        $session->set('google_analytics_events', [['name' => 'SelectContent']])->shouldBeCalled();
 
         $this->onKernelRequest($event);
     }
