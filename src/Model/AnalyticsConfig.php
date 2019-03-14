@@ -6,7 +6,7 @@ namespace Setono\SyliusAnalyticsPlugin\Model;
 
 use Sylius\Component\Resource\Model\ToggleableTrait;
 
-class GoogleAnalyticConfig implements GoogleAnalyticConfigInterface
+class AnalyticsConfig implements AnalyticsConfigInterface
 {
     use ToggleableTrait;
 

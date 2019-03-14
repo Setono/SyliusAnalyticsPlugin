@@ -4,29 +4,31 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Menu;
 
-use Knp\Menu\ItemInterface;
-use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
+use Setono\SyliusAnalyticsPlugin\Context\AnalyticsConfigContextInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
 final class AnalyticsMenuBuilder
 {
-    /** @var AnalyticConfigContextInterface */
-    private $analyticConfigContext;
+    /** @var AnalyticsConfigContextInterface */
+    private $analyticsConfigContext;
 
-    public function __construct(AnalyticConfigContextInterface $analyticConfigContext)
+    public function __construct(AnalyticsConfigContextInterface $analyticsConfigContext)
     {
-        $this->analyticConfigContext = $analyticConfigContext;
+        $this->analyticsConfigContext = $analyticsConfigContext;
     }
 
     public function addAnalytics(MenuBuilderEvent $event): void
     {
-        /** @var ItemInterface $catalogMenu */
-        $catalogMenu = $event->getMenu()->getChild('catalog');
+        $menu = $event->getMenu()->getChild('configuration');
 
-        $catalogMenu
+        if($menu === null) {
+            return;
+        }
+
+        $menu
             ->addChild('analytics', [
                 'route' => 'setono_sylius_analytics_admin_google_analytics_config_update',
-                'routeParameters' => ['id' => $this->analyticConfigContext->getConfig()->getId()],
+                'routeParameters' => ['id' => $this->analyticsConfigContext->getConfig()->getId()],
                 ])
             ->setLabel('setono_sylius_analytics.ui.google_analytic_config_index')
             ->setLabelAttribute('icon', 'bullhorn')

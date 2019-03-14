@@ -17,7 +17,7 @@ final class ViewSearchResultsEventListener
         $this->session = $session;
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(GetResponseEvent $event): void
     {
         $request = $event->getRequest();
 

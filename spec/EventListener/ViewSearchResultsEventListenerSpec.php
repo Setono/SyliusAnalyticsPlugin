@@ -1,14 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\EventListener\ViewSearchResultsEventListener;
 use PhpSpec\ObjectBehavior;
+use Setono\SyliusAnalyticsPlugin\EventListener\ViewSearchResultsEventListener;
+use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\ParameterBag;
-
 
 class ViewSearchResultsEventListenerSpec extends ObjectBehavior
 {
@@ -26,8 +27,7 @@ class ViewSearchResultsEventListenerSpec extends ObjectBehavior
         GetResponseEvent $event,
         Request $request,
         ParameterBag $parameterBag
-    ): void
-    {
+    ): void {
         $event->getRequest()->willReturn($request);
         $request->query = $parameterBag;
         $event->isMasterRequest()->willReturn(false);
@@ -40,8 +40,7 @@ class ViewSearchResultsEventListenerSpec extends ObjectBehavior
         GetResponseEvent $event,
         Request $request,
         ParameterBag $parameterBag
-    ): void
-    {
+    ): void {
         $event->getRequest()->willReturn($request);
         $request->query = $parameterBag;
 
@@ -53,5 +52,4 @@ class ViewSearchResultsEventListenerSpec extends ObjectBehavior
 
         $this->onKernelRequest($event);
     }
-
 }

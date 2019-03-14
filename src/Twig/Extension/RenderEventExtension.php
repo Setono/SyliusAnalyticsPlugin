@@ -25,16 +25,16 @@ final class RenderEventExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return[
-          new \Twig_Function('render_google_analytics_events', [$this, 'renderGoogleAnalyticsEvents'], ['is_safe' => ['html']]),
+          new \Twig_Function('render_analytics_events', [$this, 'renderAnalyticsEvents'], ['is_safe' => ['html']]),
         ];
     }
 
-    public function renderGoogleAnalyticsEvents(): string
+    public function renderAnalyticsEvents(): string
     {
         $googleAnalyticsEvents = $this->session->get('google_analytics_events');
 
         $this->session->remove('google_analytics_events');
 
-        return $this->templatingEngine->render('SetonoSyliusAnalyticsPlugin::google_analytics_events.html.twig', ['events' => $googleAnalyticsEvents]);
+        return $this->templatingEngine->render('SetonoSyliusAnalyticsPlugin::analytics_events.html.twig', ['events' => $googleAnalyticsEvents]);
     }
 }

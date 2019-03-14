@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Repository;
 
-use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
+use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfigInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class GoogleAnalyticConfigRepository extends EntityRepository implements GoogleAnalyticConfigRepositoryInterface
+class AnalyticsConfigRepository extends EntityRepository implements AnalyticsConfigRepositoryInterface
 {
-    public function findConfig(): ?GoogleAnalyticConfigInterface
+    /**
+     * @return AnalyticsConfigInterface|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findConfig(): ?AnalyticsConfigInterface
     {
         return $this->createQueryBuilder('o')
             ->setMaxResults(1)

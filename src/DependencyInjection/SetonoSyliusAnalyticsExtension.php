@@ -11,6 +11,11 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension
 {
+    /**
+     * @inheritdoc
+     *
+     * @throws \Exception
+     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);

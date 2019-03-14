@@ -1,10 +1,10 @@
 setono_sylius_analytics:
     ui:
-        edit_google_analytics_config: Edit Google Analytics Config
-        google_analytics_configs: Google Analytics Configs
+        edit_analytics_config: Edit analytics config
+        analytics_configs: Analytics configs
         analytics: Analytics
-        google_analytic_config_index: Google Analytic Index
-        tracking_id: TrackingID
+        analytics_config_index: Analytic index
+        tracking_id: Tracking id
         enabled: Enabled
-        edit_analytic: Edit Analytic Config
+        edit_analytics: Edit analytics config
         name: Name

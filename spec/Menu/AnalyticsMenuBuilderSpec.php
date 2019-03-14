@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace spec\Setono\SyliusAnalyticsPlugin\Menu;
 
 use Knp\Menu\ItemInterface;
-use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
-use Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfigInterface;
-use Setono\SyliusAnalyticsPlugin\Menu\AnalyticsMenuBuilder;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Setono\SyliusAnalyticsPlugin\Context\AnalyticsConfigContextInterface;
+use Setono\SyliusAnalyticsPlugin\Menu\AnalyticsMenuBuilder;
+use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfigInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
 final class AnalyticsMenuBuilderSpec extends ObjectBehavior
 {
-    function let(AnalyticConfigContextInterface $analyticConfigContext): void
+    function let(AnalyticsConfigContextInterface $analyticConfigContext): void
     {
         $this->beConstructedWith($analyticConfigContext);
     }
@@ -25,11 +24,11 @@ final class AnalyticsMenuBuilderSpec extends ObjectBehavior
     }
 
     function it_adds_analytics(
-        AnalyticConfigContextInterface $analyticConfigContext,
+        AnalyticsConfigContextInterface $analyticConfigContext,
         MenuBuilderEvent $event,
         ItemInterface $catalogMenu,
         ItemInterface $menu,
-        GoogleAnalyticConfigInterface $analyticConfig
+        AnalyticsConfigInterface $analyticConfig
     ): void {
         $analyticConfig->getId()->willReturn(1);
         $analyticConfigContext->getConfig()->willReturn($analyticConfig);

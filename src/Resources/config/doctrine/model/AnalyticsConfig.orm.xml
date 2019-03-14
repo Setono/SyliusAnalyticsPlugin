@@ -5,7 +5,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Setono\SyliusAnalyticsPlugin\Model\GoogleAnalyticConfig" table="setono_analytics_plugin">
+    <entity name="Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfig" table="setono_sylius_analytics__analytics_config">
 
         <id name="id" type="integer">
             <generator strategy="AUTO"/>

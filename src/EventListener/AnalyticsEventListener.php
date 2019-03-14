@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
+use Setono\SyliusAnalyticsPlugin\Context\AnalyticsConfigContextInterface;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 
-final class GoogleAnalyticEventListener
+final class AnalyticsEventListener
 {
     /** @var string */
     private $template;
 
-    /** @var AnalyticConfigContextInterface */
-    private $AnalyticConfigContext;
+    /** @var AnalyticsConfigContextInterface */
+    private $analyticsConfigContext;
 
-    public function __construct(string $template, AnalyticConfigContextInterface $AnalyticConfigContext)
+    public function __construct(string $template, AnalyticsConfigContextInterface $analyticsConfigContext)
     {
         $this->template = $template;
-        $this->AnalyticConfigContext = $AnalyticConfigContext;
+        $this->analyticsConfigContext = $analyticsConfigContext;
     }
 
     /**
@@ -32,7 +32,7 @@ final class GoogleAnalyticEventListener
         $block->setSettings(array_replace($event->getSettings(), [
             'template' => $this->template,
             'attr' => [
-                'config' => $this->AnalyticConfigContext->getConfig(),
+                'config' => $this->analyticsConfigContext->getConfig(),
                 ],
         ]));
         $block->setType('sonata.block.service.template');

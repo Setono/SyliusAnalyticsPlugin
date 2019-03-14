@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Setono\SyliusAnalyticsPlugin\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Setono\SyliusAnalyticsPlugin\Context\AnalyticConfigContextInterface;
+use Setono\SyliusAnalyticsPlugin\Context\AnalyticsConfigContextInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Tests\Setono\SyliusAnalyticsPlugin\Behat\Page\Admin\GoogleAnalyticConfig\UpdatePageInterface;
@@ -18,13 +18,13 @@ final class GoogleAnalyticContext implements Context
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /** @var AnalyticConfigContextInterface */
+    /** @var AnalyticsConfigContextInterface */
     private $analyticConfigContext;
 
     public function __construct(
         UpdatePageInterface $updatePage,
         NotificationCheckerInterface $notificationChecker,
-        AnalyticConfigContextInterface $analyticConfigContext)
+        AnalyticsConfigContextInterface $analyticConfigContext)
     {
         $this->updatePage = $updatePage;
         $this->notificationChecker = $notificationChecker;
