@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\DependencyInjection;
 
-use Setono\SyliusAnalyticsPlugin\Form\Type\AnalyticsConfigType;
+use Setono\SyliusAnalyticsPlugin\Form\Type\PropertyType;
 use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfig;
 use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfigInterface;
+use Setono\SyliusAnalyticsPlugin\Model\Property;
+use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
 use Setono\SyliusAnalyticsPlugin\Repository\AnalyticsConfigRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -19,13 +21,19 @@ final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('setono_sylius_analytics');
+        if (method_exists(TreeBuilder::class, 'getRootNode')) {
+            $treeBuilder = new TreeBuilder('setono_sylius_analytics');
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $treeBuilder = new TreeBuilder();
+            $rootNode = $treeBuilder->root('setono_sylius_analytics');
+        }
 
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->cannotBeEmpty()->end()
             ->end()
         ;
 
@@ -44,19 +52,19 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('google_analytics_config')
+                        ->arrayNode('property')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(AnalyticsConfig::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(AnalyticsConfigInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(Property::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(PropertyInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->defaultValue(AnalyticsConfigRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                        ->scalarNode('form')->defaultValue(AnalyticsConfigType::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('form')->defaultValue(PropertyType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

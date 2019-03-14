@@ -7,7 +7,7 @@ namespace spec\Setono\SyliusAnalyticsPlugin\Menu;
 use Knp\Menu\ItemInterface;
 use PhpSpec\ObjectBehavior;
 use Setono\SyliusAnalyticsPlugin\Context\AnalyticsConfigContextInterface;
-use Setono\SyliusAnalyticsPlugin\Menu\AnalyticsMenuBuilder;
+use Setono\SyliusAnalyticsPlugin\Menu\AdminMenuListener;
 use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfigInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
@@ -20,7 +20,7 @@ final class AnalyticsMenuBuilderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(AnalyticsMenuBuilder::class);
+        $this->shouldHaveType(AdminMenuListener::class);
     }
 
     function it_adds_analytics(

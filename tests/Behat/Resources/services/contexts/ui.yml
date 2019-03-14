@@ -4,6 +4,4 @@ services:
         arguments:
             - "@setono_sylius_analytics.behat.page.admin.google_analytics_config.update"
             - "@sylius.behat.notification_checker"
-            - "@__symfony__.setono_sylius_analytics_plugin.context.config"
-        tags:
-            - { name: fob.context_service }
+            - "@setono_sylius_analytics_plugin.context.config"

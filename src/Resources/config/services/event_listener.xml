@@ -2,11 +2,11 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="setono_sylius_analytics.event_listener.analytics" class="Setono\SyliusAnalyticsPlugin\EventListener\AnalyticsEventListener">
-            <argument type="string">SetonoSyliusAnalyticsPlugin::analytics_init.html.twig</argument>
-            <argument type="service" id="setono_sylius_analytics.context.analytics_config"/>
-            <tag name="kernel.event_listener" event="sonata.block.event.sylius.shop.layout.javascripts" method="onBlockEvent"/>
-        </service>
+        <!--<service id="setono_sylius_analytics.event_listener.analytics" class="Setono\SyliusAnalyticsPlugin\EventListener\AnalyticsEventListener">-->
+            <!--<argument type="string">SetonoSyliusAnalyticsPlugin::analytics_init.html.twig</argument>-->
+            <!--<argument type="service" id="setono_sylius_analytics.context.analytics_config"/>-->
+            <!--<tag name="kernel.event_listener" event="sonata.block.event.sylius.shop.layout.javascripts" method="onBlockEvent"/>-->
+        <!--</service>-->
 
         <service id="setono_sylius_analytics.event_listener.add_payment_info" class="Setono\SyliusAnalyticsPlugin\EventListener\AddPaymentInfoEventListener">
             <argument type="service" id="session"/>

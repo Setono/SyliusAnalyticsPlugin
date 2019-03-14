@@ -12,9 +12,6 @@ final class SetonoSyliusAnalyticsPlugin extends AbstractResourceBundle
 {
     use SyliusPluginTrait;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedDrivers(): array
     {
         return [
