@@ -6,8 +6,10 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "ext-json": "*",
 
-        "sylius/sylius": "^1.3.0"
+        "sylius/sylius": "^1.3.0",
+        "setono/tag-bag-bundle": "^0.5.4"
     },
     "require-dev": {
         "behat/behat": "^3.4",
@@ -61,11 +63,15 @@
     "scripts": {
         "check-style": "vendor/bin/ecs check --ansi --no-progress-bar spec src",
         "fix-style": "vendor/bin/ecs check --ansi --no-progress-bar spec src --fix",
-        "analyse": "vendor/bin/phpstan analyse -c phpstan.neon -l max src/",
+        "analyse": [
+            "@ensure-test-container-exists",
+            "./vendor/bin/phpstan analyse -c phpstan.neon -l max src"
+        ],
         "phpunit": "vendor/bin/phpunit",
         "phpspec": "vendor/bin/phpspec run",
         "test": [
             "@phpunit", "@phpspec"
-        ]
+        ],
+        "ensure-test-container-exists": "[[ -f tests/Application/var/cache/test/ApplicationTests_Setono_SyliusAnalyticsPlugin_Application_KernelTestDebugContainer.xml ]] || (cd tests/Application && php -d memory_limit=-1 bin/console cache:clear --env=test)"
     }
 }

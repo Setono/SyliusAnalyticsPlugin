@@ -7,7 +7,7 @@
         </parameter>
     </parameters>
     <services>
-        <service id="setono_sylius_analytics.form.property" class="Setono\SyliusAnalyticsPlugin\Form\Type\Property">
+        <service id="setono_sylius_analytics.form.property" class="Setono\SyliusAnalyticsPlugin\Form\Type\PropertyType">
             <argument>%setono_sylius_analytics.model.property.class%</argument>
             <argument>%setono_sylius_analytics.form.property.validation_groups%</argument>
             <tag name="form.type"/>

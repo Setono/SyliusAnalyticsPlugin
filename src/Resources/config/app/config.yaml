@@ -1,0 +1,2 @@
+imports:
+    - "@SetonoSyliusAnalyticsPlugin/Resources/config/grids/setono_sylius_analytics_admin_property.yaml"

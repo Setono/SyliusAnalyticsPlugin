@@ -1,2 +1,2 @@
 setono_analytics_plugin:
-    resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routing.yml"
+    resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routing.yaml"

@@ -1,0 +1,11 @@
+{#- @var \Setono\SyliusAnalyticsPlugin\Model\PropertyInterface[] properties -#}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ (properties|first).trackingId }}"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+{%- for property in properties -%}
+gtag('config', '{{ property.trackingId }}');
+{%- endfor -%}
+</script>

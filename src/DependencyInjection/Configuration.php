@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\DependencyInjection;
 
+use Setono\SyliusAnalyticsPlugin\Doctrine\ORM\PropertyRepository;
 use Setono\SyliusAnalyticsPlugin\Form\Type\PropertyType;
-use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfig;
-use Setono\SyliusAnalyticsPlugin\Model\AnalyticsConfigInterface;
 use Setono\SyliusAnalyticsPlugin\Model\Property;
 use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
-use Setono\SyliusAnalyticsPlugin\Repository\AnalyticsConfigRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
@@ -62,7 +60,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Property::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(PropertyInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(PropertyRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PropertyType::class)->cannotBeEmpty()->end()
                                     ->end()
