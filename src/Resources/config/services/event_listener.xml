@@ -2,86 +2,52 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="setono_sylius_analytics.event_listener.analytics" class="Setono\SyliusAnalyticsPlugin\EventListener\AnalyticsEventListener">
-            <argument type="string">SetonoSyliusAnalyticsPlugin::analytics_init.html.twig</argument>
-            <argument type="service" id="setono_sylius_analytics.context.analytics_config"/>
-            <tag name="kernel.event_listener" event="sonata.block.event.sylius.shop.layout.javascripts" method="onBlockEvent"/>
+        <service id="setono_sylius_analytics.event_listener.analytics" class="Setono\SyliusAnalyticsPlugin\EventListener\AddLibrarySubscriber">
+            <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="setono_sylius_analytics.event_listener.add_payment_info" class="Setono\SyliusAnalyticsPlugin\EventListener\AddPaymentInfoEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.order.post_payment" method="addPaymentInfo"/>
+        <service id="setono_sylius_analytics.event_listener.add_payment_info" class="Setono\SyliusAnalyticsPlugin\EventListener\AddPaymentInfoSubscriber">
+            <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="setono_sylius_analytics.event_listener.add_to_cart" class="Setono\SyliusAnalyticsPlugin\EventListener\AddToCartEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.order_item.post_add" method="addToCart"/>
+        <service id="setono_sylius_analytics.event_listener.add_to_cart" class="Setono\SyliusAnalyticsPlugin\EventListener\AddToCartSubscriber">
+            <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="setono_sylius_analytics.event_listener.begin_checkout" class="Setono\SyliusAnalyticsPlugin\EventListener\BeginCheckoutEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.order.pre_address" method="beginCheckout"/>
+        <service id="setono_sylius_analytics.event_listener.login" class="Setono\SyliusAnalyticsPlugin\EventListener\LoginSubscriber">
+            <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="setono_sylius_analytics.event_listener.checkout_progress" class="Setono\SyliusAnalyticsPlugin\EventListener\CheckoutProgressEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.order.post_address" method="checkoutProgress"/>
-            <tag name="kernel.event_listener" event="sylius.order.post_select_shipping" method="checkoutProgress"/>
-            <tag name="kernel.event_listener" event="sylius.order.post_payment" method="checkoutProgress"/>
-            <tag name="kernel.event_listener" event="sylius.order.post_complete" method="checkoutProgress"/>
+        <service id="setono_sylius_analytics.event_listener.sign_up" class="Setono\SyliusAnalyticsPlugin\EventListener\SignUpSubscriber">
+            <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="setono_sylius_analytics.event_listener.login" class="Setono\SyliusAnalyticsPlugin\EventListener\LoginEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="security.interactive_login" method="login"/>
+        <service id="setono_sylius_analytics.event_listener.view_item" class="Setono\SyliusAnalyticsPlugin\EventListener\ViewItemSubscriber">
+            <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="setono_sylius_analytics.event_listener.purchase" class="Setono\SyliusAnalyticsPlugin\EventListener\PurchaseEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.order.post_complete" method="purchase"/>
+        <service id="setono_sylius_analytics.event_listener.begin_checkout" class="Setono\SyliusAnalyticsPlugin\EventListener\BeginCheckoutSubscriber">
+            <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="setono_sylius_analytics.event_listener.remove_from_cart" class="Setono\SyliusAnalyticsPlugin\EventListener\RemoveFromCartEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.order_item.post_remove" method="removeFromCart"/>
-        </service>
-
-        <service id="setono_sylius_analytics.event_listener.search" class="Setono\SyliusAnalyticsPlugin\EventListener\SearchEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
-        </service>
-
-        <service id="setono_sylius_analytics.event_listener.select_content" class="Setono\SyliusAnalyticsPlugin\EventListener\SelectContentEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
-        </service>
-
-        <service id="setono_sylius_analytics.event_listener.set_checkout_option" class="Setono\SyliusAnalyticsPlugin\EventListener\SetCheckoutOptionEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.order.post_address" method="setCheckoutOption"/>
-            <tag name="kernel.event_listener" event="sylius.order.post_select_shipping" method="setCheckoutOption"/>
-            <tag name="kernel.event_listener" event="sylius.order.post_payment" method="setCheckoutOption"/>
-            <tag name="kernel.event_listener" event="sylius.order.post_complete" method="setCheckoutOption"/>
-        </service>
-
-        <service id="setono_sylius_analytics.event_listener.sign_up" class="Setono\SyliusAnalyticsPlugin\EventListener\SignUpEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="signUp"/>
-        </service>
-
-        <service id="setono_sylius_analytics.event_listener.view_item" class="Setono\SyliusAnalyticsPlugin\EventListener\ViewItemEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.product.show" method="viewItem"/>
-        </service>
-
-        <service id="setono_sylius_analytics.event_listener.view_item_list" class="Setono\SyliusAnalyticsPlugin\EventListener\ViewItemListEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="sylius.product.index" method="viewItemList"/>
-        </service>
-
-        <service id="setono_sylius_analytics.event_listener.view_search_results" class="Setono\SyliusAnalyticsPlugin\EventListener\ViewSearchResultsEventListener">
-            <argument type="service" id="session"/>
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        <service id="setono_sylius_analytics.event_listener.purchase" class="Setono\SyliusAnalyticsPlugin\EventListener\PurchaseSubscriber">
+            <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>

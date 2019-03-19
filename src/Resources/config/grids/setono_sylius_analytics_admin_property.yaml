@@ -1,0 +1,25 @@
+sylius_grid:
+    grids:
+        setono_sylius_analytics_admin_property:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%setono_sylius_analytics.model.property.class%"
+            fields:
+                trackingId:
+                    type: string
+                    label: setono_sylius_analytics.ui.tracking_id
+                channels:
+                    type: twig
+                    label: sylius.ui.channels
+                    options:
+                        template: "@SetonoSyliusAnalyticsPlugin/Admin/Grid/Field/channels.html.twig"
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

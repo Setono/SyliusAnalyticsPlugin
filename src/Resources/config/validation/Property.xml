@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+        https://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="Setono\SyliusAnalyticsPlugin\Model\Property">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>trackingId</value>
+            </option>
+            <option name="message">setono_sylius_analytics.property.tracking_id.unique</option>
+            <option name="groups">
+                <value>setono_sylius_analytics</value>
+            </option>
+        </constraint>
+        <property name="trackingId">
+            <constraint name="NotBlank">
+                <option name="message">setono_sylius_analytics.property.tracking_id.not_blank</option>
+                <option name="groups">
+                    <value>setono_sylius_analytics</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">1</option>
+                <option name="minMessage">setono_sylius_analytics.property.tracking_id.min_length</option>
+                <option name="groups">
+                    <value>setono_sylius_analytics</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

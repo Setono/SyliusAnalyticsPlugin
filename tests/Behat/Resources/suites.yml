@@ -1,2 +1,14 @@
-imports:
-    - suites/ui/managing_google_analytic.yml
+default:
+    suites:
+        managing_brands:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.ui.admin.notification
+
+                - setono_sylius_analytics.behat.context.transform.property
+                - setono_sylius_analytics.behat.context.setup.property
+                - setono_sylius_analytics.behat.context.ui.admin.managing_properties
+            filters:
+                tags: "@managing_properties && @ui"

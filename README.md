@@ -24,27 +24,36 @@ This command requires you to have Composer installed globally, as explained in t
 ### Step 2: Enable the plugin
 
 Then, enable the plugin by adding it to the list of registered plugins/bundles
-in the `app/AppKernel.php` file of your project:
+in `config/bundles.php` file of your project before (!) `SyliusGridBundle`:
 
 ```php
 $bundles = [
-   new \Setono\SyliusAnalyticsPlugin\SetonoSyliusAnalyticsPlugin(),
+   Setono\SyliusAnalyticsPlugin\SetonoSyliusAnalyticsPlugin::class => ['all' => true],
+   Sylius\Bundle\GridBundle\SyliusGridBundle::class => ['all' => true],
 ];
 ```
 
-### Step 3: Import routing
+### Step 3: Configure plugin
 
-````yaml
+```yaml
+# config/packages/_sylius.yaml
+imports:
+    # ...
+    - { resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/app/config.yaml" }
+    # ...
+```
+
+```yaml
+# config/routes/setono_sylius_analytics.yaml
 setono_analytics_plugin:
     resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routing.yml"
-
-````
+```
 
 [ico-version]: https://img.shields.io/packagist/v/setono/sylius-analytics-plugin.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/Setono/SyliusAnalyticsPlugin/master.svg?style=flat-square
+[ico-travis]: https://travis-ci.com/Setono/SyliusAnalyticsPlugin.svg?branch=master
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusAnalyticsPlugin.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/setono/sylius-analytics-plugin
-[link-travis]: https://travis-ci.org/Setono/SyliusAnalyticsPlugin
+[link-travis]: https://travis-ci.com/Setono/SyliusAnalyticsPlugin
 [link-code-quality]: https://scrutinizer-ci.com/g/Setono/SyliusAnalyticsPlugin

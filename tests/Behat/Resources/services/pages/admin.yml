@@ -1,2 +1,0 @@
-imports:
-    - { resource: "admin/google_analytic_config.yml" }

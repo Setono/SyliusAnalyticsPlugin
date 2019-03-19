@@ -1,3 +1,0 @@
-setono_sylius_analytics_admin:
-    resource: routing/admin.yml
-    prefix: /admin

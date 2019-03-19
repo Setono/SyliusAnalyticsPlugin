@@ -1,0 +1,13 @@
+setono_sylius_analytics_admin_property:
+    resource: |
+        section: admin
+        alias: setono_sylius_analytics.property
+        templates: SyliusAdminBundle:Crud
+        redirect: update
+        grid: setono_sylius_analytics_admin_property
+        vars:
+            all:
+                subheader: setono_sylius_analytics.ui.property
+            index:
+                icon: 'bullhorn'
+    type: sylius.resource
