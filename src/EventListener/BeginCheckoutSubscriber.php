@@ -39,7 +39,7 @@ final class BeginCheckoutSubscriber extends TagSubscriber
             return;
         }
 
-        if(!$this->hasProperties()) {
+        if (!$this->hasProperties()) {
             return;
         }
 

@@ -34,7 +34,7 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     protected function hasProperties(): bool
     {
-        if(null === $this->properties) {
+        if (null === $this->properties) {
             $this->properties = $this->propertyContext->getProperties();
         }
 
@@ -43,7 +43,7 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     protected function getProperties(): array
     {
-        if(null === $this->properties) {
+        if (null === $this->properties) {
             $this->properties = $this->propertyContext->getProperties();
         }
 

@@ -30,7 +30,7 @@ final class ViewItemSubscriber extends TagSubscriber
             return;
         }
 
-        if(!$this->hasProperties()) {
+        if (!$this->hasProperties()) {
             return;
         }
 

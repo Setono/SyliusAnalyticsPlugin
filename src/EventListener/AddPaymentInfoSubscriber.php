@@ -22,7 +22,7 @@ final class AddPaymentInfoSubscriber extends TagSubscriber
 
     public function add(): void
     {
-        if(!$this->hasProperties()) {
+        if (!$this->hasProperties()) {
             return;
         }
 

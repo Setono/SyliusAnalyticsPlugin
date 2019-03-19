@@ -33,7 +33,7 @@ final class AddLibrarySubscriber extends TagSubscriber
             return;
         }
 
-        if(!$this->hasProperties()) {
+        if (!$this->hasProperties()) {
             return;
         }
 
