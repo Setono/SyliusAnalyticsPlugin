@@ -51,9 +51,9 @@ setono_analytics_plugin:
 
 [ico-version]: https://img.shields.io/packagist/v/setono/sylius-analytics-plugin.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/Setono/SyliusAnalyticsPlugin/master.svg?style=flat-square
+[ico-travis]: https://travis-ci.com/Setono/SyliusAnalyticsPlugin.svg?branch=master
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusAnalyticsPlugin.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/setono/sylius-analytics-plugin
-[link-travis]: https://travis-ci.org/Setono/SyliusAnalyticsPlugin
+[link-travis]: https://travis-ci.com/Setono/SyliusAnalyticsPlugin
 [link-code-quality]: https://scrutinizer-ci.com/g/Setono/SyliusAnalyticsPlugin
