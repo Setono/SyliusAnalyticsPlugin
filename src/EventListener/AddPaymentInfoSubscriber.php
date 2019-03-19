@@ -25,6 +25,6 @@ final class AddPaymentInfoSubscriber extends TagSubscriber
         $this->tagBag->add(new GtagTag(
             GtagTagInterface::EVENT_ADD_PAYMENT_INFO,
             Tags::TAG_ADD_PAYMENT_INFO
-        ),TagBagInterface::SECTION_BODY_END);
+        ), TagBagInterface::SECTION_BODY_END);
     }
 }

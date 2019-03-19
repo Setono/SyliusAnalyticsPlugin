@@ -47,7 +47,7 @@ final class AddLibrarySubscriber extends TagSubscriber
         }
 
         $properties = $this->propertyContext->getProperties();
-        if (\count($properties) === 0) {
+        if (0 === \count($properties)) {
             return;
         }
 

@@ -28,7 +28,7 @@ abstract class TagSubscriber implements EventSubscriberInterface
             // @todo missing parameters: https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_additions_to_and_removals_from_shopping_carts
 
             $variant = $orderItem->getVariant();
-            if(null === $variant) {
+            if (null === $variant) {
                 continue;
             }
 
@@ -57,14 +57,14 @@ abstract class TagSubscriber implements EventSubscriberInterface
             'category' => $category,
             'variant' => $variant,
             'list_position' => $listPosition,
-            'quantity' => $quantity ,
+            'quantity' => $quantity,
             'price' => $this->formatMoney($price),
         ]);
     }
 
     protected function formatMoney(?int $money): ?string
     {
-        if(null === $money) {
+        if (null === $money) {
             return null;
         }
 

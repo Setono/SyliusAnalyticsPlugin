@@ -6,7 +6,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="Setono\SyliusAnalyticsPlugin\Model\Property" table="setono_sylius_analytics__property">
-        
+
         <indexes>
             <index columns="enabled" name="idx_enabled"/>
         </indexes>
@@ -15,8 +15,8 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="trackingId" type="string" />
-        <field name="enabled" column="enabled" type="boolean" />
+        <field name="trackingId" type="string" unique="true"/>
+        <field name="enabled" column="enabled" type="boolean"/>
 
         <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
             <join-table name="setono_sylius_analytics__property_channels">

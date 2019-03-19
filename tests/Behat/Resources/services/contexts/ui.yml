@@ -1,7 +1,0 @@
-services:
-    setono_sylius_analytics.behat.context.ui.admin.analytics:
-        class: Tests\Setono\SyliusAnalyticsPlugin\Behat\Context\Ui\Admin\GoogleAnalyticContext
-        arguments:
-            - "@setono_sylius_analytics.behat.page.admin.google_analytics_config.update"
-            - "@sylius.behat.notification_checker"
-            - "@setono_sylius_analytics_plugin.context.config"

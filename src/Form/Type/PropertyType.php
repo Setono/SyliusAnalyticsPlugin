@@ -32,4 +32,9 @@ final class PropertyType extends AbstractResourceType
             ])
         ;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'setono_sylius_analytics_property';
+    }
 }

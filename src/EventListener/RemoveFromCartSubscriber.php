@@ -9,33 +9,31 @@ use Setono\SyliusAnalyticsPlugin\Tag\GtagTagInterface;
 use Setono\SyliusAnalyticsPlugin\Tag\Tags;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 
-final class ViewItemSubscriber extends TagSubscriber
+final class RemoveFromCartSubscriber extends TagSubscriber
 {
     public static function getSubscribedEvents(): array
     {
         return [
-            'sylius.product.show' => [
-                'view',
+            'sylius.order_item.post_delete' => [
+                'track',
             ],
         ];
     }
 
-    public function view(ResourceControllerEvent $event): void
+    public function track(ResourceControllerEvent $event): void
     {
-        $product = $event->getSubject();
+        $orderItem = $event->getSubject();
 
-        if (!$product instanceof ProductInterface) {
+        if (!$orderItem instanceof OrderItemInterface) {
             return;
         }
 
-        $item = $this->createItem((string) $product->getCode(), (string) $product->getName());
-
         $this->tagBag->add(new GtagTag(
-            GtagTagInterface::EVENT_VIEW_ITEM,
-            Tags::TAG_VIEW_ITEM,
-            ['items' => [$item]]
+            GtagTagInterface::EVENT_REMOVE_FROM_CART,
+            Tags::TAG_REMOVE_FROM_CART,
+            ['items' => $this->getOrderItemsArray($orderItem)]
         ), TagBagInterface::SECTION_BODY_END);
     }
 }
