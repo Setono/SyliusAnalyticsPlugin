@@ -1,6 +1,6 @@
 setono_sylius_analytics:
     property:
         tracking_id:
+            unique: You already have one property with this tracking id
             not_blank: Tracking id cannot be blank.
             min_length: Tracking id must be at least {{ limit }} characters long.
-            max_length: Tracking id can not be longer than {{ limit }} characters.

@@ -9,3 +9,4 @@ setono_sylius_analytics:
         enabled: Enabled
         google_analytics: Google analytics
         property: Property
+        no_channels: No channels

@@ -1,7 +1,11 @@
-<ul>
-    {% for channel in data %}
-        <li>
-            {{ channel.name }}
-        </li>
-    {% endfor %}
+{% if data|length %}
+    <ul>
+        {% for channel in data %}
+            <li>
+                {{ channel.name }}
+            </li>
+        {% endfor %}
 </ul>
+{% else %}
+    <i class="exclamation circle icon red"></i> {{ 'setono_sylius_analytics.ui.no_channels'|trans }}
+{% endif %}

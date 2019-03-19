@@ -9,7 +9,6 @@ sylius_grid:
                 trackingId:
                     type: string
                     label: setono_sylius_analytics.ui.tracking_id
-                    sortable: ~
                 channels:
                     type: twig
                     label: sylius.ui.channels
