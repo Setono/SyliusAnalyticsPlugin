@@ -39,6 +39,10 @@ final class BeginCheckoutSubscriber extends TagSubscriber
             return;
         }
 
+        if(!$this->hasProperties()) {
+            return;
+        }
+
         $this->tagBag->add(new GtagTag(
             GtagTagInterface::EVENT_BEGIN_CHECKOUT,
             Tags::TAG_BEGIN_CHECKOUT

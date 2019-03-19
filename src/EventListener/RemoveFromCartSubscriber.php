@@ -30,6 +30,10 @@ final class RemoveFromCartSubscriber extends TagSubscriber
             return;
         }
 
+        if(!$this->hasProperties()) {
+            return;
+        }
+
         $this->tagBag->add(new GtagTag(
             GtagTagInterface::EVENT_REMOVE_FROM_CART,
             Tags::TAG_REMOVE_FROM_CART,

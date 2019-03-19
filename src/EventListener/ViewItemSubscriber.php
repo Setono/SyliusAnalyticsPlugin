@@ -30,6 +30,10 @@ final class ViewItemSubscriber extends TagSubscriber
             return;
         }
 
+        if(!$this->hasProperties()) {
+            return;
+        }
+
         $item = $this->createItem((string) $product->getCode(), (string) $product->getName());
 
         $this->tagBag->add(new GtagTag(

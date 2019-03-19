@@ -10,36 +10,43 @@
 
         <service id="setono_sylius_analytics.event_listener.add_payment_info" class="Setono\SyliusAnalyticsPlugin\EventListener\AddPaymentInfoSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.add_to_cart" class="Setono\SyliusAnalyticsPlugin\EventListener\AddToCartSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.login" class="Setono\SyliusAnalyticsPlugin\EventListener\LoginSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.sign_up" class="Setono\SyliusAnalyticsPlugin\EventListener\SignUpSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.view_item" class="Setono\SyliusAnalyticsPlugin\EventListener\ViewItemSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.begin_checkout" class="Setono\SyliusAnalyticsPlugin\EventListener\BeginCheckoutSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.purchase" class="Setono\SyliusAnalyticsPlugin\EventListener\PurchaseSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_analytics.context.property"/>
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>

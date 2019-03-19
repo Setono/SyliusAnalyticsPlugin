@@ -35,6 +35,10 @@ final class PurchaseSubscriber extends TagSubscriber
             return;
         }
 
+        if(!$this->hasProperties()) {
+            return;
+        }
+
         $data = [
             'transaction_id' => (string) $order->getNumber(),
             'affiliation' => $channel->getHostname() . ' (' . $order->getLocaleCode() . ')',

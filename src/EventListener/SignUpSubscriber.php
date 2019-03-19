@@ -22,6 +22,10 @@ final class SignUpSubscriber extends TagSubscriber
 
     public function signUp(): void
     {
+        if(!$this->hasProperties()) {
+            return;
+        }
+
         $this->tagBag->add(new GtagTag(
             GtagTagInterface::EVENT_SIGN_UP,
             Tags::TAG_SIGN_UP

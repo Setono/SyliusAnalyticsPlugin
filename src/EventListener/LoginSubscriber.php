@@ -22,6 +22,10 @@ final class LoginSubscriber extends TagSubscriber
 
     public function login(): void
     {
+        if(!$this->hasProperties()) {
+            return;
+        }
+
         $this->tagBag->add(new GtagTag(
             GtagTagInterface::EVENT_LOGIN,
             Tags::TAG_ADD_PAYMENT_INFO

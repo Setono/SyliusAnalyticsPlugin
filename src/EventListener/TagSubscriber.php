@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
+use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -15,9 +16,38 @@ abstract class TagSubscriber implements EventSubscriberInterface
      */
     protected $tagBag;
 
-    public function __construct(TagBagInterface $tagBag)
+    /**
+     * @var PropertyContextInterface
+     */
+    private $propertyContext;
+
+    /**
+     * @var array|null
+     */
+    private $properties;
+
+    public function __construct(TagBagInterface $tagBag, PropertyContextInterface $propertyContext)
     {
         $this->tagBag = $tagBag;
+        $this->propertyContext = $propertyContext;
+    }
+
+    protected function hasProperties(): bool
+    {
+        if(null === $this->properties) {
+            $this->properties = $this->propertyContext->getProperties();
+        }
+
+        return \count($this->properties) > 0;
+    }
+
+    protected function getProperties(): array
+    {
+        if(null === $this->properties) {
+            $this->properties = $this->propertyContext->getProperties();
+        }
+
+        return $this->properties;
     }
 
     protected function getOrderItemsArray(OrderItemInterface ...$orderItems): array

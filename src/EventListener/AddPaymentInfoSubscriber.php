@@ -22,6 +22,10 @@ final class AddPaymentInfoSubscriber extends TagSubscriber
 
     public function add(): void
     {
+        if(!$this->hasProperties()) {
+            return;
+        }
+
         $this->tagBag->add(new GtagTag(
             GtagTagInterface::EVENT_ADD_PAYMENT_INFO,
             Tags::TAG_ADD_PAYMENT_INFO

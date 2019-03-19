@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
 use Setono\SyliusAnalyticsPlugin\Tag\Tags;
 use Setono\TagBagBundle\Tag\TagInterface;
 use Setono\TagBagBundle\Tag\TwigTag;
@@ -14,18 +13,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class AddLibrarySubscriber extends TagSubscriber
 {
-    /**
-     * @var PropertyContextInterface
-     */
-    private $propertyContext;
-
-    public function __construct(TagBagInterface $tagBag, PropertyContextInterface $propertyContext)
-    {
-        parent::__construct($tagBag);
-
-        $this->propertyContext = $propertyContext;
-    }
-
     public static function getSubscribedEvents(): array
     {
         return [
@@ -46,8 +33,7 @@ final class AddLibrarySubscriber extends TagSubscriber
             return;
         }
 
-        $properties = $this->propertyContext->getProperties();
-        if (0 === \count($properties)) {
+        if(!$this->hasProperties()) {
             return;
         }
 
@@ -56,7 +42,7 @@ final class AddLibrarySubscriber extends TagSubscriber
             TagInterface::TYPE_HTML,
             Tags::TAG_LIBRARY,
             [
-                'properties' => $properties,
+                'properties' => $this->getProperties(),
             ]
         ), TagBagInterface::SECTION_HEAD);
     }
