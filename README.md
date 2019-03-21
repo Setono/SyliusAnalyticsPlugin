@@ -54,10 +54,19 @@ imports:
     # ...
 ```
 
+### Step 4: Import routing
+
 ```yaml
 # config/routes/setono_sylius_analytics.yaml
 setono_analytics_plugin:
     resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routing.yaml"
+```
+
+### Step 5: Update your database schema
+
+```bash
+$ php bin/console doctrine:migrations:diff
+$ php bin/console doctrine:migrations:migrate
 ```
 
 [ico-version]: https://img.shields.io/packagist/v/setono/sylius-analytics-plugin.svg?style=flat-square
