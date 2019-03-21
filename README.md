@@ -57,7 +57,7 @@ imports:
 ```yaml
 # config/routes/setono_sylius_analytics.yaml
 setono_analytics_plugin:
-    resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routing.yml"
+    resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routing.yaml"
 ```
 
 [ico-version]: https://img.shields.io/packagist/v/setono/sylius-analytics-plugin.svg?style=flat-square
