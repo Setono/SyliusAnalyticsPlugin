@@ -1,6 +1,7 @@
 # Sylius Analytics Plugin
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Latest Version][ico-version]][link-packagist]
+[![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-travis]][link-travis]
 [![Quality Score][ico-code-quality]][link-code-quality]
@@ -69,8 +70,10 @@ $ php bin/console doctrine:migrations:diff
 $ php bin/console doctrine:migrations:migrate
 ```
 
-[ico-version]: https://img.shields.io/packagist/v/setono/sylius-analytics-plugin.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+
+[ico-version]: https://poser.pugx.org/setono/sylius-analytics-plugin/v/stable
+[ico-unstable-version]: https://poser.pugx.org/setono/sylius-analytics-plugin/v/unstable
+[ico-license]: https://poser.pugx.org/setono/sylius-analytics-plugin/license
 [ico-travis]: https://travis-ci.com/Setono/SyliusAnalyticsPlugin.svg?branch=master
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusAnalyticsPlugin.svg?style=flat-square
 
