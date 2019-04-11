@@ -44,8 +44,8 @@ final class BeginCheckoutSubscriber extends TagSubscriber
         }
 
         $this->tagBag->add(new GtagTag(
-            GtagTagInterface::EVENT_BEGIN_CHECKOUT,
-            Tags::TAG_BEGIN_CHECKOUT
+            Tags::TAG_BEGIN_CHECKOUT,
+            GtagTagInterface::EVENT_BEGIN_CHECKOUT
         ), TagBagInterface::SECTION_BODY_END);
     }
 }

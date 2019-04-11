@@ -10,7 +10,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface PropertyRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Returns the properties that enabled and enabled on the given channel
+     * Returns the properties that are enabled and enabled on the given channel
      *
      * @param ChannelInterface $channel
      *

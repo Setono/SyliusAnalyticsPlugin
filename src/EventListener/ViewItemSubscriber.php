@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
+use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
+use Setono\SyliusAnalyticsPlugin\Event\BuilderEvent;
 use Setono\SyliusAnalyticsPlugin\Tag\GtagTag;
 use Setono\SyliusAnalyticsPlugin\Tag\GtagTagInterface;
 use Setono\SyliusAnalyticsPlugin\Tag\Tags;
@@ -34,12 +36,17 @@ final class ViewItemSubscriber extends TagSubscriber
             return;
         }
 
-        $item = $this->createItem((string) $product->getCode(), (string) $product->getName());
+        $builder = ItemBuilder::create()
+            ->setId($product->getCode())
+            ->setName($product->getName())
+        ;
+
+        $this->eventDispatcher->dispatch(ItemBuilder::EVENT_NAME, new BuilderEvent($builder, $product));
 
         $this->tagBag->add(new GtagTag(
-            GtagTagInterface::EVENT_VIEW_ITEM,
             Tags::TAG_VIEW_ITEM,
-            ['items' => [$item]]
+            GtagTagInterface::EVENT_VIEW_ITEM,
+            $builder
         ), TagBagInterface::SECTION_BODY_END);
     }
 }

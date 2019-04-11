@@ -27,8 +27,8 @@ final class LoginSubscriber extends TagSubscriber
         }
 
         $this->tagBag->add(new GtagTag(
-            GtagTagInterface::EVENT_LOGIN,
-            Tags::TAG_ADD_PAYMENT_INFO
+            Tags::TAG_LOGIN,
+            GtagTagInterface::EVENT_LOGIN
         ), TagBagInterface::SECTION_BODY_END);
     }
 }

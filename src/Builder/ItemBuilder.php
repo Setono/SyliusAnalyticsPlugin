@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\Builder;
 
 /**
- * @method ItemBuilder withId(string $id)
- * @method ItemBuilder withName(string $name)
- * @method ItemBuilder withListName(string $listName)
- * @method ItemBuilder withBrand(string $brand)
- * @method ItemBuilder withCategory(string $category)
- * @method ItemBuilder withVariant(string $variant)
- * @method ItemBuilder withListPosition(int $listPosition)
- * @method ItemBuilder withQuantity(int $quantity)
- * @method ItemBuilder withPrice(string $price)
+ * @method ItemBuilder setId(string $id)
+ * @method ItemBuilder setName(string $name)
+ * @method ItemBuilder setListName(string $listName)
+ * @method ItemBuilder setBrand(string $brand)
+ * @method ItemBuilder setCategory(string $category)
+ * @method ItemBuilder setVariant(string $variant)
+ * @method ItemBuilder setListPosition(int $listPosition)
+ * @method ItemBuilder setQuantity(int $quantity)
+ * @method ItemBuilder setPrice(float $price)
  */
 final class ItemBuilder extends Builder
 {
-
+    public const EVENT_NAME = 'setono_sylius_analytics.builder.item';
 }

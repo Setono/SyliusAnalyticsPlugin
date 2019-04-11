@@ -15,20 +15,20 @@ final class AddPaymentInfoSubscriber extends TagSubscriber
     {
         return [
             'sylius.order.post_payment' => [
-                'add',
+                'track',
             ],
         ];
     }
 
-    public function add(): void
+    public function track(): void
     {
         if (!$this->hasProperties()) {
             return;
         }
 
         $this->tagBag->add(new GtagTag(
-            GtagTagInterface::EVENT_ADD_PAYMENT_INFO,
-            Tags::TAG_ADD_PAYMENT_INFO
+            Tags::TAG_ADD_PAYMENT_INFO,
+            GtagTagInterface::EVENT_ADD_PAYMENT_INFO
         ), TagBagInterface::SECTION_BODY_END);
     }
 }

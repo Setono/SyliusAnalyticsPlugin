@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
+use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
+use Setono\SyliusAnalyticsPlugin\Builder\PurchaseBuilder;
+use Setono\SyliusAnalyticsPlugin\Event\BuilderEvent;
 use Setono\SyliusAnalyticsPlugin\Tag\GtagTag;
 use Setono\SyliusAnalyticsPlugin\Tag\GtagTagInterface;
 use Setono\SyliusAnalyticsPlugin\Tag\Tags;
@@ -39,15 +42,14 @@ final class PurchaseSubscriber extends TagSubscriber
             return;
         }
 
-        $data = [
-            'transaction_id' => (string) $order->getNumber(),
-            'affiliation' => $channel->getHostname() . ' (' . $order->getLocaleCode() . ')',
-            'value' => (string) $this->formatMoney($order->getTotal()),
-            'currency' => (string) $order->getCurrencyCode(),
-            'tax' => (string) $this->formatMoney($order->getTaxTotal()),
-            'shipping' => (string) $this->formatMoney($order->getShippingTotal()),
-            'items' => [],
-        ];
+        $builder = PurchaseBuilder::create()
+            ->setTransactionId($order->getNumber())
+            ->setAffiliation($channel->getHostname() . ' (' . $order->getLocaleCode() . ')')
+            ->setValue($this->moneyFormatter->format($order->getTotal()))
+            ->setCurrency($order->getCurrencyCode())
+            ->setTax($this->moneyFormatter->format($order->getTaxTotal()))
+            ->setShipping($this->moneyFormatter->format($order->getShippingTotal()))
+        ;
 
         foreach ($order->getItems() as $orderItem) {
             $variant = $orderItem->getVariant();
@@ -55,20 +57,24 @@ final class PurchaseSubscriber extends TagSubscriber
                 continue;
             }
 
-            $dataItem = $this->createItem(
-                $variant->getCode(),
-                (string) $orderItem->getVariantName(),
-                $orderItem->getQuantity(),
-                $orderItem->getDiscountedUnitPrice()
-            );
+            $itemBuilder = ItemBuilder::create()
+                ->setId($variant->getCode())
+                ->setName($orderItem->getVariantName())
+                ->setQuantity($orderItem->getQuantity())
+                ->setPrice($this->moneyFormatter->format($orderItem->getDiscountedUnitPrice()))
+            ;
 
-            $data['items'][] = $dataItem;
+            $this->eventDispatcher->dispatch(ItemBuilder::EVENT_NAME, new BuilderEvent($itemBuilder, $orderItem));
+
+            $builder->addItem($itemBuilder);
         }
 
+        $this->eventDispatcher->dispatch(PurchaseBuilder::EVENT_NAME, new BuilderEvent($builder, $order));
+
         $this->tagBag->add(new GtagTag(
-            GtagTagInterface::EVENT_PURCHASE,
             Tags::TAG_PURCHASE,
-            $data
+            GtagTagInterface::EVENT_PURCHASE,
+            $builder
         ), TagBagInterface::SECTION_BODY_END);
     }
 }

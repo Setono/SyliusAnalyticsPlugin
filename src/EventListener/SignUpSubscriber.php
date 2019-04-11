@@ -27,8 +27,8 @@ final class SignUpSubscriber extends TagSubscriber
         }
 
         $this->tagBag->add(new GtagTag(
-            GtagTagInterface::EVENT_SIGN_UP,
-            Tags::TAG_SIGN_UP
+            Tags::TAG_SIGN_UP,
+            GtagTagInterface::EVENT_SIGN_UP
         ), TagBagInterface::SECTION_BODY_END);
     }
 }

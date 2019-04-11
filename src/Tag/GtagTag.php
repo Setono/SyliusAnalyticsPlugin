@@ -4,18 +4,30 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Tag;
 
+use Setono\SyliusAnalyticsPlugin\Builder\BuilderInterface;
+
 final class GtagTag implements GtagTagInterface
 {
+    /**
+     * @var string
+     */
     private $action;
+
+    /**
+     * @var string
+     */
     private $key;
+
+    /**
+     * @var BuilderInterface|null
+     */
     private $parameters;
 
-    public function __construct(string $action, string $key, array $parameters = [])
+    public function __construct(string $key, string $action, BuilderInterface $builder = null)
     {
-        $this->action = $action;
         $this->key = $key;
-
-        $this->parameters = empty($parameters) ? '' : json_encode($parameters);
+        $this->action = $action;
+        $this->parameters = $builder;
     }
 
     public function getKey(): string
@@ -37,8 +49,8 @@ final class GtagTag implements GtagTagInterface
     {
         $ret = ['action' => $this->action];
 
-        if ('' !== $this->parameters) {
-            $ret['parameters'] = $this->parameters;
+        if (null !== $this->parameters) {
+            $ret['parameters'] = $this->parameters->getJson();
         }
 
         return $ret;
