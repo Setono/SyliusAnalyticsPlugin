@@ -70,6 +70,76 @@ $ php bin/console doctrine:migrations:diff
 $ php bin/console doctrine:migrations:migrate
 ```
 
+### Step 6: Create a property
+When you create a property in Google Analytics you receive a tracking id which looks something like UA-12345678-1.
+
+Now create a new property in your Sylius shop by navigating to `/admin/properties/new`.
+Remember to enable the property and enable the channels you want to track. 
+
+### Step 7: You're ready!
+The events that are tracked are located in the [EventListener folder](src/EventListener).
+To make your tracking even better you should create event listeners listening to the 
+builder events fired in i.e. the [PurchaseSubscriber](src/EventListener/PurchaseSubscriber.php).
+
+Let's say you use the [Brand plugin](https://github.com/loevgaard/SyliusBrandPlugin) and want to enrich the items
+tracked with the brand of the product. That would look like this:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\EventListener;
+
+use Loevgaard\SyliusBrandPlugin\Model\BrandAwareInterface;
+use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
+use Setono\SyliusAnalyticsPlugin\Event\BuilderEvent;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+
+final class AddBrandSubscriber implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            'setono_sylius_analytics.builder.item' => [
+                'addBrand',
+            ],
+        ];
+    }
+
+    public function addBrand(BuilderEvent $event): void
+    {
+        $builder = $event->getBuilder();
+        if(!$builder instanceof ItemBuilder) {
+            return;
+        }
+        
+        $subject = $event->getSubject();
+        
+        if(!$subject instanceof OrderItemInterface) {
+            return;
+        }
+        
+        $product = $subject->getProduct();
+        if(!$product instanceof BrandAwareInterface) {
+            return;
+        }
+        
+        $builder->setBrand($product->getBrand()->getName());
+    }
+}
+
+```
+
+## Contribute
+Ways you can contribute:
+* Translate [messages](src/Resources/translations/messages.en.yaml) and [validators](src/Resources/translations/validators.en.yaml) to your mother tongue
+* Create Behat tests that verifies the scripts are outputted on the respective pages
+* Create new event subscribers that handle Analytics events which are not implemented
+
+Thank you!
 
 [ico-version]: https://poser.pugx.org/setono/sylius-analytics-plugin/v/stable
 [ico-unstable-version]: https://poser.pugx.org/setono/sylius-analytics-plugin/v/unstable

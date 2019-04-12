@@ -22,6 +22,7 @@
         "friends-of-behat/symfony-extension": "^2.0",
         "friends-of-behat/variadic-extension": "^1.1",
         "lakion/mink-debug-extension": "^1.2.3",
+        "loevgaard/sylius-brand-plugin": "^2.0@beta",
         "phpspec/phpspec": "^5.0",
         "phpstan/phpstan-doctrine": "^0.10",
         "phpstan/phpstan-shim": "^0.10",

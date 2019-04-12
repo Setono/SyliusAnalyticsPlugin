@@ -10,9 +10,6 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 
 class PropertyRepository extends EntityRepository implements PropertyRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findByChannel(ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
