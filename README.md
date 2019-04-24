@@ -59,7 +59,7 @@ imports:
 
 ```yaml
 # config/routes/setono_sylius_analytics.yaml
-setono_analytics_plugin:
+setono_sylius_analytics:
     resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routing.yaml"
 ```
 
