@@ -10,14 +10,10 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 
 final class PropertyContext implements PropertyContextInterface
 {
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var PropertyRepositoryInterface
-     */
+    /** @var PropertyRepositoryInterface */
     private $propertyRepository;
 
     public function __construct(ChannelContextInterface $channelContext, PropertyRepositoryInterface $propertyRepository)

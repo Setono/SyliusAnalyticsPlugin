@@ -22,7 +22,7 @@ final class LoginSubscriber extends TagSubscriber
 
     public function login(): void
     {
-        if (!$this->hasProperties()) {
+        if (!$this->isShopContext() || !$this->hasProperties()) {
             return;
         }
 

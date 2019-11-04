@@ -22,7 +22,7 @@ final class SignUpSubscriber extends TagSubscriber
 
     public function signUp(): void
     {
-        if (!$this->hasProperties()) {
+        if (!$this->isShopContext() || !$this->hasProperties()) {
             return;
         }
 

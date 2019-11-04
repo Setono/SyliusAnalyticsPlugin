@@ -8,19 +8,13 @@ use Setono\SyliusAnalyticsPlugin\Builder\BuilderInterface;
 
 final class GtagTag implements GtagTagInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $action;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $key;
 
-    /**
-     * @var BuilderInterface|null
-     */
+    /** @var BuilderInterface|null */
     private $parameters;
 
     public function __construct(string $key, string $action, BuilderInterface $builder = null)

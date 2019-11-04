@@ -24,11 +24,11 @@ final class BeginCheckoutSubscriber extends TagSubscriber
 
     public function track(GetResponseEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        $request = $event->getRequest();
+
+        if (!$event->isMasterRequest() || !$this->isShopContext($request)) {
             return;
         }
-
-        $request = $event->getRequest();
 
         if (!$request->attributes->has('_route')) {
             return;

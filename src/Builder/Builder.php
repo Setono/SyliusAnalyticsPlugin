@@ -4,24 +4,36 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Builder;
 
+use InvalidArgumentException;
+use Safe\Exceptions\JsonException;
+use Safe\Exceptions\StringsException;
+use function Safe\json_decode;
+use function Safe\json_encode;
+use function Safe\sprintf;
 use Symfony\Component\DependencyInjection\Container;
 
 abstract class Builder implements BuilderInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $data = [];
 
     private function __construct()
     {
     }
 
+    /**
+     * @return static
+     */
     public static function create()
     {
         return new static();
     }
 
+    /**
+     * @return static
+     *
+     * @throws JsonException
+     */
     public static function createFromJson(string $json)
     {
         $new = new static();
@@ -36,30 +48,33 @@ abstract class Builder implements BuilderInterface
     }
 
     /**
-     * @return string
-     *
-     * @throws \Safe\Exceptions\JsonException
+     * @throws JsonException
      */
     public function getJson(): string
     {
-        return \Safe\json_encode($this->data);
+        return json_encode($this->data);
     }
 
+    /**
+     * @param string $name
+     * @return static
+     * @throws StringsException
+     */
     public function __call($name, array $arguments)
     {
         if (count($arguments) !== 1) {
-            return;
+            return $this;
         }
 
-        if (strpos($name, 'set') !== 0) {
-            return;
+        if (mb_strpos($name, 'set') !== 0) {
+            return $this;
         }
 
-        $key = Container::underscore(substr($name, 3));
+        $key = Container::underscore(mb_substr($name, 3));
         $val = $arguments[0];
 
         if (null === $val) {
-            return;
+            return $this;
         }
 
         if (is_callable($val)) {
@@ -71,7 +86,7 @@ abstract class Builder implements BuilderInterface
         }
 
         if (!is_scalar($val) && !is_array($val)) {
-            throw new \InvalidArgumentException(sprintf('Unexpected type %s. Expected types are: callable, %s or scalar', is_object($val) ? get_class($val) : gettype($val), BuilderInterface::class));
+            throw new InvalidArgumentException(sprintf('Unexpected type %s. Expected types are: callable, %s or scalar', is_object($val) ? get_class($val) : gettype($val), BuilderInterface::class));
         }
 
         $this->data[$key] = $val;

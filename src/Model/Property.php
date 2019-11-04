@@ -14,19 +14,13 @@ class Property implements PropertyInterface
 {
     use ToggleableTrait;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $trackingId;
 
-    /**
-     * @var Collection|ChannelInterface[]
-     */
+    /** @var Collection|ChannelInterface[] */
     protected $channels;
 
     public function __construct()

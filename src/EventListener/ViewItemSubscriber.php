@@ -28,7 +28,7 @@ final class ViewItemSubscriber extends TagSubscriber
     {
         $product = $event->getSubject();
 
-        if (!$product instanceof ProductInterface) {
+        if (!$product instanceof ProductInterface || !$this->isShopContext()) {
             return;
         }
 
@@ -41,7 +41,7 @@ final class ViewItemSubscriber extends TagSubscriber
             ->setName($product->getName())
         ;
 
-        $this->eventDispatcher->dispatch(ItemBuilder::EVENT_NAME, new BuilderEvent($builder, $product));
+        $this->eventDispatcher->dispatch(new BuilderEvent($builder, $product));
 
         $this->tagBag->add(new GtagTag(
             Tags::TAG_VIEW_ITEM,

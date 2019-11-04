@@ -24,12 +24,14 @@ final class AddLibrarySubscriber extends TagSubscriber
 
     public function add(GetResponseEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        $request = $event->getRequest();
+
+        if (!$event->isMasterRequest() || !$this->isShopContext($request)) {
             return;
         }
 
         // Only add the library on 'real' page loads, not AJAX requests like add to cart
-        if ($event->getRequest()->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             return;
         }
 

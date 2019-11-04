@@ -22,7 +22,7 @@ final class AddPaymentInfoSubscriber extends TagSubscriber
 
     public function track(): void
     {
-        if (!$this->hasProperties()) {
+        if (!$this->isShopContext() || !$this->hasProperties()) {
             return;
         }
 

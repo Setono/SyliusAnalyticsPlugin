@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\Builder;
 
 use InvalidArgumentException;
+use Safe\Exceptions\StringsException;
+use function Safe\sprintf;
 
 trait ItemsAwareBuilderTrait
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $data = [];
 
     /**
-     * @param array|BuilderInterface $item
+     * @param array|BuilderInterface|mixed $item
      *
-     * @return BuilderInterface
+     * @throws StringsException
      */
     public function addItem($item): BuilderInterface
     {

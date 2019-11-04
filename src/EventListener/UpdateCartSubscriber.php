@@ -17,7 +17,7 @@ abstract class UpdateCartSubscriber extends TagSubscriber
     {
         $orderItem = $event->getSubject();
 
-        if (!$orderItem instanceof OrderItemInterface) {
+        if (!$orderItem instanceof OrderItemInterface || !$this->isShopContext()) {
             return;
         }
 
@@ -37,7 +37,7 @@ abstract class UpdateCartSubscriber extends TagSubscriber
             ->setPrice($this->moneyFormatter->format($orderItem->getDiscountedUnitPrice()))
         ;
 
-        $this->eventDispatcher->dispatch(ItemBuilder::EVENT_NAME, new BuilderEvent($builder, $orderItem));
+        $this->eventDispatcher->dispatch(new BuilderEvent($builder, $orderItem));
 
         $this->tagBag->add(new GtagTag(
             $key,

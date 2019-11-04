@@ -29,7 +29,7 @@ final class PurchaseSubscriber extends TagSubscriber
     {
         $order = $event->getSubject();
 
-        if (!$order instanceof OrderInterface) {
+        if (!$order instanceof OrderInterface || !$this->isShopContext()) {
             return;
         }
 
@@ -64,12 +64,12 @@ final class PurchaseSubscriber extends TagSubscriber
                 ->setPrice($this->moneyFormatter->format($orderItem->getDiscountedUnitPrice()))
             ;
 
-            $this->eventDispatcher->dispatch(ItemBuilder::EVENT_NAME, new BuilderEvent($itemBuilder, $orderItem));
+            $this->eventDispatcher->dispatch(new BuilderEvent($itemBuilder, $orderItem));
 
             $builder->addItem($itemBuilder);
         }
 
-        $this->eventDispatcher->dispatch(PurchaseBuilder::EVENT_NAME, new BuilderEvent($builder, $order));
+        $this->eventDispatcher->dispatch(new BuilderEvent($builder, $order));
 
         $this->tagBag->add(new GtagTag(
             Tags::TAG_PURCHASE,
