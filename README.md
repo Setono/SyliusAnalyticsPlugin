@@ -103,7 +103,7 @@ final class AddBrandSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            'setono_sylius_analytics.builder.item' => [
+            BuilderEvent::class => [
                 'addBrand',
             ],
         ];
