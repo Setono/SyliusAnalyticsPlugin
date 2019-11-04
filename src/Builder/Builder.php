@@ -57,7 +57,9 @@ abstract class Builder implements BuilderInterface
 
     /**
      * @param string $name
+     *
      * @return static
+     *
      * @throws StringsException
      */
     public function __call($name, array $arguments)
