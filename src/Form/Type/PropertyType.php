@@ -23,7 +23,7 @@ final class PropertyType extends AbstractResourceType
             ])
             ->add('enabled', CheckboxType::class, [
                 'required' => false,
-                'label' => 'sylius.form.product.enabled',
+                'label' => 'sylius.ui.enabled',
             ])
             ->add('channels', ChannelChoiceType::class, [
                 'multiple' => true,
