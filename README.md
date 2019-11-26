@@ -3,7 +3,7 @@
 [![Latest Version][ico-version]][link-packagist]
 [![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
-[![Build Status][ico-travis]][link-travis]
+[![Build Status][ico-github-actions]][link-github-actions]
 [![Quality Score][ico-code-quality]][link-code-quality]
 
 Use Google Analytics to track activity in Sylius.
@@ -144,9 +144,9 @@ Thank you!
 [ico-version]: https://poser.pugx.org/setono/sylius-analytics-plugin/v/stable
 [ico-unstable-version]: https://poser.pugx.org/setono/sylius-analytics-plugin/v/unstable
 [ico-license]: https://poser.pugx.org/setono/sylius-analytics-plugin/license
-[ico-travis]: https://travis-ci.com/Setono/SyliusAnalyticsPlugin.svg?branch=master
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusAnalyticsPlugin.svg?style=flat-square
+[ico-github-actions]: https://github.com/Setono/SyliusAnalyticsPlugin/workflows/Build/badge.svg
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusAnalyticsPlugin.svg
 
 [link-packagist]: https://packagist.org/packages/setono/sylius-analytics-plugin
-[link-travis]: https://travis-ci.com/Setono/SyliusAnalyticsPlugin
+[link-github-actions]: https://github.com/Setono/SyliusAnalyticsPlugin/actions
 [link-code-quality]: https://scrutinizer-ci.com/g/Setono/SyliusAnalyticsPlugin
