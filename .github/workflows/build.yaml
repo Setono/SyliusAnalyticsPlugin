@@ -13,7 +13,7 @@ jobs:
             max-parallel: 3
             matrix:
                 operating-system: [ubuntu-latest]
-                php-versions: ['7.2', '7.3', '7.4']
+                php-versions: ['7.2', '7.3']
                 composer-args: ['--prefer-lowest --prefer-stable', '']
         steps:
             -   name: Checkout
@@ -22,7 +22,7 @@ jobs:
                 uses: shivammathur/setup-php@master
                 with:
                     php-version: ${{ matrix.php-versions }}
-                    extension-csv: intl, gd, mbstring
+                    extension-csv: intl
             -   name: Install Composer dependencies
                 run: composer update --no-progress --no-suggest --prefer-dist --no-interaction ${{ matrix.composer-args }}
             -   name: Validate composer
