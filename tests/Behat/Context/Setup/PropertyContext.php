@@ -11,14 +11,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PropertyContext implements Context
 {
-    /**
-     * @var PropertyRepositoryInterface
-     */
+    /** @var PropertyRepositoryInterface */
     private $propertyRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $propertyFactory;
 
     public function __construct(PropertyRepositoryInterface $propertyRepository, FactoryInterface $propertyFactory)

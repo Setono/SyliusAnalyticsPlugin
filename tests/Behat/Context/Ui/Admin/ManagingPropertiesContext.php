@@ -13,19 +13,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPropertiesContext implements Context
 {
-    /**
-     * @var IndexPropertyPage
-     */
+    /** @var IndexPropertyPage */
     private $indexPropertyPage;
 
-    /**
-     * @var CreatePropertyPage
-     */
+    /** @var CreatePropertyPage */
     private $createPropertyPage;
 
-    /**
-     * @var UpdatePropertyPage
-     */
+    /** @var UpdatePropertyPage */
     private $updatePropertyPage;
 
     public function __construct(IndexPropertyPage $indexPropertyPage, CreatePropertyPage $createPropertyPage, UpdatePropertyPage $updatePropertyPage)
