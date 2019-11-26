@@ -20,9 +20,7 @@ final class PurchaseSubscriber extends TagSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            'sylius.order.post_complete' => [
-                'track',
-            ],
+            'sylius.order.post_complete' => 'track',
         ];
     }
 

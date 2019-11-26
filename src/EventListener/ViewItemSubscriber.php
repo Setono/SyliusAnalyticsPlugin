@@ -18,9 +18,7 @@ final class ViewItemSubscriber extends TagSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            'sylius.product.show' => [
-                'view',
-            ],
+            'sylius.product.show' => 'view',
         ];
     }
 

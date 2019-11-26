@@ -14,9 +14,7 @@ final class LoginSubscriber extends TagSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            'security.interactive_login' => [
-                'login',
-            ],
+            'security.interactive_login' => 'login',
         ];
     }
 

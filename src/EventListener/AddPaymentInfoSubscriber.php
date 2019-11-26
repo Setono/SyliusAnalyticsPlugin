@@ -14,9 +14,7 @@ final class AddPaymentInfoSubscriber extends TagSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            'sylius.order.post_payment' => [
-                'track',
-            ],
+            'sylius.order.post_payment' => 'track',
         ];
     }
 

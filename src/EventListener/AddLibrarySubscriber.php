@@ -16,9 +16,7 @@ final class AddLibrarySubscriber extends TagSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => [
-                'add',
-            ],
+            KernelEvents::REQUEST => 'add',
         ];
     }
 

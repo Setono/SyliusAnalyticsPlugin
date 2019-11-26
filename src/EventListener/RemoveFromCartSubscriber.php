@@ -13,9 +13,7 @@ final class RemoveFromCartSubscriber extends UpdateCartSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            'sylius.order_item.post_delete' => [
-                'track',
-            ],
+            'sylius.order_item.post_delete' => 'track',
         ];
     }
 

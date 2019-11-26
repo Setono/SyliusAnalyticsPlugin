@@ -16,9 +16,7 @@ final class BeginCheckoutSubscriber extends TagSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => [
-                'track',
-            ],
+            KernelEvents::REQUEST => 'track',
         ];
     }
 

@@ -14,9 +14,7 @@ final class SignUpSubscriber extends TagSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            'sylius.customer.post_register' => [
-                'signUp',
-            ],
+            'sylius.customer.post_register' => 'signUp',
         ];
     }
 

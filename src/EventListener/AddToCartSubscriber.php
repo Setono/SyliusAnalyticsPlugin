@@ -13,9 +13,7 @@ final class AddToCartSubscriber extends UpdateCartSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            'sylius.order_item.post_add' => [
-                'track',
-            ],
+            'sylius.order_item.post_add' => 'track',
         ];
     }
 
