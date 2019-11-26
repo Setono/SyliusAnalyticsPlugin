@@ -6,7 +6,8 @@
 [![Build Status][ico-github-actions]][link-github-actions]
 [![Quality Score][ico-code-quality]][link-code-quality]
 
-Use Google Analytics to track activity in Sylius.
+This plugin adds Google Analytics tracking to your store. It injects the tags directly
+and hence does not depend on third party tools like Google Tag Manager.
 
 ## Installation
 
