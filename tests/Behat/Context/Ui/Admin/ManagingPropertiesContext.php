@@ -32,7 +32,7 @@ final class ManagingPropertiesContext implements Context
     /**
      * @Given I want to create a new property
      */
-    public function iWantToCreateANewBrand(): void
+    public function iWantToCreateANewProperty(): void
     {
         $this->createPropertyPage->open();
     }
