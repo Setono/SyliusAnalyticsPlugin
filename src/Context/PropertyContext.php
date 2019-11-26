@@ -29,6 +29,6 @@ final class PropertyContext implements PropertyContextInterface
      */
     public function getProperties(): array
     {
-        return $this->propertyRepository->findByChannel($this->channelContext->getChannel());
+        return $this->propertyRepository->findEnabledByChannel($this->channelContext->getChannel());
     }
 }

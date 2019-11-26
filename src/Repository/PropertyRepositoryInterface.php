@@ -12,5 +12,5 @@ interface PropertyRepositoryInterface extends RepositoryInterface
     /**
      * Returns the properties that are enabled and enabled on the given channel
      */
-    public function findByChannel(ChannelInterface $channel): array;
+    public function findEnabledByChannel(ChannelInterface $channel): array;
 }
