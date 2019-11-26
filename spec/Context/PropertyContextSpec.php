@@ -26,7 +26,7 @@ class PropertyContextSpec extends ObjectBehavior
     public function it_returns_properties(ChannelInterface $channel, PropertyInterface $property, ChannelContextInterface $channelContext, PropertyRepositoryInterface $propertyRepository): void
     {
         $channelContext->getChannel()->willReturn($channel);
-        $propertyRepository->findByChannel($channel)->willReturn([$property]);
+        $propertyRepository->findEnabledByChannel($channel)->willReturn([$property]);
 
         $this->getProperties()->shouldReturn([$property]);
     }

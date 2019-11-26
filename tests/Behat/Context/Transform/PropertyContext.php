@@ -9,9 +9,7 @@ use Setono\SyliusAnalyticsPlugin\Repository\PropertyRepositoryInterface;
 
 final class PropertyContext implements Context
 {
-    /**
-     * @var PropertyRepositoryInterface
-     */
+    /** @var PropertyRepositoryInterface */
     private $propertyRepository;
 
     public function __construct(PropertyRepositoryInterface $propertyRepository)
@@ -25,7 +23,7 @@ final class PropertyContext implements Context
     public function getPropertyByTrackingId($property)
     {
         return $this->propertyRepository->findOneBy([
-            'trackingId' => $property
+            'trackingId' => $property,
         ]);
     }
 }

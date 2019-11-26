@@ -21,6 +21,7 @@
         <service id="setono_sylius_analytics.behat.context.setup.property" class="Tests\Setono\SyliusAnalyticsPlugin\Behat\Context\Setup\PropertyContext">
             <argument type="service" id="setono_sylius_analytics.repository.property" />
             <argument type="service" id="setono_sylius_analytics.factory.property" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <!-- Context: Transform -->

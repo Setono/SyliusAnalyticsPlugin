@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
+use Safe\Exceptions\StringsException;
 use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
 use Setono\SyliusAnalyticsPlugin\Builder\PurchaseBuilder;
 use Setono\SyliusAnalyticsPlugin\Event\BuilderEvent;
@@ -19,12 +20,13 @@ final class PurchaseSubscriber extends TagSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            'sylius.order.post_complete' => [
-                'track',
-            ],
+            'sylius.order.post_complete' => 'track',
         ];
     }
 
+    /**
+     * @throws StringsException
+     */
     public function track(ResourceControllerEvent $event): void
     {
         $order = $event->getSubject();

@@ -13,19 +13,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPropertiesContext implements Context
 {
-    /**
-     * @var IndexPropertyPage
-     */
+    /** @var IndexPropertyPage */
     private $indexPropertyPage;
 
-    /**
-     * @var CreatePropertyPage
-     */
+    /** @var CreatePropertyPage */
     private $createPropertyPage;
 
-    /**
-     * @var UpdatePropertyPage
-     */
+    /** @var UpdatePropertyPage */
     private $updatePropertyPage;
 
     public function __construct(IndexPropertyPage $indexPropertyPage, CreatePropertyPage $createPropertyPage, UpdatePropertyPage $updatePropertyPage)
@@ -38,7 +32,7 @@ final class ManagingPropertiesContext implements Context
     /**
      * @Given I want to create a new property
      */
-    public function iWantToCreateANewBrand(): void
+    public function iWantToCreateANewProperty(): void
     {
         $this->createPropertyPage->open();
     }
@@ -49,6 +43,14 @@ final class ManagingPropertiesContext implements Context
     public function iFillTheTrackingId($id): void
     {
         $this->createPropertyPage->specifyTrackingId($id);
+    }
+
+    /**
+     * @When I enable all channels
+     */
+    public function iEnableAllChannels(): void
+    {
+        $this->createPropertyPage->enableChannels();
     }
 
     /**

@@ -10,7 +10,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 
 class PropertyRepository extends EntityRepository implements PropertyRepositoryInterface
 {
-    public function findByChannel(ChannelInterface $channel): array
+    public function findEnabledByChannel(ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
             ->andWhere(':channel MEMBER OF o.channels')

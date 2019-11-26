@@ -5,9 +5,9 @@ Feature: Updating a property
   I want to be able to edit a property
 
   Background:
-    Given the store has a property with tracking id "UA-12345678-1"
+    Given the store operates on a single channel in "United States"
+    And the store has a property with tracking id "UA-12345678-1" on this channel
     And I am logged in as an administrator
-    And the store operates on a single channel in "United States"
 
   @ui
   Scenario: Updating tracking id
