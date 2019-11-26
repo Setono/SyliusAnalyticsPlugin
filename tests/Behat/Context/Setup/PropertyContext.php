@@ -7,6 +7,7 @@ namespace Tests\Setono\SyliusAnalyticsPlugin\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
 use Setono\SyliusAnalyticsPlugin\Repository\PropertyRepositoryInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PropertyContext implements Context
@@ -24,26 +25,27 @@ final class PropertyContext implements Context
     }
 
     /**
-     * @Given the store has a property with tracking id :trackingId
+     * @Given /^the store has a property with tracking id "([^"]+)" on (this channel)$/
      */
-    public function theStoreHasAPropertyWithTrackingId($trackingId): void
+    public function theStoreHasAPropertyWithTrackingId(string $trackingId, ChannelInterface $channel): void
     {
-        $brand = $this->createProperty($trackingId);
+        $property = $this->createProperty($trackingId, $channel);
 
-        $this->saveBrand($brand);
+        $this->saveProperty($property);
     }
 
-    private function createProperty(string $trackingId): PropertyInterface
+    private function createProperty(string $trackingId, ChannelInterface $channel): PropertyInterface
     {
         /** @var PropertyInterface $property */
         $property = $this->propertyFactory->createNew();
 
         $property->setTrackingId($trackingId);
+        $property->addChannel($channel);
 
         return $property;
     }
 
-    private function saveBrand(PropertyInterface $property): void
+    private function saveProperty(PropertyInterface $property): void
     {
         $this->propertyRepository->add($property);
     }

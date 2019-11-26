@@ -46,6 +46,14 @@ final class ManagingPropertiesContext implements Context
     }
 
     /**
+     * @When I enable all channels
+     */
+    public function iEnableAllChannels(): void
+    {
+        $this->createPropertyPage->enableChannels();
+    }
+
+    /**
      * @When I add it
      */
     public function iAddIt(): void

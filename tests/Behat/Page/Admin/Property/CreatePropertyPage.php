@@ -13,13 +13,16 @@ class CreatePropertyPage extends BaseCreatePage
         $this->getElement('tracking_id')->setValue($id);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function enableChannels(): void
+    {
+        $this->getElement('channels')->check();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'tracking_id' => '#setono_sylius_analytics_property_trackingId',
+            'channels' => 'input[name="setono_sylius_analytics_property[channels][]"]',
         ]);
     }
 }

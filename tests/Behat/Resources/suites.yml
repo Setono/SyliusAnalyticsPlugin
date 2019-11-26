@@ -1,10 +1,11 @@
 default:
     suites:
-        managing_brands:
+        managing_properties:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.ui.admin.notification
 
                 - setono_sylius_analytics.behat.context.transform.property
