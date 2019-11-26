@@ -1,16 +1,22 @@
 {
     "name": "setono/sylius-analytics-plugin",
     "type": "sylius-plugin",
-    "keywords": ["sylius", "sylius-plugin", "setono", "analytics", "google"],
     "description": "Google Analytics plugin for Sylius",
+    "keywords": [
+        "sylius",
+        "sylius-plugin",
+        "setono",
+        "analytics",
+        "google"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.2",
         "ext-json": "*",
         "psr/event-dispatcher": "^1.0",
         "setono/tag-bag-bundle": "^1.0.2",
-        "sylius/sylius": "^1.3.0",
-        "thecodingmachine/safe": "^0.1.16"
+        "sylius/sylius": "^1.3",
+        "thecodingmachine/safe": "^0.1"
     },
     "require-dev": {
         "behat/behat": "^3.4",
@@ -22,9 +28,11 @@
         "friends-of-behat/suite-settings-extension": "^1.0",
         "friends-of-behat/symfony-extension": "^2.0",
         "friends-of-behat/variadic-extension": "^1.1",
+        "kalessil/production-dependencies-guard": "dev-master",
         "korbeil/phpstan-generic-rules": "^0.2.1",
         "lakion/mink-debug-extension": "^1.2.3",
-        "loevgaard/sylius-brand-plugin": "^2.0@beta",
+        "localheinz/composer-normalize": "^1.3",
+        "loevgaard/sylius-brand-plugin": "^2.0",
         "phpspec/phpspec": "^5.0",
         "phpstan/phpstan": "^0.11",
         "phpstan/phpstan-doctrine": "^0.11",
@@ -35,15 +43,22 @@
         "sensiolabs/security-checker": "^5.0",
         "setono/sylius-tag-bag-plugin": "^1.0",
         "sylius-labs/coding-standard": "^3.1",
-        "symfony/browser-kit": "^3.4|^4.1",
-        "symfony/debug-bundle": "^3.4|^4.1",
+        "symfony/browser-kit": "^3.4 || ^4.1",
+        "symfony/debug-bundle": "^3.4 || ^4.1",
         "symfony/dotenv": "^4.2",
-        "symfony/intl": "^3.4|^4.1",
-        "symfony/web-profiler-bundle": "^3.4|^4.1",
-        "symfony/web-server-bundle": "^3.4|^4.1",
+        "symfony/intl": "^3.4 || ^4.1",
+        "symfony/web-profiler-bundle": "^3.4 || ^4.1",
+        "symfony/web-server-bundle": "^3.4 || ^4.1",
         "thecodingmachine/phpstan-safe-rule": "^0.1"
     },
-    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
     "autoload": {
         "psr-4": {
             "Setono\\SyliusAnalyticsPlugin\\": "src/",
@@ -51,24 +66,20 @@
         }
     },
     "autoload-dev": {
-        "classmap": ["tests/Application/Kernel.php"]
+        "classmap": [
+            "tests/Application/Kernel.php"
+        ]
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
-    },
-    "config": {
-        "sort-packages": true
-    },
+    "prefer-stable": true,
     "scripts": {
+        "analyse": "vendor/bin/phpstan analyse -c phpstan.neon -l max src",
         "check-style": "vendor/bin/ecs check --ansi --no-progress-bar spec src",
         "fix-style": "vendor/bin/ecs check --ansi --no-progress-bar spec src --fix",
-        "analyse": "vendor/bin/phpstan analyse -c phpstan.neon -l max src",
-        "phpunit": "vendor/bin/phpunit",
         "phpspec": "vendor/bin/phpspec run",
+        "phpunit": "vendor/bin/phpunit",
         "test": [
-            "@phpunit", "@phpspec"
+            "@phpunit",
+            "@phpspec"
         ]
     }
 }
