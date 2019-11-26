@@ -22,7 +22,7 @@ jobs:
                 uses: shivammathur/setup-php@master
                 with:
                     php-version: ${{ matrix.php-versions }}
-                    extension-csv: intl, gd
+                    extension-csv: intl, gd, mbstring
             -   name: Install Composer dependencies
                 run: composer update --no-progress --no-suggest --prefer-dist --no-interaction ${{ matrix.composer-args }}
             -   name: Validate composer
