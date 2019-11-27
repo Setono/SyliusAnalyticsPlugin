@@ -145,7 +145,7 @@ Thank you!
 [ico-version]: https://poser.pugx.org/setono/sylius-analytics-plugin/v/stable
 [ico-unstable-version]: https://poser.pugx.org/setono/sylius-analytics-plugin/v/unstable
 [ico-license]: https://poser.pugx.org/setono/sylius-analytics-plugin/license
-[ico-github-actions]: https://github.com/Setono/SyliusAnalyticsPlugin/workflows/Build/badge.svg
+[ico-github-actions]: https://github.com/Setono/SyliusAnalyticsPlugin/workflows/build/badge.svg
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusAnalyticsPlugin.svg
 
 [link-packagist]: https://packagist.org/packages/setono/sylius-analytics-plugin
