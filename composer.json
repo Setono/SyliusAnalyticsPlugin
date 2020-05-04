@@ -12,6 +12,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "ext-json": "*",
+
         "psr/event-dispatcher": "^1.0",
         "setono/tag-bag-bundle": "^1.0.2",
         "sylius/sylius": "^1.3",

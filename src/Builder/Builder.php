@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\Builder;
 
 use InvalidArgumentException;
-use Safe\Exceptions\JsonException;
-use Safe\Exceptions\StringsException;
+use const JSON_INVALID_UTF8_IGNORE;
+use const JSON_INVALID_UTF8_SUBSTITUTE;
+use const JSON_PRESERVE_ZERO_FRACTION;
+use const JSON_UNESCAPED_SLASHES;
 use function Safe\json_decode;
 use function Safe\json_encode;
 use function Safe\sprintf;
@@ -31,8 +33,6 @@ abstract class Builder implements BuilderInterface
 
     /**
      * @return static
-     *
-     * @throws JsonException
      */
     public static function createFromJson(string $json)
     {
@@ -47,20 +47,16 @@ abstract class Builder implements BuilderInterface
         return $this->data;
     }
 
-    /**
-     * @throws JsonException
-     */
     public function getJson(): string
     {
-        return json_encode($this->data);
+        return json_encode($this->data,
+            JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION | JSON_INVALID_UTF8_IGNORE | JSON_INVALID_UTF8_SUBSTITUTE);
     }
 
     /**
      * @param string $name
      *
      * @return static
-     *
-     * @throws StringsException
      */
     public function __call($name, array $arguments)
     {
@@ -88,7 +84,10 @@ abstract class Builder implements BuilderInterface
         }
 
         if (!is_scalar($val) && !is_array($val)) {
-            throw new InvalidArgumentException(sprintf('Unexpected type %s. Expected types are: callable, %s or scalar', is_object($val) ? get_class($val) : gettype($val), BuilderInterface::class));
+            throw new InvalidArgumentException(sprintf(
+                'Unexpected type %s. Expected types are: callable, %s or scalar',
+                is_object($val) ? get_class($val) : gettype($val), BuilderInterface::class
+            ));
         }
 
         $this->data[$key] = $val;
