@@ -7,6 +7,7 @@ setono_sylius_analytics:
         tracking_id: Tracking id
         tracking_id_placeholder: Insert your tracking id, i.e. UA-12345678-1...
         enabled: Enabled
+        disabled: Disabled
         google_analytics: Google analytics
         property: Property
         no_channels: No channels

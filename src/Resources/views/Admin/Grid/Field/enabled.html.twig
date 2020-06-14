@@ -1,0 +1,11 @@
+{% if data %}
+    <span class="ui teal label">
+        <i class="checkmark icon"></i>
+        {{ 'setono_sylius_analytics.ui.enabled'|trans }}
+    </span>
+{% else %}
+    <span class="ui red label">
+        <i class="remove icon"></i>
+        {{ 'setono_sylius_analytics.ui.disabled'|trans }}
+    </span>
+{% endif %}
