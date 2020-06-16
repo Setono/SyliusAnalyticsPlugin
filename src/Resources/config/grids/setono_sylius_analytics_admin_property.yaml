@@ -13,7 +13,7 @@ sylius_grid:
                     type: twig
                     label: setono_sylius_analytics.ui.enabled
                     options:
-                        template: "@SetonoSyliusAnalyticsPlugin/Admin/Grid/Field/enabled.html.twig"
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
                 channels:
                     type: twig
                     label: sylius.ui.channels
