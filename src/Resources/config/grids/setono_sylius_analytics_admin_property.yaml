@@ -9,6 +9,11 @@ sylius_grid:
                 trackingId:
                     type: string
                     label: setono_sylius_analytics.ui.tracking_id
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
                 channels:
                     type: twig
                     label: sylius.ui.channels
