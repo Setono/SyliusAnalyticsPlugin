@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Safe\Exceptions\StringsException;
 use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
 use Setono\SyliusAnalyticsPlugin\Builder\PurchaseBuilder;
 use Setono\SyliusAnalyticsPlugin\Event\BuilderEvent;
@@ -24,9 +23,6 @@ final class PurchaseSubscriber extends TagSubscriber
         ];
     }
 
-    /**
-     * @throws StringsException
-     */
     public function track(ResourceControllerEvent $event): void
     {
         $order = $event->getSubject();
@@ -45,12 +41,12 @@ final class PurchaseSubscriber extends TagSubscriber
         }
 
         $builder = PurchaseBuilder::create()
-            ->setTransactionId($order->getNumber())
+            ->setTransactionId((string) $order->getNumber())
             ->setAffiliation($channel->getHostname() . ' (' . $order->getLocaleCode() . ')')
-            ->setValue($this->moneyFormatter->format($order->getTotal()))
-            ->setCurrency($order->getCurrencyCode())
-            ->setTax($this->moneyFormatter->format($order->getTaxTotal()))
-            ->setShipping($this->moneyFormatter->format($order->getShippingTotal()))
+            ->setValue((float) $this->moneyFormatter->format($order->getTotal()))
+            ->setCurrency((string) $order->getCurrencyCode())
+            ->setTax((float) $this->moneyFormatter->format($order->getTaxTotal()))
+            ->setShipping((float) $this->moneyFormatter->format($order->getShippingTotal()))
         ;
 
         foreach ($order->getItems() as $orderItem) {
@@ -60,10 +56,10 @@ final class PurchaseSubscriber extends TagSubscriber
             }
 
             $itemBuilder = ItemBuilder::create()
-                ->setId($variant->getCode())
-                ->setName($orderItem->getVariantName())
+                ->setId((string) $variant->getCode())
+                ->setName((string) $orderItem->getVariantName())
                 ->setQuantity($orderItem->getQuantity())
-                ->setPrice($this->moneyFormatter->format($orderItem->getDiscountedUnitPrice()))
+                ->setPrice((float) $this->moneyFormatter->format($orderItem->getDiscountedUnitPrice()))
             ;
 
             $this->eventDispatcher->dispatch(new BuilderEvent($itemBuilder, $orderItem));

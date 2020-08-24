@@ -35,8 +35,8 @@ final class ViewItemSubscriber extends TagSubscriber
         }
 
         $builder = ItemBuilder::create()
-            ->setId($product->getCode())
-            ->setName($product->getName())
+            ->setId((string) $product->getCode())
+            ->setName((string) $product->getName())
         ;
 
         $this->eventDispatcher->dispatch(new BuilderEvent($builder, $product));

@@ -31,10 +31,10 @@ abstract class UpdateCartSubscriber extends TagSubscriber
         }
 
         $builder = ItemBuilder::create()
-            ->setId($variant->getCode())
-            ->setName($orderItem->getVariantName())
+            ->setId((string) $variant->getCode())
+            ->setName((string) $orderItem->getVariantName())
             ->setQuantity($orderItem->getQuantity())
-            ->setPrice($this->moneyFormatter->format($orderItem->getDiscountedUnitPrice()))
+            ->setPrice((float) $this->moneyFormatter->format($orderItem->getDiscountedUnitPrice()))
         ;
 
         $this->eventDispatcher->dispatch(new BuilderEvent($builder, $orderItem));
