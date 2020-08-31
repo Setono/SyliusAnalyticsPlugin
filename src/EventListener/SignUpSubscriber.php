@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\Tag\GtagTag;
-use Setono\SyliusAnalyticsPlugin\Tag\GtagTagInterface;
-use Setono\SyliusAnalyticsPlugin\Tag\Tags;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Setono\TagBag\Tag\GtagEvent;
+use Setono\TagBag\Tag\GtagEventInterface;
+use Setono\TagBag\Tag\GtagLibrary;
 
 final class SignUpSubscriber extends TagSubscriber
 {
@@ -24,9 +23,9 @@ final class SignUpSubscriber extends TagSubscriber
             return;
         }
 
-        $this->tagBag->add(new GtagTag(
-            Tags::TAG_SIGN_UP,
-            GtagTagInterface::EVENT_SIGN_UP
-        ), TagBagInterface::SECTION_BODY_END);
+        $this->tagBag->addTag(
+            (new GtagEvent(GtagEventInterface::EVENT_SIGN_UP))
+                ->addDependency(GtagLibrary::NAME)
+        );
     }
 }

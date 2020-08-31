@@ -7,10 +7,9 @@ namespace Setono\SyliusAnalyticsPlugin\EventListener;
 use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
 use Setono\SyliusAnalyticsPlugin\Builder\PurchaseBuilder;
 use Setono\SyliusAnalyticsPlugin\Event\BuilderEvent;
-use Setono\SyliusAnalyticsPlugin\Tag\GtagTag;
-use Setono\SyliusAnalyticsPlugin\Tag\GtagTagInterface;
-use Setono\SyliusAnalyticsPlugin\Tag\Tags;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Setono\TagBag\Tag\GtagEvent;
+use Setono\TagBag\Tag\GtagEventInterface;
+use Setono\TagBag\Tag\GtagLibrary;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 
@@ -69,10 +68,9 @@ final class PurchaseSubscriber extends TagSubscriber
 
         $this->eventDispatcher->dispatch(new BuilderEvent($builder, $order));
 
-        $this->tagBag->add(new GtagTag(
-            Tags::TAG_PURCHASE,
-            GtagTagInterface::EVENT_PURCHASE,
-            $builder
-        ), TagBagInterface::SECTION_BODY_END);
+        $this->tagBag->addTag(
+            (new GtagEvent(GtagEventInterface::EVENT_PURCHASE, $builder->getData()))
+                ->addDependency(GtagLibrary::NAME)
+        );
     }
 }

@@ -1,5 +1,0 @@
-{%- if parameters is defined -%}
-    gtag('event', '{{ action }}', {{ parameters|raw }});
-{%- else -%}
-    gtag('event', '{{ action }}');
-{%- endif -%}

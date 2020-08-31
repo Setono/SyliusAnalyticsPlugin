@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\Tag\Tags;
-use Setono\TagBagBundle\Tag\TagInterface;
-use Setono\TagBagBundle\Tag\TwigTag;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Setono\TagBag\Tag\GtagConfig;
+use Setono\TagBag\Tag\GtagLibrary;
+use Setono\TagBag\Tag\TagInterface;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class AddLibrarySubscriber extends TagSubscriber
@@ -20,7 +19,7 @@ final class AddLibrarySubscriber extends TagSubscriber
         ];
     }
 
-    public function add(GetResponseEvent $event): void
+    public function add(RequestEvent $event): void
     {
         $request = $event->getRequest();
 
@@ -37,13 +36,14 @@ final class AddLibrarySubscriber extends TagSubscriber
             return;
         }
 
-        $this->tagBag->add(new TwigTag(
-            '@SetonoSyliusAnalyticsPlugin/Tag/library.html.twig',
-            TagInterface::TYPE_HTML,
-            Tags::TAG_LIBRARY,
-            [
-                'properties' => $this->getProperties(),
-            ]
-        ), TagBagInterface::SECTION_HEAD);
+        $this->tagBag->addTag(new GtagLibrary((string) $this->getProperties()[0]->getTrackingId()));
+
+        foreach ($this->getProperties() as $property) {
+            $this->tagBag->addTag(
+                (new GtagConfig((string) $property->getTrackingId()))
+                    ->setSection(TagInterface::SECTION_HEAD)
+                    ->addDependency(GtagLibrary::NAME)
+            );
+        }
     }
 }

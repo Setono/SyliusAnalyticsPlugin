@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\Tag\GtagTag;
-use Setono\SyliusAnalyticsPlugin\Tag\GtagTagInterface;
-use Setono\SyliusAnalyticsPlugin\Tag\Tags;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Setono\TagBag\Tag\GtagEvent;
+use Setono\TagBag\Tag\GtagEventInterface;
+use Setono\TagBag\Tag\GtagLibrary;
 
 final class AddPaymentInfoSubscriber extends TagSubscriber
 {
@@ -24,9 +23,9 @@ final class AddPaymentInfoSubscriber extends TagSubscriber
             return;
         }
 
-        $this->tagBag->add(new GtagTag(
-            Tags::TAG_ADD_PAYMENT_INFO,
-            GtagTagInterface::EVENT_ADD_PAYMENT_INFO
-        ), TagBagInterface::SECTION_BODY_END);
+        $this->tagBag->addTag(
+            (new GtagEvent(GtagEventInterface::EVENT_ADD_PAYMENT_INFO))
+                ->addDependency(GtagLibrary::NAME)
+        );
     }
 }
