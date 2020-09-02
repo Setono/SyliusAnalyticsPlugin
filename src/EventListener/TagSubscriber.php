@@ -9,7 +9,7 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
 use Setono\SyliusAnalyticsPlugin\Formatter\MoneyFormatter;
 use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Setono\TagBag\TagBagInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\Tag\GtagTag;
-use Setono\SyliusAnalyticsPlugin\Tag\GtagTagInterface;
-use Setono\SyliusAnalyticsPlugin\Tag\Tags;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Setono\TagBag\Tag\GtagEvent;
+use Setono\TagBag\Tag\GtagEventInterface;
+use Setono\TagBag\Tag\GtagLibrary;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class BeginCheckoutSubscriber extends TagSubscriber
@@ -20,7 +19,7 @@ final class BeginCheckoutSubscriber extends TagSubscriber
         ];
     }
 
-    public function track(GetResponseEvent $event): void
+    public function track(RequestEvent $event): void
     {
         $request = $event->getRequest();
 
@@ -41,9 +40,9 @@ final class BeginCheckoutSubscriber extends TagSubscriber
             return;
         }
 
-        $this->tagBag->add(new GtagTag(
-            Tags::TAG_BEGIN_CHECKOUT,
-            GtagTagInterface::EVENT_BEGIN_CHECKOUT
-        ), TagBagInterface::SECTION_BODY_END);
+        $this->tagBag->addTag(
+            (new GtagEvent(GtagEventInterface::EVENT_BEGIN_CHECKOUT))
+                ->addDependency(GtagLibrary::NAME)
+        );
     }
 }
