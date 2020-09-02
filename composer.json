@@ -14,7 +14,7 @@
         "php": "^7.3",
         "ext-json": "*",
         "psr/event-dispatcher": "^1.0",
-        "setono/tag-bag-bundle": "dev-master",
+        "setono/tag-bag-bundle": "^2.1",
         "setono/tag-bag-gtag": "^1.4.1",
         "setono/tag-bag-twig": "^1.1",
         "sylius/sylius": "^1.3",
