@@ -13,7 +13,7 @@ final class AdminMenuListener
     {
         $menu = $event->getMenu();
 
-        $configuration = $menu->getChild('configuration');
+        $configuration = $menu->getChild('marketing');
 
         if (null !== $configuration) {
             $this->addChild($configuration);
