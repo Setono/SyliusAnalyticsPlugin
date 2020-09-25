@@ -1,0 +1,12 @@
+setono_sylius_analytics:
+    ui:
+        edit_property: Rediger ejendom
+        new_property: Ny ejendom
+        properties: Ejendomme
+        property_index: Ejendomsindeks
+        tracking_id: Sporings-id
+        tracking_id_placeholder: Indsæt dit sporings-id, f.eks. UA-12345678-1...
+        enabled: Aktiveret
+        google_analytics: Google analytics
+        property: Ejendom
+        no_channels: Ingen kanaler
