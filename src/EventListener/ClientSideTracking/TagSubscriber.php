@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\SyliusAnalyticsPlugin\EventListener;
+namespace Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking;
 
 use function count;
 use Psr\EventDispatcher\EventDispatcherInterface;

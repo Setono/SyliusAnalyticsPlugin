@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\SyliusAnalyticsPlugin\EventListener;
+namespace Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking;
 
 use Setono\TagBag\Tag\GtagEventInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;

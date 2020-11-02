@@ -80,7 +80,7 @@ Remember to enable the property and enable the channels you want to track.
 ### Step 7: You're ready!
 The events that are tracked are located in the [EventListener folder](src/EventListener).
 To make your tracking even better you should create event listeners listening to the 
-builder events fired in i.e. the [PurchaseSubscriber](src/EventListener/PurchaseSubscriber.php).
+builder events fired in i.e. the [PurchaseSubscriber](src/EventListener/ClientSideTracking/PurchaseSubscriber.php).
 
 Let's say you use the [Brand plugin](https://github.com/loevgaard/SyliusBrandPlugin) and want to enrich the items
 tracked with the brand of the product. That would look like this:

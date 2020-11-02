@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\SyliusAnalyticsPlugin\EventListener;
+namespace Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking;
 
 use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
 use Setono\SyliusAnalyticsPlugin\Builder\PurchaseBuilder;

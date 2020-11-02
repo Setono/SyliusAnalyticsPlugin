@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="setono_sylius_analytics.event_listener.tag_subscriber"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\TagSubscriber" abstract="true">
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking\TagSubscriber" abstract="true">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
             <argument type="service" id="setono_sylius_analytics.context.property"/>
             <argument type="service" id="event_dispatcher"/>
@@ -12,49 +12,49 @@
             <argument type="service" id="security.firewall.map"/>
         </service>
         <service id="setono_sylius_analytics.event_listener.analytics"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\AddLibrarySubscriber"
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking\AddLibrarySubscriber"
                  parent="setono_sylius_analytics.event_listener.tag_subscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.add_payment_info"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\AddPaymentInfoSubscriber"
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking\AddPaymentInfoSubscriber"
                  parent="setono_sylius_analytics.event_listener.tag_subscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.add_to_cart"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\AddToCartSubscriber"
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking\AddToCartSubscriber"
                  parent="setono_sylius_analytics.event_listener.tag_subscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.login"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\LoginSubscriber"
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking\LoginSubscriber"
                  parent="setono_sylius_analytics.event_listener.tag_subscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.sign_up"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\SignUpSubscriber"
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking\SignUpSubscriber"
                  parent="setono_sylius_analytics.event_listener.tag_subscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.view_item"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\ViewItemSubscriber"
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking\ViewItemSubscriber"
                  parent="setono_sylius_analytics.event_listener.tag_subscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.begin_checkout"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\BeginCheckoutSubscriber"
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking\BeginCheckoutSubscriber"
                  parent="setono_sylius_analytics.event_listener.tag_subscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.purchase"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\PurchaseSubscriber"
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\ClientSideTracking\PurchaseSubscriber"
                  parent="setono_sylius_analytics.event_listener.tag_subscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
