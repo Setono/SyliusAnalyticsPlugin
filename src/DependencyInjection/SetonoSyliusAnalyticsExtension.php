@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\DependencyInjection;
 
-use Exception;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -21,8 +20,9 @@ final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension
 
         $loader->load('services.xml');
 
-        if(true === $config['server_side_tracking']) {
-
+        if (true === $config['server_side_tracking']) {
+            $loader->load('services/server_side_tracking/event_listener.xml');
+            $loader->load('services/server_side_tracking/resolver.xml');
         } else {
             $loader->load('services/client_side_tracking/event_listener.xml');
         }

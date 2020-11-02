@@ -13,6 +13,7 @@
     "require": {
         "php": "^7.3",
         "ext-json": "*",
+        "googleads/google-ads-php": "^5.0",
         "psr/event-dispatcher": "^1.0",
         "setono/tag-bag-bundle": "^2.1",
         "setono/tag-bag-gtag": "^1.4.1",
@@ -20,18 +21,20 @@
         "sylius/sylius": "^1.3",
         "symfony/config": "^4.4 || 5.0",
         "symfony/http-kernel": "^4.4 || ^5.0",
-        "thecodingmachine/safe": "^1.0"
+        "symfony/uid": "^5.1",
+        "thecodingmachine/safe": "^1.0",
+        "theiconic/php-ga-measurement-protocol": "^2.9"
     },
     "require-dev": {
-        "loevgaard/sylius-brand-plugin": "^2.0",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpspec/phpspec": "^6.2",
-        "phpunit/phpunit": "^9.3",
+        "phpunit/phpunit": "^8.5 || ^9.4",
         "roave/security-advisories": "dev-master",
         "setono/code-quality-pack": "^1.4",
         "setono/sylius-behat-pack": "^0.1",
         "setono/sylius-tag-bag-plugin": "^1.1",
+        "sylius/sylius": "~1.7.0",
         "symfony/debug-bundle": "^5.1",
         "symfony/dotenv": "^5.1",
         "symfony/intl": "^4.4 || ^5.0",
