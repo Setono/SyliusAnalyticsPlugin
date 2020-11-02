@@ -31,7 +31,7 @@ final class Configuration implements ConfigurationInterface
                 ->end()
                 ->booleanNode('server_side_tracking')
                     ->info('If this is true, the plugin will use server side tracking instead of client side (JS) tracking')
-                    ->defaultTrue()
+                    ->defaultFalse()
                 ->end()
             ->end()
         ;

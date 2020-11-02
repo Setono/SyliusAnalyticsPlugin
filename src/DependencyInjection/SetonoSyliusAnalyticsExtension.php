@@ -21,6 +21,12 @@ final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension
 
         $loader->load('services.xml');
 
+        if(true === $config['server_side_tracking']) {
+
+        } else {
+            $loader->load('services/client_side_tracking/event_listener.xml');
+        }
+
         $this->registerResources('setono_sylius_analytics', $config['driver'], $config['resources'], $container);
     }
 }
