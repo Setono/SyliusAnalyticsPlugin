@@ -19,19 +19,20 @@ final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        if (method_exists(TreeBuilder::class, 'getRootNode')) {
-            $treeBuilder = new TreeBuilder('setono_sylius_analytics');
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $treeBuilder = new TreeBuilder();
-            $rootNode = $treeBuilder->root('setono_sylius_analytics');
-        }
+        $treeBuilder = new TreeBuilder('setono_sylius_analytics');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->cannotBeEmpty()->end()
+                ->scalarNode('driver')
+                    ->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)
+                    ->cannotBeEmpty()
+                ->end()
+                ->booleanNode('server_side_tracking')
+                    ->info('If this is true, the plugin will use server side tracking instead of client side (JS) tracking')
+                    ->defaultTrue()
+                ->end()
             ->end()
         ;
 

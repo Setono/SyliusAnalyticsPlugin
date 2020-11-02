@@ -12,13 +12,12 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension
 {
-    /**
-     * @throws Exception
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+
+        $container->setParameter('setono_sylius_analytics.server_side_tracking', $config['server_side_tracking']);
 
         $loader->load('services.xml');
 
