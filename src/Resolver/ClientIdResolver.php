@@ -4,39 +4,41 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Resolver;
 
-use RuntimeException;
-use Symfony\Component\HttpFoundation\RequestStack;
+use DateInterval;
+use Safe\DateTime;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Uid\Uuid;
 
-final class ClientIdResolver implements ClientIdResolverInterface
+final class ClientIdResolver implements ClientIdResolverInterface, EventSubscriberInterface
 {
-    public const CLIENT_ID_SESSION_KEY = 'setono_sylius_analytics_client_id';
+    public const CLIENT_ID_COOKIE_KEY = 'setono_sylius_analytics_client_id';
 
-    /** @var RequestStack */
-    private $requestStack;
+    /** @var string */
+    private $clientId;
 
-    public function __construct(RequestStack $requestStack)
+    public static function getSubscribedEvents(): array
     {
-        $this->requestStack = $requestStack;
+        return [
+            KernelEvents::RESPONSE => 'save',
+        ];
     }
 
-    public function resolve(): string
+    public function resolve(Request $request): string
     {
-        $request = $this->requestStack->getMasterRequest();
-        if (null === $request) {
-            throw new RuntimeException('Cannot resolve a client id if there is not master request');
+        if (null === $this->clientId) {
+            $this->clientId = $request->cookies->has(self::CLIENT_ID_COOKIE_KEY) ? $request->cookies->get(self::CLIENT_ID_COOKIE_KEY, '') : (string) Uuid::v4();
         }
 
-        $session = $request->getSession();
+        return $this->clientId;
+    }
 
-        if ($session->has(self::CLIENT_ID_SESSION_KEY)) {
-            return $session->get(self::CLIENT_ID_SESSION_KEY);
-        }
-
-        $clientId = (string) Uuid::v4();
-
-        $session->set(self::CLIENT_ID_SESSION_KEY, $clientId);
-
-        return $clientId;
+    public function save(ResponseEvent $event): void
+    {
+        $expire = (new DateTime())->add(new DateInterval('P2Y'));
+        $event->getResponse()->headers->setCookie(Cookie::create(self::CLIENT_ID_COOKIE_KEY, $this->clientId, $expire));
     }
 }

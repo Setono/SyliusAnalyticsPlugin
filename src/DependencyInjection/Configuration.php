@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\DependencyInjection;
 
+use Setono\SyliusAnalyticsPlugin\Doctrine\ORM\HitRepository;
 use Setono\SyliusAnalyticsPlugin\Doctrine\ORM\PropertyRepository;
 use Setono\SyliusAnalyticsPlugin\Form\Type\PropertyType;
+use Setono\SyliusAnalyticsPlugin\Model\Hit;
+use Setono\SyliusAnalyticsPlugin\Model\HitInterface;
 use Setono\SyliusAnalyticsPlugin\Model\Property;
 use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -29,9 +32,19 @@ final class Configuration implements ConfigurationInterface
                     ->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)
                     ->cannotBeEmpty()
                 ->end()
-                ->booleanNode('server_side_tracking')
-                    ->info('If this is true, the plugin will use server side tracking instead of client side (JS) tracking')
-                    ->defaultFalse()
+                ->arrayNode('server_side_tracking')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('enabled')
+                            ->info('If this is true, the plugin will use server side tracking instead of client side (JS) tracking')
+                            ->defaultFalse()
+                        ->end()
+                        ->integerNode('push_delay')
+                            ->info('The number of seconds after a hit is recorded and it is pushed to Google')
+                            ->defaultValue(600) // 10 minutes
+                            ->example(300)
+                        ->end()
+                    ->end()
                 ->end()
             ->end()
         ;
@@ -61,6 +74,22 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->defaultValue(PropertyRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PropertyType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('hit')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(Hit::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(HitInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(HitRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()
                             ->end()

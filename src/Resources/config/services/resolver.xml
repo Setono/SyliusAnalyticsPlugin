@@ -5,7 +5,7 @@
     <services>
         <service id="setono_sylius_analytics.resolver.client_id"
                  class="Setono\SyliusAnalyticsPlugin\Resolver\ClientIdResolver">
-            <argument type="service" id="request_stack"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>

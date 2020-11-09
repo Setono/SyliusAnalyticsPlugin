@@ -16,13 +16,13 @@ final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-        $container->setParameter('setono_sylius_analytics.server_side_tracking', $config['server_side_tracking']);
+        $container->setParameter('setono_sylius_analytics.server_side_tracking.enabled', $config['server_side_tracking']['enabled']);
+        $container->setParameter('setono_sylius_analytics.server_side_tracking.push_delay', $config['server_side_tracking']['push_delay']);
 
         $loader->load('services.xml');
 
-        if (true === $config['server_side_tracking']) {
+        if (true === $config['server_side_tracking']['enabled']) {
             $loader->load('services/server_side_tracking/event_listener.xml');
-            $loader->load('services/server_side_tracking/resolver.xml');
         } else {
             $loader->load('services/client_side_tracking/event_listener.xml');
         }

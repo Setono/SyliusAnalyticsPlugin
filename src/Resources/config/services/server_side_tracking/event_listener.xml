@@ -5,6 +5,7 @@
     <services>
         <service id="setono_sylius_analytics.event_listener.page_view_builder"
                  class="Setono\SyliusAnalyticsPlugin\EventListener\ServerSideTracking\PageViewBuilder">
+            <argument type="service" id="setono_sylius_analytics.factory.hit"/>
             <argument type="service" id="setono_sylius_analytics.context.property"/>
             <argument type="service" id="security.firewall.map"/>
             <argument type="service" id="setono_sylius_analytics.resolver.client_id"/>

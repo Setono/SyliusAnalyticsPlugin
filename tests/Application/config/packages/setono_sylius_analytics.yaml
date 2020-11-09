@@ -1,2 +1,3 @@
 setono_sylius_analytics:
-    server_side_tracking: true
+    server_side_tracking:
+        enabled: true

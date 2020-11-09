@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
                   xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="Setono\SyliusAnalyticsPlugin\Model\Hit" table="setono_sylius_analytics__hit">
         <id name="id" type="string"/>
-        <field name="url" type="text"/>
+        <field name="sessionId" column="session_id" type="string"/>
+        <field name="consent" type="boolean"/>
+        <field name="payload" type="text"/>
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+
+        <indexes>
+            <index columns="session_id"/>
+        </indexes>
     </entity>
 </doctrine-mapping>

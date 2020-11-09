@@ -7,9 +7,6 @@ namespace Setono\SyliusAnalyticsPlugin\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Symfony\Component\Uid\Uuid;
 
-/**
- * @final
- */
 class Hit implements HitInterface
 {
     use TimestampableTrait;
@@ -18,12 +15,17 @@ class Hit implements HitInterface
     protected $id;
 
     /** @var string */
-    protected $url;
+    protected $sessionId;
 
-    public function __construct(string $url)
+    /** @var bool */
+    protected $consent = false;
+
+    /** @var string */
+    protected $payload;
+
+    public function __construct()
     {
         $this->id = (string) Uuid::v4();
-        $this->url = $url;
     }
 
     public function getId(): string
@@ -31,8 +33,33 @@ class Hit implements HitInterface
         return $this->id;
     }
 
-    public function getUrl(): string
+    public function getSessionId(): string
     {
-        return $this->url;
+        return $this->sessionId;
+    }
+
+    public function setSessionId(string $sessionId): void
+    {
+        $this->sessionId = $sessionId;
+    }
+
+    public function hasConsent(): bool
+    {
+        return $this->consent;
+    }
+
+    public function setConsent(bool $consent): void
+    {
+        $this->consent = $consent;
+    }
+
+    public function getPayload(): string
+    {
+        return $this->payload;
+    }
+
+    public function setPayload(string $url): void
+    {
+        $this->payload = $url;
     }
 }

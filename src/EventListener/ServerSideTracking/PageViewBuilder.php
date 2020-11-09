@@ -6,6 +6,7 @@ namespace Setono\SyliusAnalyticsPlugin\EventListener\ServerSideTracking;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
+use Setono\SyliusAnalyticsPlugin\Factory\HitFactoryInterface;
 use Setono\SyliusAnalyticsPlugin\Model\Hit;
 use Setono\SyliusAnalyticsPlugin\Resolver\ClientIdResolverInterface;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
@@ -13,6 +14,7 @@ use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\Event\TerminateEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use TheIconic\Tracking\GoogleAnalytics\Analytics;
 
@@ -20,6 +22,9 @@ final class PageViewBuilder implements EventSubscriberInterface
 {
     /** @var Analytics[] */
     private $hits = [];
+
+    /** @var HitFactoryInterface */
+    private $hitFactory;
 
     /** @var PropertyContextInterface */
     private $propertyContext;
@@ -34,11 +39,13 @@ final class PageViewBuilder implements EventSubscriberInterface
     private $managerRegistry;
 
     public function __construct(
+        HitFactoryInterface $hitFactory,
         PropertyContextInterface $propertyContext,
         FirewallMap $firewallMap,
         ClientIdResolverInterface $clientIdResolver,
         ManagerRegistry $managerRegistry
     ) {
+        $this->hitFactory = $hitFactory;
         $this->propertyContext = $propertyContext;
         $this->firewallMap = $firewallMap;
         $this->clientIdResolver = $clientIdResolver;
@@ -80,14 +87,13 @@ final class PageViewBuilder implements EventSubscriberInterface
                 ->setDebug(true)
                 ->setProtocolVersion('1')
                 ->setTrackingId($property->getTrackingId())
-                ->setClientId($this->clientIdResolver->resolve())
+                ->setClientId($this->clientIdResolver->resolve($request))
                 ->setAnonymizeIp(true)
                 ->setIpOverride($request->getClientIp())
                 ->setUserAgentOverride($request->headers->get('user-agent'))
                 ->setHitType('pageview')
                 ->setDocumentLocationUrl($request->getUri())
-                //->setDocumentTitle() todo
-                //->setQueueTime() todo should this be set?
+                // todo add more parameters, i.e. utm_source etc
             ;
 
             if ($request->headers->has('referer')) {
@@ -98,15 +104,25 @@ final class PageViewBuilder implements EventSubscriberInterface
         }
     }
 
-    public function persist(): void
+    public function persist(TerminateEvent $event): void
     {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
+        $request = $event->getRequest();
+        if (!$this->isShopContext($request)) {
+            return;
+        }
+
         $manager = $this->getManager();
 
         foreach ($this->hits as $hit) {
-            $hit = new Hit($hit->getUrl(true)); // todo create a factory for this
-            $manager->persist($hit);
-            $manager->flush();
+            $obj = $this->hitFactory->createWithData($hit->getUrl(true), $request->getSession()->getId());
+            $manager->persist($obj);
         }
+
+        $manager->flush();
     }
 
     public function call(callable $callable): void
