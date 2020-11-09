@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\EventListener\ServerSideTracking;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
 use Setono\SyliusAnalyticsPlugin\Factory\HitFactoryInterface;
 use Setono\SyliusAnalyticsPlugin\Model\Hit;
 use Setono\SyliusAnalyticsPlugin\Resolver\ClientIdResolverInterface;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
