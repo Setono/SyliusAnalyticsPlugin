@@ -77,7 +77,7 @@ final class PageViewBuilder implements EventSubscriberInterface
 
         $request = $event->getRequest();
 
-        if($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             return;
         }
 
