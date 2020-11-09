@@ -15,6 +15,12 @@
     "string",
     "true",
     "void",
-    "Sylius\\Bundle\\CoreBundle\\Application\\SyliusPluginTrait"
+    "Sylius\\Bundle\\CoreBundle\\Application\\SyliusPluginTrait",
+    "Sylius\\Component\\Channel\\Context\\ChannelContextInterface",
+    "Sylius\\Component\\Channel\\Model\\ChannelInterface",
+    "Sylius\\Component\\Channel\\Model\\ChannelsAwareInterface",
+    "Sylius\\Component\\Core\\Model\\OrderInterface",
+    "Sylius\\Component\\Core\\Model\\OrderItemInterface",
+    "Sylius\\Component\\Core\\Model\\ProductInterface"
   ]
 }
