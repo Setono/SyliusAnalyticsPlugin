@@ -91,15 +91,38 @@ final class PageViewBuilder implements EventSubscriberInterface
             $analytics
                 ->setDebug(true)
                 ->setProtocolVersion('1')
+                ->setDataSource('web')
                 ->setTrackingId($property->getTrackingId())
                 ->setClientId($this->clientIdResolver->resolve($request))
                 ->setAnonymizeIp(true)
                 ->setIpOverride($request->getClientIp())
                 ->setUserAgentOverride($request->headers->get('user-agent'))
                 ->setHitType('pageview')
-                ->setDocumentLocationUrl($request->getUri())
-                // todo add more parameters, i.e. utm_source etc
-            ;
+                ->setDocumentLocationUrl($request->getUri());
+
+            if ($request->query->has('utm_campaign')) {
+                $analytics->setCampaignName($request->query->get('utm_campaign'));
+            }
+
+            if ($request->query->has('utm_content')) {
+                $analytics->setCampaignContent($request->query->get('utm_content'));
+            }
+
+            if ($request->query->has('utm_medium')) {
+                $analytics->setCampaignMedium($request->query->get('utm_medium'));
+            }
+
+            if ($request->query->has('utm_source')) {
+                $analytics->setCampaignSource($request->query->get('utm_source'));
+            }
+
+            if ($request->query->has('utm_term')) {
+                $analytics->setCampaignKeyword($request->query->get('utm_term'));
+            }
+
+            if ($request->query->has('gclid')) {
+                $analytics->setGoogleAdwordsId($request->query->get('gclid'));
+            }
 
             if ($request->headers->has('referer')) {
                 $analytics->setDocumentReferrer($request->headers->get('referer'));
