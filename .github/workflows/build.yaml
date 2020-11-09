@@ -31,6 +31,7 @@ jobs:
                     php-version: ${{ matrix.php-versions }}
                     extensions: intl
                     coverage: none
+                    tools: composer:v1
             -   name: Install Composer dependencies
                 run: composer update --no-progress --no-suggest --prefer-dist --no-interaction
             -   name: Validate composer
