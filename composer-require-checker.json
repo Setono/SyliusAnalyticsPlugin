@@ -21,6 +21,8 @@
     "Sylius\\Component\\Channel\\Model\\ChannelsAwareInterface",
     "Sylius\\Component\\Core\\Model\\OrderInterface",
     "Sylius\\Component\\Core\\Model\\OrderItemInterface",
-    "Sylius\\Component\\Core\\Model\\ProductInterface"
+    "Sylius\\Component\\Core\\Model\\ProductInterface",
+    "Sylius\\Bundle\\ChannelBundle\\Form\\Type\\ChannelChoiceType",
+    "Sylius\\Bundle\\UiBundle\\Menu\\Event\\MenuBuilderEvent"
   ]
 }
