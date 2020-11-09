@@ -39,7 +39,7 @@
         "symfony/http-client": "^5.1",
         "symfony/http-client-contracts": "^2.3",
         "symfony/http-foundation": "^4.4 || 5.0",
-        "symfony/http-kernel": "^4.4 || ^5.0",
+        "symfony/http-kernel": "^4.4 || ^5.1.5",
         "symfony/security-bundle": "^4.4 || ^5.0",
         "symfony/uid": "^5.1",
         "thecodingmachine/safe": "^1.0",
