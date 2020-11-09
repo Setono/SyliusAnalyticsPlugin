@@ -29,6 +29,7 @@ class HitRepository extends EntityRepository implements HitRepositoryInterface
 
         return $this->createQueryBuilder('o')
             ->andWhere('o.createdAt < :then')
+            ->andWhere('o.consent = true')
             ->setParameter('then', $then)
             ->setMaxResults(1000) // just to avoid any memory problems
             ->getQuery()

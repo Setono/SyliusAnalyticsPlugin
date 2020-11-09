@@ -7,8 +7,11 @@ namespace Tests\Setono\SyliusAnalyticsPlugin\DependencyInjection;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Setono\SyliusAnalyticsPlugin\DependencyInjection\Configuration;
+use Setono\SyliusAnalyticsPlugin\Doctrine\ORM\HitRepository;
 use Setono\SyliusAnalyticsPlugin\Doctrine\ORM\PropertyRepository;
 use Setono\SyliusAnalyticsPlugin\Form\Type\PropertyType;
+use Setono\SyliusAnalyticsPlugin\Model\Hit;
+use Setono\SyliusAnalyticsPlugin\Model\HitInterface;
 use Setono\SyliusAnalyticsPlugin\Model\Property;
 use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -42,6 +45,19 @@ final class ConfigurationTest extends TestCase
                         'form' => PropertyType::class,
                     ],
                 ],
+                'hit' => [
+                    'classes' => [
+                        'model' => Hit::class,
+                        'interface' => HitInterface::class,
+                        'controller' => ResourceController::class,
+                        'repository' => HitRepository::class,
+                        'factory' => Factory::class,
+                    ],
+                ],
+            ],
+            'server_side_tracking' => [
+                'enabled' => false,
+                'push_delay' => 600,
             ],
         ]);
     }

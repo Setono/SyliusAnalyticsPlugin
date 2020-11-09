@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\Command;
 
 use Safe\DateTime;
+use Setono\SyliusAnalyticsPlugin\Model\HitInterface;
 use Setono\SyliusAnalyticsPlugin\Repository\HitRepositoryInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -47,18 +48,29 @@ final class PushHitsCommand extends Command
 
             $queueTime = 1000 * ((new DateTime())->getTimestamp() - $createdAt->getTimestamp());
             $payload = $hit->getPayload() . '&qt=' . $queueTime;
-            $responses[] = $this->httpClient->request('POST', 'https://www.google-analytics.com/debug/collect', [
+            $responses[] = $this->httpClient->request('POST', 'https://www.google-analytics.com/collect', [
                 'body' => $payload,
                 'user_data' => $hit->getId(),
             ]);
         }
 
         foreach ($this->httpClient->stream($responses, 5) as $response => $chunk) {
-            if ($chunk->isTimeout()) {
-                // todo mark hit as failed
-            } elseif ($chunk->isLast()) {
-                // todo parse response and remove hit from database on success
+            if (!$chunk->isLast()) {
+                continue;
             }
+
+            if ($response->getStatusCode() !== 200) {
+                continue;
+            }
+
+            /** @var HitInterface|null $hit */
+            $hit = $this->hitRepository->find($response->getInfo('user_data'));
+
+            if (null === $hit) {
+                continue;
+            }
+
+            $this->hitRepository->remove($hit);
         }
 
         return 0;

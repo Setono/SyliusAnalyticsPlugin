@@ -25,5 +25,7 @@ final class SetonoSyliusAnalyticsExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderHasParameter('setono_sylius_analytics.driver', SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
+        $this->assertContainerBuilderHasParameter('setono_sylius_analytics.server_side_tracking.enabled', false);
+        $this->assertContainerBuilderHasParameter('setono_sylius_analytics.server_side_tracking.push_delay', 600);
     }
 }
