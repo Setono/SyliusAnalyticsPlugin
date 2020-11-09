@@ -31,13 +31,15 @@ jobs:
                     php-version: ${{ matrix.php-versions }}
                     extensions: intl
                     coverage: none
-                    tools: composer:v1
+                    tools: composer:v1, composer-require-checker
             -   name: Install Composer dependencies
                 run: composer update --no-progress --no-suggest --prefer-dist --no-interaction
             -   name: Validate composer
                 run: composer validate --strict
             -   name: Check composer normalized
                 run: composer normalize --dry-run
+            -   name: Check direct dependencies
+                run: composer-require-checker check --config-file=$(pwd)/composer-require-checker.json
             -   name: Check style
                 run: composer check-style
             -   name: Static analysis
