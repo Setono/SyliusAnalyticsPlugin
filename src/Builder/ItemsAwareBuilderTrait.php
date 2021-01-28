@@ -10,8 +10,7 @@ use function Safe\sprintf;
 
 trait ItemsAwareBuilderTrait
 {
-    /** @var array */
-    protected $data = [];
+    protected array $data = [];
 
     /**
      * @param array|BuilderInterface|mixed $item

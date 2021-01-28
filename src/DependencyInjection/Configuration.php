@@ -7,7 +7,6 @@ namespace Setono\SyliusAnalyticsPlugin\DependencyInjection;
 use Setono\SyliusAnalyticsPlugin\Doctrine\ORM\PropertyRepository;
 use Setono\SyliusAnalyticsPlugin\Form\Type\PropertyType;
 use Setono\SyliusAnalyticsPlugin\Model\Property;
-use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
@@ -19,14 +18,10 @@ final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        if (method_exists(TreeBuilder::class, 'getRootNode')) {
-            $treeBuilder = new TreeBuilder('setono_sylius_analytics');
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $treeBuilder = new TreeBuilder();
-            $rootNode = $treeBuilder->root('setono_sylius_analytics');
-        }
+        $treeBuilder = new TreeBuilder('setono_sylius_analytics');
+
+        /** @var ArrayNodeDefinition $rootNode */
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -55,7 +50,6 @@ final class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Property::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(PropertyInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->defaultValue(PropertyRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()

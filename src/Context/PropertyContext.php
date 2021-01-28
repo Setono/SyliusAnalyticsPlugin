@@ -10,11 +10,14 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 
 final class PropertyContext implements PropertyContextInterface
 {
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    /**
+     * The properties are cached in this property
+     */
+    private ?array $properties = null;
 
-    /** @var PropertyRepositoryInterface */
-    private $propertyRepository;
+    private ChannelContextInterface $channelContext;
+
+    private PropertyRepositoryInterface $propertyRepository;
 
     public function __construct(ChannelContextInterface $channelContext, PropertyRepositoryInterface $propertyRepository)
     {
@@ -29,6 +32,10 @@ final class PropertyContext implements PropertyContextInterface
      */
     public function getProperties(): array
     {
-        return $this->propertyRepository->findEnabledByChannel($this->channelContext->getChannel());
+        if (null === $this->properties) {
+            $this->properties = $this->propertyRepository->findEnabledByChannel($this->channelContext->getChannel());
+        }
+
+        return $this->properties;
     }
 }
