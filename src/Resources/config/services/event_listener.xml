@@ -56,6 +56,7 @@
         <service id="setono_sylius_analytics.event_listener.purchase"
                  class="Setono\SyliusAnalyticsPlugin\EventListener\PurchaseSubscriber"
                  parent="setono_sylius_analytics.event_listener.tag_subscriber">
+            <argument type="service" id="sylius.repository.order"/>
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>

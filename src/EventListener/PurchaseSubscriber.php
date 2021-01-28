@@ -4,29 +4,75 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
 use Setono\SyliusAnalyticsPlugin\Builder\PurchaseBuilder;
+use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
 use Setono\SyliusAnalyticsPlugin\Event\BuilderEvent;
 use Setono\TagBag\Tag\GtagEvent;
 use Setono\TagBag\Tag\GtagEventInterface;
 use Setono\TagBag\Tag\GtagLibrary;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Setono\TagBag\TagBagInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
+use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 final class PurchaseSubscriber extends TagSubscriber
 {
+    private OrderRepositoryInterface $orderRepository;
+
+    public function __construct(
+        TagBagInterface $tagBag,
+        PropertyContextInterface $propertyContext,
+        EventDispatcherInterface $eventDispatcher,
+        RequestStack $requestStack,
+        FirewallMap $firewallMap,
+        OrderRepositoryInterface $orderRepository
+    ) {
+        parent::__construct($tagBag, $propertyContext, $eventDispatcher, $requestStack, $firewallMap);
+
+        $this->orderRepository = $orderRepository;
+    }
+
     public static function getSubscribedEvents(): array
     {
         return [
-            'sylius.order.post_complete' => 'track',
+            KernelEvents::REQUEST => 'track',
         ];
     }
 
-    public function track(ResourceControllerEvent $event): void
+    public function track(RequestEvent $event): void
     {
-        $order = $event->getSubject();
+        $request = $event->getRequest();
 
-        if (!$order instanceof OrderInterface || !$this->isShopContext()) {
+        if (!$event->isMasterRequest() || !$this->isShopContext($request)) {
+            return;
+        }
+
+        if (!$request->attributes->has('_route')) {
+            return;
+        }
+
+        $route = $request->attributes->get('_route');
+        if ('sylius_shop_order_thank_you' !== $route) {
+            return;
+        }
+
+        $orderId = $request->getSession()->get('sylius_order_id');
+
+        if (null === $orderId) {
+            return;
+        }
+
+        $order = $this->orderRepository->find($orderId);
+        if (null === $order) {
+            return;
+        }
+
+        if (!$order instanceof OrderInterface) {
             return;
         }
 
@@ -41,7 +87,7 @@ final class PurchaseSubscriber extends TagSubscriber
 
         $builder = PurchaseBuilder::create()
             ->setTransactionId((string) $order->getNumber())
-            ->setAffiliation($channel->getHostname() . ' (' . $order->getLocaleCode() . ')')
+            ->setAffiliation($channel->getName() . ' (' . $order->getLocaleCode() . ')')
             ->setValue((float) $this->moneyFormatter->format($order->getTotal()))
             ->setCurrency((string) $order->getCurrencyCode())
             ->setTax((float) $this->moneyFormatter->format($order->getTaxTotal()))
