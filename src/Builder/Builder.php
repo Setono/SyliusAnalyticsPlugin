@@ -16,8 +16,7 @@ use Symfony\Component\DependencyInjection\Container;
 
 abstract class Builder implements BuilderInterface
 {
-    /** @var array */
-    protected $data = [];
+    protected array $data = [];
 
     private function __construct()
     {

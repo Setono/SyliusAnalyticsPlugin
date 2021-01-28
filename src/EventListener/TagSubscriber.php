@@ -8,7 +8,6 @@ use function count;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
 use Setono\SyliusAnalyticsPlugin\Formatter\MoneyFormatter;
-use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
 use Setono\TagBag\TagBagInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -17,26 +16,17 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 abstract class TagSubscriber implements EventSubscriberInterface
 {
-    /** @var TagBagInterface */
-    protected $tagBag;
+    protected TagBagInterface $tagBag;
 
-    /** @var PropertyContextInterface */
-    private $propertyContext;
+    private PropertyContextInterface $propertyContext;
 
-    /** @var EventDispatcherInterface */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /** @var PropertyInterface[]|null */
-    private $properties;
+    protected MoneyFormatter $moneyFormatter;
 
-    /** @var MoneyFormatter */
-    protected $moneyFormatter;
+    private RequestStack $requestStack;
 
-    /** @var RequestStack */
-    private $requestStack;
-
-    /** @var FirewallMap */
-    private $firewallMap;
+    private FirewallMap $firewallMap;
 
     public function __construct(
         TagBagInterface $tagBag,
@@ -55,16 +45,12 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     protected function hasProperties(): bool
     {
-        return count($this->getProperties()) > 0;
+        return count($this->propertyContext->getProperties()) > 0;
     }
 
     protected function getProperties(): array
     {
-        if (null === $this->properties) {
-            $this->properties = $this->propertyContext->getProperties();
-        }
-
-        return $this->properties;
+        return $this->propertyContext->getProperties();
     }
 
     protected function isShopContext(Request $request = null): bool
