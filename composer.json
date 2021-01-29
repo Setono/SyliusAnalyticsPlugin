@@ -36,7 +36,7 @@
         "setono/code-quality-pack": "^1.5.1",
         "setono/sylius-behat-pack": "^0.1",
         "setono/sylius-tag-bag-plugin": "^1.1",
-        "sylius/sylius": "~1.7.0",
+        "sylius/sylius": "~1.8.8",
         "symfony/debug-bundle": "^4.4 || ^5.0",
         "symfony/dotenv": "^4.4 || ^5.0",
         "symfony/intl": "^4.4 || ^5.0",
