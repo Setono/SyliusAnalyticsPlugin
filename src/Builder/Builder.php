@@ -8,12 +8,14 @@ use InvalidArgumentException;
 use const JSON_INVALID_UTF8_IGNORE;
 use const JSON_INVALID_UTF8_SUBSTITUTE;
 use const JSON_PRESERVE_ZERO_FRACTION;
+use const JSON_THROW_ON_ERROR;
 use const JSON_UNESCAPED_SLASHES;
-use function Safe\json_decode;
-use function Safe\json_encode;
 use function Safe\sprintf;
 use Symfony\Component\DependencyInjection\Container;
 
+/**
+ * @psalm-consistent-constructor
+ */
 abstract class Builder implements BuilderInterface
 {
     protected array $data = [];
@@ -30,17 +32,6 @@ abstract class Builder implements BuilderInterface
         return new static();
     }
 
-    /**
-     * @return static
-     */
-    public static function createFromJson(string $json)
-    {
-        $new = new static();
-        $new->data = json_decode($json, true);
-
-        return $new;
-    }
-
     public function getData(): array
     {
         return $this->data;
@@ -49,7 +40,7 @@ abstract class Builder implements BuilderInterface
     public function getJson(): string
     {
         return json_encode($this->data,
-            JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION | JSON_INVALID_UTF8_IGNORE | JSON_INVALID_UTF8_SUBSTITUTE);
+            JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION | JSON_INVALID_UTF8_IGNORE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR);
     }
 
     /**
@@ -63,11 +54,13 @@ abstract class Builder implements BuilderInterface
             return $this;
         }
 
-        if (mb_strpos($name, 'set') !== 0) {
+        if (strpos($name, 'set') !== 0) {
             return $this;
         }
 
-        $key = Container::underscore(mb_substr($name, 3));
+        $key = Container::underscore(substr($name, 3));
+
+        /** @var mixed $val */
         $val = $arguments[0];
 
         if (null === $val) {
@@ -75,6 +68,7 @@ abstract class Builder implements BuilderInterface
         }
 
         if (is_callable($val)) {
+            /** @var string $val */
             $val = $val();
         } elseif ($val instanceof BuilderInterface) {
             $val = $val->getData();

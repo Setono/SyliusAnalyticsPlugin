@@ -8,6 +8,7 @@ use function count;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
 use Setono\SyliusAnalyticsPlugin\Formatter\MoneyFormatter;
+use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
 use Setono\TagBag\TagBagInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -48,6 +49,9 @@ abstract class TagSubscriber implements EventSubscriberInterface
         return count($this->propertyContext->getProperties()) > 0;
     }
 
+    /**
+     * @return array<array-key, PropertyInterface>
+     */
     protected function getProperties(): array
     {
         return $this->propertyContext->getProperties();
