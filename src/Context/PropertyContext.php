@@ -12,6 +12,8 @@ final class PropertyContext implements PropertyContextInterface
 {
     /**
      * The properties are cached in this property
+     *
+     * @var array<array-key, PropertyInterface>
      */
     private ?array $properties = null;
 
@@ -28,7 +30,7 @@ final class PropertyContext implements PropertyContextInterface
     /**
      * Returns the properties enabled for the active channel
      *
-     * @return PropertyInterface[]
+     * @return array<array-key, PropertyInterface>
      */
     public function getProperties(): array
     {

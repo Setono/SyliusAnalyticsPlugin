@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\Builder;
 
 use InvalidArgumentException;
-use Safe\Exceptions\StringsException;
 use function Safe\sprintf;
+use Webmozart\Assert\Assert;
 
 trait ItemsAwareBuilderTrait
 {
@@ -14,8 +14,6 @@ trait ItemsAwareBuilderTrait
 
     /**
      * @param array|BuilderInterface|mixed $item
-     *
-     * @throws StringsException
      */
     public function addItem($item): BuilderInterface
     {
@@ -30,6 +28,8 @@ trait ItemsAwareBuilderTrait
         if (!is_array($item)) {
             throw new InvalidArgumentException(sprintf('The item needs to be an array or instance of %s', BuilderInterface::class));
         }
+
+        Assert::isArray($this->data['items']);
 
         $this->data['items'][] = $item;
 

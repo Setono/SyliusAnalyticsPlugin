@@ -61,9 +61,10 @@ final class PurchaseSubscriber extends TagSubscriber
             return;
         }
 
+        /** @var mixed $orderId */
         $orderId = $request->getSession()->get('sylius_order_id');
 
-        if (null === $orderId) {
+        if (!is_scalar($orderId)) {
             return;
         }
 
@@ -87,7 +88,7 @@ final class PurchaseSubscriber extends TagSubscriber
 
         $builder = PurchaseBuilder::create()
             ->setTransactionId((string) $order->getNumber())
-            ->setAffiliation($channel->getName() . ' (' . $order->getLocaleCode() . ')')
+            ->setAffiliation((string) $channel->getName() . ' (' . (string) $order->getLocaleCode() . ')')
             ->setValue((float) $this->moneyFormatter->format($order->getTotal()))
             ->setCurrency((string) $order->getCurrencyCode())
             ->setTax((float) $this->moneyFormatter->format($order->getTaxTotal()))

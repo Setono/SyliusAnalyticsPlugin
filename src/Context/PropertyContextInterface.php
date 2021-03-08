@@ -11,7 +11,7 @@ interface PropertyContextInterface
     /**
      * Returns the properties enabled for the active channel
      *
-     * @return PropertyInterface[]
+     * @return array<array-key, PropertyInterface>
      */
     public function getProperties(): array;
 }

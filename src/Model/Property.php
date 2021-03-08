@@ -17,7 +17,11 @@ class Property implements PropertyInterface
 
     protected ?string $trackingId = null;
 
-    /** @var Collection|BaseChannelInterface[] */
+    /**
+     * @var Collection|BaseChannelInterface[]
+     *
+     * @psalm-var Collection<array-key, BaseChannelInterface>
+     */
     protected Collection $channels;
 
     public function __construct()
