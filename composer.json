@@ -13,7 +13,10 @@
     "require": {
         "php": "^7.4",
         "ext-json": "*",
+        "doctrine/collections": "^1.6",
+        "knplabs/knp-menu": "^3.1",
         "psr/event-dispatcher": "^1.0",
+        "setono/tag-bag": "^1.4",
         "setono/tag-bag-bundle": "^2.2",
         "setono/tag-bag-gtag": "^1.4.1",
         "setono/tag-bag-twig": "^1.1",
@@ -21,10 +24,13 @@
         "symfony/config": "^4.4 || ^5.0",
         "symfony/dependency-injection": "^4.4 || ^5.0",
         "symfony/event-dispatcher": "^4.4 || ^5.0",
+        "symfony/event-dispatcher-contracts": "^1.1",
         "symfony/form": "^4.4 || ^5.0",
         "symfony/http-foundation": "^4.4 || ^5.0.7",
         "symfony/http-kernel": "^4.4 || ^5.0",
-        "thecodingmachine/safe": "^1.0"
+        "symfony/security-bundle": "^4.4 || ^5.0",
+        "thecodingmachine/safe": "^1.0",
+        "webmozart/assert": "^1.9"
     },
     "require-dev": {
         "loevgaard/sylius-brand-plugin": "^2.1",
