@@ -4,7 +4,6 @@
 [![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-github-actions]][link-github-actions]
-[![Quality Score][ico-code-quality]][link-code-quality]
 
 This plugin adds Google Analytics tracking to your store. It injects the tags directly
 and hence does not depend on third party tools like Google Tag Manager.
@@ -146,8 +145,6 @@ Thank you!
 [ico-unstable-version]: https://poser.pugx.org/setono/sylius-analytics-plugin/v/unstable
 [ico-license]: https://poser.pugx.org/setono/sylius-analytics-plugin/license
 [ico-github-actions]: https://github.com/Setono/SyliusAnalyticsPlugin/workflows/build/badge.svg
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusAnalyticsPlugin.svg
 
 [link-packagist]: https://packagist.org/packages/setono/sylius-analytics-plugin
 [link-github-actions]: https://github.com/Setono/SyliusAnalyticsPlugin/actions
-[link-code-quality]: https://scrutinizer-ci.com/g/Setono/SyliusAnalyticsPlugin
