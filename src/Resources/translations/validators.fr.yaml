@@ -1,0 +1,8 @@
+setono_sylius_analytics:
+    property:
+        channels:
+            min_count: Vous devez sélectionner au moins {{ limit }} canal(aux) ou plus.
+        tracking_id:
+            min_length: Le Tracking id doit faire minimum {{ limit }} caractères.
+            not_blank: Le Tracking id ne peut être vide.
+            unique: Vous avez déjà une propriété avec ce Tracking id

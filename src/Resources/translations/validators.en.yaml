@@ -1,8 +1,8 @@
 setono_sylius_analytics:
     property:
-        tracking_id:
-            unique: You already have one property with this tracking id
-            not_blank: Tracking id cannot be blank.
-            min_length: Tracking id must be at least {{ limit }} characters long.
         channels:
             min_count: You must select {{ limit }} or more channels.
+        tracking_id:
+            min_length: Tracking id must be at least {{ limit }} characters long.
+            not_blank: Tracking id cannot be blank.
+            unique: You already have one property with this tracking id

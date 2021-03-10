@@ -1,12 +1,12 @@
 setono_sylius_analytics:
     ui:
         edit_property: Edit property
+        enabled: Enabled
+        google_analytics: Google analytics
         new_property: New property
+        no_channels: No channels
         properties: Properties
+        property: Property
         property_index: Property index
         tracking_id: Tracking id
         tracking_id_placeholder: Insert your tracking id, i.e. UA-12345678-1...
-        enabled: Enabled
-        google_analytics: Google analytics
-        property: Property
-        no_channels: No channels
