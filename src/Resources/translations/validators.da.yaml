@@ -1,8 +1,8 @@
 setono_sylius_analytics:
     property:
-        tracking_id:
-            unique: Du har allerede en eksisterende ejendom med dette sporings-id
-            not_blank: Sporings-id kan ikke efterlades blank.
-            min_length: Sporings-id skal minimum bestå af {{ limit }} karakterer.
         channels:
             min_count: Du bedes vælge {{ limit }} eller flere kanaler.
+        tracking_id:
+            min_length: Sporings-id skal minimum bestå af {{ limit }} karakterer.
+            not_blank: Sporings-id kan ikke efterlades blank.
+            unique: Du har allerede en eksisterende ejendom med dette sporings-id
