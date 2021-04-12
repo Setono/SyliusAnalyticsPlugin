@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\TagBag\Tag\GtagEventInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Setono\SyliusAnalyticsPlugin\Event\AddToCartEvent;
+use Sylius\Component\Core\Model\OrderItemInterface;
 
 final class RemoveFromCartSubscriber extends UpdateCartSubscriber
 {
@@ -16,8 +16,13 @@ final class RemoveFromCartSubscriber extends UpdateCartSubscriber
         ];
     }
 
-    public function track(ResourceControllerEvent $event): void
+    public function _track(OrderItemInterface $orderItem): void
     {
-        $this->_track($event, GtagEventInterface::EVENT_REMOVE_FROM_CART);
+        $event = AddToCartEvent::createFromOrderItem($orderItem);
+
+        $this->eventDispatcher->dispatch($event);
+
+        $this->hitBuilder->setProductAction('remove');
+        $event->productData->applyTo($this->hitBuilder);
     }
 }

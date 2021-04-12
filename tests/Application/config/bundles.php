@@ -29,14 +29,9 @@ return [
     Sylius\Bundle\ReviewBundle\SyliusReviewBundle::class => ['all' => true],
     Sylius\Bundle\CoreBundle\SyliusCoreBundle::class => ['all' => true],
     Sylius\Bundle\ResourceBundle\SyliusResourceBundle::class => ['all' => true],
-
-    // These two bundles are the ones you need to enable to make this plugin work
+    Setono\ClientIdBundle\SetonoClientIdBundle::class => ['all' => true],
     Setono\SyliusAnalyticsPlugin\SetonoSyliusAnalyticsPlugin::class => ['all' => true], // Added before the grid bundle
-    Setono\TagBagBundle\SetonoTagBagBundle::class => ['all' => true],
-
-    // This is used to add the twig functions to the layout.html automatically
-    Setono\SyliusTagBagPlugin\SetonoSyliusTagBagPlugin::class => ['all' => true],
-
+    Setono\GoogleAnalyticsServerSideTrackingBundle\SetonoGoogleAnalyticsServerSideTrackingBundle::class => ['all' => true],
     Sylius\Bundle\GridBundle\SyliusGridBundle::class => ['all' => true],
     winzou\Bundle\StateMachineBundle\winzouStateMachineBundle::class => ['all' => true],
     Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],

@@ -9,5 +9,5 @@ setono_sylius_analytics_admin_property:
             all:
                 subheader: setono_sylius_analytics.ui.property
             index:
-                icon: 'bullhorn'
+                icon: 'google'
     type: sylius.resource

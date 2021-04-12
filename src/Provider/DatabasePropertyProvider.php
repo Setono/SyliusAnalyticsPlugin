@@ -2,21 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Setono\SyliusAnalyticsPlugin\Context;
+namespace Setono\SyliusAnalyticsPlugin\Provider;
 
+use Setono\GoogleAnalyticsServerSideTrackingBundle\Provider\PropertyProviderInterface;
 use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
 use Setono\SyliusAnalyticsPlugin\Repository\PropertyRepositoryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 
-final class PropertyContext implements PropertyContextInterface
+final class DatabasePropertyProvider implements PropertyProviderInterface
 {
-    /**
-     * The properties are cached in this property
-     *
-     * @var array<array-key, PropertyInterface>
-     */
-    private ?array $properties = null;
-
     private ChannelContextInterface $channelContext;
 
     private PropertyRepositoryInterface $propertyRepository;
@@ -27,17 +21,11 @@ final class PropertyContext implements PropertyContextInterface
         $this->propertyRepository = $propertyRepository;
     }
 
-    /**
-     * Returns the properties enabled for the active channel
-     *
-     * @return array<array-key, PropertyInterface>
-     */
     public function getProperties(): array
     {
-        if (null === $this->properties) {
-            $this->properties = $this->propertyRepository->findEnabledByChannel($this->channelContext->getChannel());
-        }
-
-        return $this->properties;
+        return array_map(
+            static fn (PropertyInterface $property) => (string) $property->getTrackingId(),
+            $this->propertyRepository->findEnabledByChannel($this->channelContext->getChannel())
+        );
     }
 }

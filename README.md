@@ -93,7 +93,7 @@ namespace App\EventListener;
 
 use Loevgaard\SyliusBrandPlugin\Model\BrandAwareInterface;
 use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
-use Setono\SyliusAnalyticsPlugin\Event\BuilderEvent;
+use Setono\SyliusAnalyticsPlugin\Event\PurchaseEvent;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -103,13 +103,13 @@ final class AddBrandSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            BuilderEvent::class => [
+            PurchaseEvent::class => [
                 'addBrand',
             ],
         ];
     }
 
-    public function addBrand(BuilderEvent $event): void
+    public function addBrand(PurchaseEvent $event): void
     {
         $builder = $event->getBuilder();
         if(!$builder instanceof ItemBuilder) {

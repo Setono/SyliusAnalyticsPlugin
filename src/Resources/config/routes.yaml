@@ -1,0 +1,3 @@
+setono_sylius_analytics_admin:
+    resource: routes/admin.yaml
+    prefix: /admin/google-analytics

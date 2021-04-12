@@ -4,16 +4,38 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
-use Setono\SyliusAnalyticsPlugin\Event\BuilderEvent;
-use Setono\TagBag\Tag\GtagEvent;
-use Setono\TagBag\Tag\GtagEventInterface;
-use Setono\TagBag\Tag\GtagLibrary;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
+use Setono\SyliusAnalyticsPlugin\Event\ViewItemEvent;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-final class ViewItemSubscriber extends TagSubscriber
+final class ViewItemSubscriber extends AnalyticsEventSubscriber
 {
+    private ProductVariantResolverInterface $productVariantResolver;
+
+    private ChannelContextInterface $channelContext;
+
+    public function __construct(
+        HitBuilder $hitBuilder,
+        EventDispatcherInterface $eventDispatcher,
+        RequestStack $requestStack,
+        FirewallMap $firewallMap,
+        ProductVariantResolverInterface $productVariantResolver,
+        ChannelContextInterface $channelContext
+    ) {
+        parent::__construct($hitBuilder, $eventDispatcher, $requestStack, $firewallMap);
+
+        $this->productVariantResolver = $productVariantResolver;
+        $this->channelContext = $channelContext;
+    }
+
     public static function getSubscribedEvents(): array
     {
         return [
@@ -21,28 +43,29 @@ final class ViewItemSubscriber extends TagSubscriber
         ];
     }
 
-    public function view(ResourceControllerEvent $event): void
+    public function view(ResourceControllerEvent $resourceControllerEvent): void
     {
-        $product = $event->getSubject();
+        $product = $resourceControllerEvent->getSubject();
 
         if (!$product instanceof ProductInterface || !$this->isShopContext()) {
             return;
         }
 
-        if (!$this->hasProperties()) {
+        $variant = $this->productVariantResolver->getVariant($product);
+        if (!$variant instanceof ProductVariantInterface) {
             return;
         }
 
-        $builder = ItemBuilder::create()
-            ->setId((string) $product->getCode())
-            ->setName((string) $product->getName())
-        ;
+        $channel = $this->channelContext->getChannel();
+        if (!$channel instanceof ChannelInterface) {
+            return;
+        }
 
-        $this->eventDispatcher->dispatch(new BuilderEvent($builder, $product));
+        $event = ViewItemEvent::createFromProduct($product, $variant, $channel);
 
-        $this->tagBag->addTag(
-            (new GtagEvent(GtagEventInterface::EVENT_VIEW_ITEM, $builder->getData()))
-                ->addDependency(GtagLibrary::NAME)
-        );
+        $this->eventDispatcher->dispatch($event);
+
+        $this->hitBuilder->setProductAction('detail');
+        $event->productData->applyTo($this->hitBuilder);
     }
 }

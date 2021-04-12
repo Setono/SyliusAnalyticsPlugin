@@ -1,0 +1,2 @@
+setono_analytics_plugin:
+    resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routes.yaml"
