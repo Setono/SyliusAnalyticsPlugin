@@ -4,57 +4,33 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use function count;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
-use Setono\SyliusAnalyticsPlugin\Formatter\MoneyFormatter;
-use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
-use Setono\TagBag\TagBagInterface;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-abstract class TagSubscriber implements EventSubscriberInterface
+abstract class PageviewSubscriber implements EventSubscriberInterface
 {
-    protected TagBagInterface $tagBag;
-
-    private PropertyContextInterface $propertyContext;
+    protected HitBuilder $pageviewHitBuilder;
 
     protected EventDispatcherInterface $eventDispatcher;
-
-    protected MoneyFormatter $moneyFormatter;
 
     private RequestStack $requestStack;
 
     private FirewallMap $firewallMap;
 
     public function __construct(
-        TagBagInterface $tagBag,
-        PropertyContextInterface $propertyContext,
+        HitBuilder $pageviewHitBuilder,
         EventDispatcherInterface $eventDispatcher,
         RequestStack $requestStack,
         FirewallMap $firewallMap
     ) {
-        $this->tagBag = $tagBag;
-        $this->propertyContext = $propertyContext;
+        $this->pageviewHitBuilder = $pageviewHitBuilder;
         $this->eventDispatcher = $eventDispatcher;
-        $this->moneyFormatter = new MoneyFormatter();
         $this->requestStack = $requestStack;
         $this->firewallMap = $firewallMap;
-    }
-
-    protected function hasProperties(): bool
-    {
-        return count($this->propertyContext->getProperties()) > 0;
-    }
-
-    /**
-     * @return array<array-key, PropertyInterface>
-     */
-    protected function getProperties(): array
-    {
-        return $this->propertyContext->getProperties();
     }
 
     protected function isShopContext(Request $request = null): bool
@@ -72,5 +48,10 @@ abstract class TagSubscriber implements EventSubscriberInterface
         }
 
         return $firewallConfig->getName() === 'shop';
+    }
+
+    protected static function formatAmount(int $amount): float
+    {
+        return round($amount / 100, 2);
     }
 }

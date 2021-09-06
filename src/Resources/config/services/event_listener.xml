@@ -3,60 +3,42 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="setono_sylius_analytics.event_listener.tag_subscriber"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\TagSubscriber" abstract="true">
-            <argument type="service" id="setono_tag_bag.tag_bag"/>
-            <argument type="service" id="setono_sylius_analytics.context.property"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="request_stack"/>
-            <argument type="service" id="security.firewall.map"/>
-        </service>
-        <service id="setono_sylius_analytics.event_listener.analytics"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\AddLibrarySubscriber"
-                 parent="setono_sylius_analytics.event_listener.tag_subscriber">
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
-        <service id="setono_sylius_analytics.event_listener.add_payment_info"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\AddPaymentInfoSubscriber"
-                 parent="setono_sylius_analytics.event_listener.tag_subscriber">
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
         <service id="setono_sylius_analytics.event_listener.add_to_cart"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\AddToCartSubscriber"
-                 parent="setono_sylius_analytics.event_listener.tag_subscriber">
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\AddToCartSubscriber">
+            <argument type="service" id="setono_google_analytics_server_side_tracking.factory.hit_builder"/>
+            <argument type="service" id="event_dispatcher"/>
+
             <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="setono_sylius_analytics.event_listener.login"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\LoginSubscriber"
-                 parent="setono_sylius_analytics.event_listener.tag_subscriber">
-            <tag name="kernel.event_subscriber"/>
-        </service>
+        <service id="setono_sylius_analytics.event_listener.remove_from_cart"
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\RemoveFromCartSubscriber">
+            <argument type="service" id="setono_google_analytics_server_side_tracking.factory.hit_builder"/>
+            <argument type="service" id="event_dispatcher"/>
 
-        <service id="setono_sylius_analytics.event_listener.sign_up"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\SignUpSubscriber"
-                 parent="setono_sylius_analytics.event_listener.tag_subscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.view_item"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\ViewItemSubscriber"
-                 parent="setono_sylius_analytics.event_listener.tag_subscriber">
-            <tag name="kernel.event_subscriber"/>
-        </service>
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\ViewItemSubscriber">
+            <argument type="service" id="setono_google_analytics_server_side_tracking.hit.page_view_hit_builder"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="security.firewall.map"/>
+            <argument type="service" id="sylius.product_variant_resolver.default"/>
+            <argument type="service" id="sylius.context.channel"/>
 
-        <service id="setono_sylius_analytics.event_listener.begin_checkout"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\BeginCheckoutSubscriber"
-                 parent="setono_sylius_analytics.event_listener.tag_subscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_analytics.event_listener.purchase"
-                 class="Setono\SyliusAnalyticsPlugin\EventListener\PurchaseSubscriber"
-                 parent="setono_sylius_analytics.event_listener.tag_subscriber">
+                 class="Setono\SyliusAnalyticsPlugin\EventListener\PurchaseSubscriber">
+            <argument type="service" id="setono_google_analytics_server_side_tracking.hit.page_view_hit_builder"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="security.firewall.map"/>
             <argument type="service" id="sylius.repository.order"/>
+
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>

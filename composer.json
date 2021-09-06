@@ -16,10 +16,8 @@
         "doctrine/collections": "^1.6",
         "knplabs/knp-menu": "^3.1",
         "psr/event-dispatcher": "^1.0",
-        "setono/tag-bag": "^1.4",
-        "setono/tag-bag-bundle": "^2.2",
-        "setono/tag-bag-gtag": "^1.4.1",
-        "setono/tag-bag-twig": "^1.1",
+        "setono/google-analytics-measurement-protocol": "^0.2.1",
+        "setono/google-analytics-server-side-tracking-bundle": "dev-master",
         "sylius/resource-bundle": "^1.6",
         "symfony/config": "^4.4 || ^5.0",
         "symfony/dependency-injection": "^4.4 || ^5.0",
@@ -29,20 +27,17 @@
         "symfony/http-foundation": "^4.4 || ^5.0.7",
         "symfony/http-kernel": "^4.4 || ^5.0",
         "symfony/security-bundle": "^4.4 || ^5.0",
-        "thecodingmachine/safe": "^1.0",
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
         "loevgaard/sylius-brand-plugin": "^2.1",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "phpspec/phpspec": "^6.3",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-symfony": "^2.2",
-        "roave/security-advisories": "dev-master",
-        "setono/code-quality-pack": "^1.5.2",
+        "roave/security-advisories": "dev-latest",
+        "setono/code-quality-pack": "^2.1",
         "setono/sylius-behat-pack": "^0.1",
-        "setono/sylius-tag-bag-plugin": "^1.1",
         "sylius/sylius": "~1.7.0",
         "symfony/debug-bundle": "^4.4 || ^5.0",
         "symfony/dotenv": "^4.4 || ^5.0",
@@ -54,7 +49,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "3.0-dev"
         }
     },
     "autoload": {
@@ -76,9 +71,9 @@
             "@ensure-test-container-exists",
             "psalm"
         ],
-        "check-style": "ecs check --ansi spec/ src/ tests/",
+        "check-style": "ecs check",
         "ensure-test-container-exists": "[[ -f tests/Application/var/cache/test/ApplicationTests_Setono_SyliusAnalyticsPlugin_Application_KernelTestDebugContainer.xml ]] || tests/Application/bin/console cache:warmup --env=test",
-        "fix-style": "ecs check --ansi spec/ src/ tests/ --fix",
+        "fix-style": "ecs check --fix",
         "phpspec": "phpspec run",
         "phpunit": "phpunit",
         "test": [

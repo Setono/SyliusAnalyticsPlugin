@@ -1,8 +1,6 @@
 name: "build"
 on:
-    push:
-        branches:
-            - "master"
+    push: ~
     pull_request: ~
     schedule:
         - cron: "5 8 * * 1"
@@ -194,7 +192,7 @@ jobs:
                     dependency-versions: "${{ matrix.dependencies }}"
 
             -   name: "Lint container"
-                run: "(cd tests/Application && bin/console lint:container) || true"
+                run: "(cd tests/Application && bin/console lint:container)"
 
             -   name: "Create database"
                 run: "(cd tests/Application && bin/console doctrine:database:create -vvv)"

@@ -5,34 +5,30 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
-use Setono\SyliusAnalyticsPlugin\Builder\PurchaseBuilder;
-use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
-use Setono\SyliusAnalyticsPlugin\Event\BuilderEvent;
-use Setono\TagBag\Tag\GtagEvent;
-use Setono\TagBag\Tag\GtagEventInterface;
-use Setono\TagBag\Tag\GtagLibrary;
-use Setono\TagBag\TagBagInterface;
+use Setono\GoogleAnalyticsMeasurementProtocol\DTO\Event\PurchaseEventData;
+use Setono\GoogleAnalyticsMeasurementProtocol\DTO\ProductData;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
+use Setono\SyliusAnalyticsPlugin\Event\GenericDataEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Webmozart\Assert\Assert;
 
-final class PurchaseSubscriber extends TagSubscriber
+final class PurchaseSubscriber extends PageviewSubscriber
 {
     private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
-        TagBagInterface $tagBag,
-        PropertyContextInterface $propertyContext,
+        HitBuilder $pageviewHitBuilder,
         EventDispatcherInterface $eventDispatcher,
         RequestStack $requestStack,
         FirewallMap $firewallMap,
         OrderRepositoryInterface $orderRepository
     ) {
-        parent::__construct($tagBag, $propertyContext, $eventDispatcher, $requestStack, $firewallMap);
+        parent::__construct($pageviewHitBuilder, $eventDispatcher, $requestStack, $firewallMap);
 
         $this->orderRepository = $orderRepository;
     }
@@ -44,11 +40,11 @@ final class PurchaseSubscriber extends TagSubscriber
         ];
     }
 
-    public function track(RequestEvent $event): void
+    public function track(RequestEvent $requestEvent): void
     {
-        $request = $event->getRequest();
+        $request = $requestEvent->getRequest();
 
-        if (!$event->isMasterRequest() || !$this->isShopContext($request)) {
+        if (!$requestEvent->isMasterRequest() || !$this->isShopContext($request)) {
             return;
         }
 
@@ -69,55 +65,41 @@ final class PurchaseSubscriber extends TagSubscriber
         }
 
         $order = $this->orderRepository->find($orderId);
-        if (null === $order) {
-            return;
-        }
-
         if (!$order instanceof OrderInterface) {
             return;
         }
 
         $channel = $order->getChannel();
-        if (null === $channel) {
-            return;
-        }
+        Assert::notNull($channel);
 
-        if (!$this->hasProperties()) {
-            return;
-        }
-
-        $builder = PurchaseBuilder::create()
-            ->setTransactionId((string) $order->getNumber())
-            ->setAffiliation((string) $channel->getName() . ' (' . (string) $order->getLocaleCode() . ')')
-            ->setValue((float) $this->moneyFormatter->format($order->getTotal()))
-            ->setCurrency((string) $order->getCurrencyCode())
-            ->setTax((float) $this->moneyFormatter->format($order->getTaxTotal()))
-            ->setShipping((float) $this->moneyFormatter->format($order->getShippingTotal()))
-        ;
-
-        foreach ($order->getItems() as $orderItem) {
-            $variant = $orderItem->getVariant();
-            if (null === $variant) {
+        $items = [];
+        foreach ($order->getItems() as $item) {
+            $product = $item->getProduct();
+            if (null === $product) {
                 continue;
             }
 
-            $itemBuilder = ItemBuilder::create()
-                ->setId((string) $variant->getCode())
-                ->setName((string) $orderItem->getVariantName())
-                ->setQuantity($orderItem->getQuantity())
-                ->setPrice((float) $this->moneyFormatter->format($orderItem->getDiscountedUnitPrice()))
-            ;
+            $productData = ProductData::createAsProductType((string) $product->getCode(), (string) $item->getProductName());
+            $productData->quantity = $item->getQuantity();
+            $productData->price = self::formatAmount($item->getFullDiscountedUnitPrice());
 
-            $this->eventDispatcher->dispatch(new BuilderEvent($itemBuilder, $orderItem));
+            $this->eventDispatcher->dispatch(new GenericDataEvent($productData, $item));
 
-            $builder->addItem($itemBuilder);
+            $items[] = $productData;
         }
 
-        $this->eventDispatcher->dispatch(new BuilderEvent($builder, $order));
-
-        $this->tagBag->addTag(
-            (new GtagEvent(GtagEventInterface::EVENT_PURCHASE, $builder->getData()))
-                ->addDependency(GtagLibrary::NAME)
+        $data = new PurchaseEventData(
+            (string) $order->getNumber(),
+            (string) $channel->getName() . ' (' . (string) $order->getLocaleCode() . ')',
+            self::formatAmount($order->getTotal()),
+            (string) $order->getCurrencyCode(),
+            self::formatAmount($order->getTaxTotal()),
+            self::formatAmount($order->getShippingTotal()),
+            $items
         );
+
+        $this->eventDispatcher->dispatch(new GenericDataEvent($data, $order));
+
+        $data->applyTo($this->pageviewHitBuilder);
     }
 }

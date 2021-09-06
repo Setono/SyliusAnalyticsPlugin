@@ -4,44 +4,36 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
-use Setono\SyliusAnalyticsPlugin\Event\BuilderEvent;
-use Setono\TagBag\Tag\GtagEvent;
-use Setono\TagBag\Tag\GtagLibrary;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Setono\GoogleAnalyticsServerSideTrackingBundle\Factory\HitBuilderFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-abstract class UpdateCartSubscriber extends TagSubscriber
+abstract class UpdateCartSubscriber implements EventSubscriberInterface
 {
-    protected function _track(ResourceControllerEvent $resourceControllerEvent, string $event): void
+    protected HitBuilderFactoryInterface $hitBuilderFactory;
+
+    protected EventDispatcherInterface $eventDispatcher;
+
+    public function __construct(
+        HitBuilderFactoryInterface $hitBuilderFactory,
+        EventDispatcherInterface $eventDispatcher
+    ) {
+        $this->hitBuilderFactory = $hitBuilderFactory;
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    public function track(ResourceControllerEvent $resourceControllerEvent): void
     {
         $orderItem = $resourceControllerEvent->getSubject();
 
-        if (!$orderItem instanceof OrderItemInterface || !$this->isShopContext()) {
+        if (!$orderItem instanceof OrderItemInterface) {
             return;
         }
 
-        $variant = $orderItem->getVariant();
-        if (null === $variant) {
-            return;
-        }
-
-        if (!$this->hasProperties()) {
-            return;
-        }
-
-        $builder = ItemBuilder::create()
-            ->setId((string) $variant->getCode())
-            ->setName((string) $orderItem->getVariantName())
-            ->setQuantity($orderItem->getQuantity())
-            ->setPrice((float) $this->moneyFormatter->format($orderItem->getDiscountedUnitPrice()))
-        ;
-
-        $this->eventDispatcher->dispatch(new BuilderEvent($builder, $orderItem));
-
-        $this->tagBag->addTag(
-            (new GtagEvent($event, $builder->getData()))
-                ->addDependency(GtagLibrary::NAME)
-        );
+        $this->_track($orderItem);
     }
+
+    abstract protected function _track(OrderItemInterface $orderItem): void;
 }
