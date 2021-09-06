@@ -24,6 +24,9 @@
     "Sylius\\Component\\Core\\Model\\OrderInterface",
     "Sylius\\Component\\Core\\Model\\OrderItemInterface",
     "Sylius\\Component\\Core\\Model\\ProductInterface",
-    "Sylius\\Component\\Order\\Repository\\OrderRepositoryInterface"
+    "Sylius\\Component\\Order\\Repository\\OrderRepositoryInterface",
+    "Sylius\\Component\\Core\\Model\\ChannelInterface",
+    "Sylius\\Component\\Core\\Model\\ProductVariantInterface",
+    "Sylius\\Component\\Product\\Resolver\\ProductVariantResolverInterface"
   ]
 }
