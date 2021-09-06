@@ -11,7 +11,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": ">=7.4",
         "ext-json": "*",
         "doctrine/collections": "^1.6",
         "knplabs/knp-menu": "^3.1",
@@ -36,7 +36,7 @@
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-symfony": "^2.2",
         "roave/security-advisories": "dev-latest",
-        "setono/code-quality-pack": "^2.1",
+        "setono/code-quality-pack": "^2.1.2",
         "setono/sylius-behat-pack": "^0.1",
         "sylius/sylius": "~1.7.0",
         "symfony/debug-bundle": "^4.4 || ^5.0",
