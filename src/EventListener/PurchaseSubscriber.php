@@ -14,18 +14,18 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class PurchaseSubscriber extends AnalyticsEventSubscriber
+final class PurchaseSubscriber extends PageviewSubscriber
 {
     private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
-        HitBuilder $hitBuilder,
+        HitBuilder $pageviewHitBuilder,
         EventDispatcherInterface $eventDispatcher,
         RequestStack $requestStack,
         FirewallMap $firewallMap,
         OrderRepositoryInterface $orderRepository
     ) {
-        parent::__construct($hitBuilder, $eventDispatcher, $requestStack, $firewallMap);
+        parent::__construct($pageviewHitBuilder, $eventDispatcher, $requestStack, $firewallMap);
 
         $this->orderRepository = $orderRepository;
     }
@@ -69,6 +69,6 @@ final class PurchaseSubscriber extends AnalyticsEventSubscriber
         $event = PurchaseEvent::createFromOrder($order);
         $this->eventDispatcher->dispatch($event);
 
-        $event->purchaseEventData->applyTo($this->hitBuilder);
+        $event->purchaseEventData->applyTo($this->pageviewHitBuilder);
     }
 }

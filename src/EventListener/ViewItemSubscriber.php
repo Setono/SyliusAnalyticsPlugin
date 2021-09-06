@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Setono\GoogleAnalyticsMeasurementProtocol\DTO\ProductData;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
-use Setono\SyliusAnalyticsPlugin\Event\ViewItemEvent;
+use Setono\SyliusAnalyticsPlugin\Event\GenericDataEvent;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -16,21 +17,21 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class ViewItemSubscriber extends AnalyticsEventSubscriber
+final class ViewItemSubscriber extends PageviewSubscriber
 {
     private ProductVariantResolverInterface $productVariantResolver;
 
     private ChannelContextInterface $channelContext;
 
     public function __construct(
-        HitBuilder $hitBuilder,
+        HitBuilder $pageviewHitBuilder,
         EventDispatcherInterface $eventDispatcher,
         RequestStack $requestStack,
         FirewallMap $firewallMap,
         ProductVariantResolverInterface $productVariantResolver,
         ChannelContextInterface $channelContext
     ) {
-        parent::__construct($hitBuilder, $eventDispatcher, $requestStack, $firewallMap);
+        parent::__construct($pageviewHitBuilder, $eventDispatcher, $requestStack, $firewallMap);
 
         $this->productVariantResolver = $productVariantResolver;
         $this->channelContext = $channelContext;
@@ -61,11 +62,19 @@ final class ViewItemSubscriber extends AnalyticsEventSubscriber
             return;
         }
 
-        $event = ViewItemEvent::createFromProduct($product, $variant, $channel);
+        $data = ProductData::createAsProductType((string) $product->getCode(), (string) $product->getName());
 
-        $this->eventDispatcher->dispatch($event);
+        $channelPricings = $variant->getChannelPricingForChannel($channel);
+        if (null !== $channelPricings) {
+            $price = $channelPricings->getPrice();
+            if (null !== $price) {
+                $data->price = self::formatAmount($price);
+            }
+        }
 
-        $this->hitBuilder->setProductAction('detail');
-        $event->productData->applyTo($this->hitBuilder);
+        $this->eventDispatcher->dispatch(new GenericDataEvent($data, $product));
+
+        $this->pageviewHitBuilder->setProductAction('detail');
+        $data->applyTo($this->pageviewHitBuilder);
     }
 }

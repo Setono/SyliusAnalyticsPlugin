@@ -11,9 +11,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-abstract class AnalyticsEventSubscriber implements EventSubscriberInterface
+abstract class PageviewSubscriber implements EventSubscriberInterface
 {
-    protected HitBuilder $hitBuilder;
+    protected HitBuilder $pageviewHitBuilder;
 
     protected EventDispatcherInterface $eventDispatcher;
 
@@ -22,12 +22,12 @@ abstract class AnalyticsEventSubscriber implements EventSubscriberInterface
     private FirewallMap $firewallMap;
 
     public function __construct(
-        HitBuilder $hitBuilder,
+        HitBuilder $pageviewHitBuilder,
         EventDispatcherInterface $eventDispatcher,
         RequestStack $requestStack,
         FirewallMap $firewallMap
     ) {
-        $this->hitBuilder = $hitBuilder;
+        $this->pageviewHitBuilder = $pageviewHitBuilder;
         $this->eventDispatcher = $eventDispatcher;
         $this->requestStack = $requestStack;
         $this->firewallMap = $firewallMap;
@@ -48,5 +48,10 @@ abstract class AnalyticsEventSubscriber implements EventSubscriberInterface
         }
 
         return $firewallConfig->getName() === 'shop';
+    }
+
+    protected static function formatAmount(int $amount): float
+    {
+        return round($amount / 100, 2);
     }
 }
