@@ -11,24 +11,22 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
 use Setono\SyliusAnalyticsPlugin\Event\GenericDataEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
-use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Webmozart\Assert\Assert;
 
 final class PurchaseSubscriber extends PageviewSubscriber
 {
+    use FormatAmountTrait;
+
     private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
         HitBuilder $pageviewHitBuilder,
         EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack,
-        FirewallMap $firewallMap,
         OrderRepositoryInterface $orderRepository
     ) {
-        parent::__construct($pageviewHitBuilder, $eventDispatcher, $requestStack, $firewallMap);
+        parent::__construct($pageviewHitBuilder, $eventDispatcher);
 
         $this->orderRepository = $orderRepository;
     }
@@ -44,7 +42,7 @@ final class PurchaseSubscriber extends PageviewSubscriber
     {
         $request = $requestEvent->getRequest();
 
-        if (!$requestEvent->isMasterRequest() || !$this->isShopContext($request)) {
+        if (!$requestEvent->isMasterRequest()) {
             return;
         }
 

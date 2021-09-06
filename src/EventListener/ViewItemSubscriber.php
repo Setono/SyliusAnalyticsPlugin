@@ -14,11 +14,11 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
-use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ViewItemSubscriber extends PageviewSubscriber
 {
+    use FormatAmountTrait;
+
     private ProductVariantResolverInterface $productVariantResolver;
 
     private ChannelContextInterface $channelContext;
@@ -26,12 +26,10 @@ final class ViewItemSubscriber extends PageviewSubscriber
     public function __construct(
         HitBuilder $pageviewHitBuilder,
         EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack,
-        FirewallMap $firewallMap,
         ProductVariantResolverInterface $productVariantResolver,
         ChannelContextInterface $channelContext
     ) {
-        parent::__construct($pageviewHitBuilder, $eventDispatcher, $requestStack, $firewallMap);
+        parent::__construct($pageviewHitBuilder, $eventDispatcher);
 
         $this->productVariantResolver = $productVariantResolver;
         $this->channelContext = $channelContext;
@@ -48,7 +46,7 @@ final class ViewItemSubscriber extends PageviewSubscriber
     {
         $product = $resourceControllerEvent->getSubject();
 
-        if (!$product instanceof ProductInterface || !$this->isShopContext()) {
+        if (!$product instanceof ProductInterface) {
             return;
         }
 

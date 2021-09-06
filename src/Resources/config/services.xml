@@ -4,6 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
         <import resource="services/event_listener.xml"/>
+        <import resource="services/filter.xml"/>
         <import resource="services/form.xml"/>
         <import resource="services/menu.xml"/>
     </imports>

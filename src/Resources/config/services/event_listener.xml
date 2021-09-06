@@ -23,8 +23,6 @@
                  class="Setono\SyliusAnalyticsPlugin\EventListener\ViewItemSubscriber">
             <argument type="service" id="setono_google_analytics_server_side_tracking.hit.page_view_hit_builder"/>
             <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="request_stack"/>
-            <argument type="service" id="security.firewall.map"/>
             <argument type="service" id="sylius.product_variant_resolver.default"/>
             <argument type="service" id="sylius.context.channel"/>
 
@@ -35,8 +33,6 @@
                  class="Setono\SyliusAnalyticsPlugin\EventListener\PurchaseSubscriber">
             <argument type="service" id="setono_google_analytics_server_side_tracking.hit.page_view_hit_builder"/>
             <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="request_stack"/>
-            <argument type="service" id="security.firewall.map"/>
             <argument type="service" id="sylius.repository.order"/>
 
             <tag name="kernel.event_subscriber"/>
