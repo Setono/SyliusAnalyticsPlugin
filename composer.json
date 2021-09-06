@@ -9,7 +9,6 @@
         "analytics",
         "google"
     ],
-    "minimum-stability": "dev",
     "license": "MIT",
     "require": {
         "php": "^7.4",
@@ -17,7 +16,8 @@
         "doctrine/collections": "^1.6",
         "knplabs/knp-menu": "^3.1",
         "psr/event-dispatcher": "^1.0",
-        "setono/google-analytics-server-side-tracking-bundle": "dev-remove-storage",
+        "setono/google-analytics-measurement-protocol": "^0.2.1",
+        "setono/google-analytics-server-side-tracking-bundle": "dev-master",
         "sylius/resource-bundle": "^1.6",
         "symfony/config": "^4.4 || ^5.0",
         "symfony/dependency-injection": "^4.4 || ^5.0",
@@ -34,7 +34,6 @@
         "loevgaard/sylius-brand-plugin": "^2.1",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "phpspec/phpspec": "^6.3",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-symfony": "^2.2",
         "roave/security-advisories": "dev-latest",
@@ -73,9 +72,9 @@
             "@ensure-test-container-exists",
             "psalm"
         ],
-        "check-style": "ecs check --ansi spec/ src/ tests/",
+        "check-style": "ecs check",
         "ensure-test-container-exists": "[[ -f tests/Application/var/cache/test/ApplicationTests_Setono_SyliusAnalyticsPlugin_Application_KernelTestDebugContainer.xml ]] || tests/Application/bin/console cache:warmup --env=test",
-        "fix-style": "ecs check --ansi spec/ src/ tests/ --fix",
+        "fix-style": "ecs check --fix",
         "phpspec": "phpspec run",
         "phpunit": "phpunit",
         "test": [
