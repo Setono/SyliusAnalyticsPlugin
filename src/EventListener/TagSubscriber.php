@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use function count;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
@@ -72,5 +73,16 @@ abstract class TagSubscriber implements EventSubscriberInterface
         }
 
         return $firewallConfig->getName() === 'shop';
+    }
+
+    protected function isMainRequest(RequestEvent $event): bool
+    {
+        if (method_exists($event, 'isMainRequest')) {
+            return $event->isMainRequest();
+        }
+
+        // BC Layer for Symfony < 5.3
+        /** @psalm-suppress DeprecatedMethod */
+        return $event->isMasterRequest();
     }
 }

@@ -23,7 +23,7 @@ final class AddLibrarySubscriber extends TagSubscriber
     {
         $request = $event->getRequest();
 
-        if (!$event->isMasterRequest() || !$this->isShopContext($request)) {
+        if (!$this->isMainRequest($event) || !$this->isShopContext($request)) {
             return;
         }
 
