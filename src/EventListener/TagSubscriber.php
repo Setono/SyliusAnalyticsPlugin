@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 use function count;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\SyliusAnalyticsPlugin\Context\PropertyContextInterface;
@@ -15,6 +14,7 @@ use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 abstract class TagSubscriber implements EventSubscriberInterface
 {

@@ -39,8 +39,10 @@ abstract class Builder implements BuilderInterface
 
     public function getJson(): string
     {
-        return json_encode($this->data,
-            JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION | JSON_INVALID_UTF8_IGNORE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR);
+        return json_encode(
+            $this->data,
+            JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION | JSON_INVALID_UTF8_IGNORE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR
+        );
     }
 
     /**
@@ -79,7 +81,8 @@ abstract class Builder implements BuilderInterface
         if (!is_scalar($val) && !is_array($val)) {
             throw new InvalidArgumentException(sprintf(
                 'Unexpected type %s. Expected types are: callable, %s or scalar',
-                is_object($val) ? get_class($val) : gettype($val), BuilderInterface::class
+                is_object($val) ? get_class($val) : gettype($val),
+                BuilderInterface::class
             ));
         }
 
