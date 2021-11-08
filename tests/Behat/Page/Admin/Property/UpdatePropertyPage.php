@@ -19,7 +19,7 @@ class UpdatePropertyPage extends UpdatePage
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function getDefinedElements(): array
     {
