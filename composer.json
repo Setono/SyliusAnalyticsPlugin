@@ -40,10 +40,10 @@
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-symfony": "^2.2",
         "roave/security-advisories": "dev-master",
-        "setono/code-quality-pack": "^1.5.2",
+        "setono/code-quality-pack": "^2.1.2",
         "setono/sylius-behat-pack": "^0.1",
         "setono/sylius-tag-bag-plugin": "^1.1",
-        "sylius/sylius": "~1.7.0",
+        "sylius/sylius": "~1.10.0",
         "symfony/debug-bundle": "^4.4 || ^5.0",
         "symfony/dotenv": "^4.4 || ^5.0",
         "symfony/intl": "^4.4 || ^5.0",
@@ -54,7 +54,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "2.0-dev"
         }
     },
     "autoload": {
@@ -77,7 +77,7 @@
             "psalm"
         ],
         "check-style": "ecs check --ansi spec/ src/ tests/",
-        "ensure-test-container-exists": "[[ -f tests/Application/var/cache/test/ApplicationTests_Setono_SyliusAnalyticsPlugin_Application_KernelTestDebugContainer.xml ]] || tests/Application/bin/console cache:warmup --env=test",
+        "ensure-test-container-exists": "bash bin/container-exists.sh",
         "fix-style": "ecs check --ansi spec/ src/ tests/ --fix",
         "phpspec": "phpspec run",
         "phpunit": "phpunit",

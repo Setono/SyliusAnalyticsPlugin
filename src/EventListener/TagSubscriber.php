@@ -14,6 +14,7 @@ use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 abstract class TagSubscriber implements EventSubscriberInterface
 {
@@ -72,5 +73,16 @@ abstract class TagSubscriber implements EventSubscriberInterface
         }
 
         return $firewallConfig->getName() === 'shop';
+    }
+
+    protected function isMainRequest(RequestEvent $event): bool
+    {
+        if (method_exists($event, 'isMainRequest')) {
+            return $event->isMainRequest();
+        }
+
+        // BC Layer for Symfony < 5.3
+        /** @psalm-suppress DeprecatedMethod */
+        return $event->isMasterRequest();
     }
 }
