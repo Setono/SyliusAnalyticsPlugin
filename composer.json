@@ -17,7 +17,7 @@
         "knplabs/knp-menu": "^3.1",
         "psr/event-dispatcher": "^1.0",
         "setono/google-analytics-measurement-protocol": "^0.4",
-        "setono/google-analytics-server-side-tracking-bundle": "^0.2",
+        "setono/google-analytics-server-side-tracking-bundle": "^0.2 || ^0.3",
         "sylius/resource-bundle": "^1.6",
         "symfony/config": "^4.4 || ^5.0",
         "symfony/dependency-injection": "^4.4 || ^5.0",
