@@ -36,7 +36,7 @@
         "loevgaard/sylius-brand-plugin": "^2.1",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "phpspec/phpspec": "^6.3",
+        "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-symfony": "^2.2",
         "roave/security-advisories": "dev-master",
