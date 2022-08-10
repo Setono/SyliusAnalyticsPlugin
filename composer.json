@@ -19,7 +19,7 @@
         "setono/google-analytics-measurement-protocol": "^0.4",
         "setono/google-analytics-server-side-tracking-bundle": "^0.2 || ^0.3",
         "setono/symfony-main-request-trait": "^1.0",
-        "sylius/resource-bundle": "^1.6",
+        "sylius/resource-bundle": "^1.8",
         "symfony/config": "^4.4 || ^5.4",
         "symfony/dependency-injection": "^4.4 || ^5.4",
         "symfony/event-dispatcher": "^4.4 || ^5.4",
