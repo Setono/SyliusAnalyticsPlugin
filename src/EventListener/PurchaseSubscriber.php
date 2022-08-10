@@ -8,6 +8,7 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\DTO\Event\PurchaseEventData;
 use Setono\GoogleAnalyticsMeasurementProtocol\DTO\ProductData;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
+use Setono\MainRequestTrait\MainRequestTrait;
 use Setono\SyliusAnalyticsPlugin\Event\GenericDataEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
@@ -17,6 +18,8 @@ use Webmozart\Assert\Assert;
 
 final class PurchaseSubscriber extends PageviewSubscriber
 {
+    use MainRequestTrait;
+
     use FormatAmountTrait;
 
     private OrderRepositoryInterface $orderRepository;
@@ -42,7 +45,7 @@ final class PurchaseSubscriber extends PageviewSubscriber
     {
         $request = $requestEvent->getRequest();
 
-        if (!$requestEvent->isMasterRequest()) {
+        if (!$this->isMainRequest($requestEvent)) {
             return;
         }
 

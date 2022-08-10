@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <psalm
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    totallyTyped="true"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    phpVersion="8.1"
+    errorLevel="1"
 >
     <projectFiles>
         <directory name="src"/>
@@ -13,10 +14,14 @@
     </projectFiles>
     <plugins>
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
+            <!-- Symfony 4 container XML -->
             <containerXml>tests/Application/var/cache/test/ApplicationTests_Setono_SyliusAnalyticsPlugin_Application_KernelTestDebugContainer.xml</containerXml>
+
+            <!-- Symfony 5 container XML -->
+            <containerXml>tests/Application/var/cache/test/Tests_Setono_SyliusAnalyticsPlugin_Application_KernelTestDebugContainer.xml</containerXml>
         </pluginClass>
     </plugins>
     <issueHandlers>
-        <PluginIssue name="QueryBuilderSetParameter" errorLevel="info" />
+        <PluginIssue name="QueryBuilderSetParameter" errorLevel="info"/>
     </issueHandlers>
 </psalm>
