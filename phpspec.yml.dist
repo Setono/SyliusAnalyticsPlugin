@@ -1,4 +1,0 @@
-suites:
-    main:
-        namespace: Setono\SyliusAnalyticsPlugin
-        psr4_prefix: Setono\SyliusAnalyticsPlugin

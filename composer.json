@@ -1,7 +1,8 @@
 {
     "name": "setono/sylius-analytics-plugin",
-    "type": "sylius-plugin",
     "description": "Google Analytics plugin for Sylius",
+    "license": "MIT",
+    "type": "sylius-plugin",
     "keywords": [
         "sylius",
         "sylius-plugin",
@@ -9,7 +10,6 @@
         "analytics",
         "google"
     ],
-    "license": "MIT",
     "require": {
         "php": ">=7.4",
         "ext-json": "*",
@@ -18,39 +18,41 @@
         "psr/event-dispatcher": "^1.0",
         "setono/google-analytics-measurement-protocol": "^0.4",
         "setono/google-analytics-server-side-tracking-bundle": "^0.2 || ^0.3",
+        "setono/symfony-main-request-trait": "^1.0",
         "sylius/resource-bundle": "^1.6",
-        "symfony/config": "^4.4 || ^5.0",
-        "symfony/dependency-injection": "^4.4 || ^5.0",
-        "symfony/event-dispatcher": "^4.4 || ^5.0",
-        "symfony/form": "^4.4 || ^5.0",
-        "symfony/http-foundation": "^4.4 || ^5.0.7",
-        "symfony/http-kernel": "^4.4 || ^5.0",
-        "symfony/security-bundle": "^4.4 || ^5.0",
+        "symfony/config": "^4.4 || ^5.4",
+        "symfony/dependency-injection": "^4.4 || ^5.4",
+        "symfony/event-dispatcher": "^4.4 || ^5.4",
+        "symfony/form": "^4.4 || ^5.4",
+        "symfony/http-foundation": "^4.4 || ^5.4",
+        "symfony/http-kernel": "^4.4 || ^5.4",
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
+        "api-platform/core": "^2.6",
+        "friendsofsymfony/oauth-server-bundle": ">2.0.0-alpha.0 ^2.0@dev",
+        "lexik/jwt-authentication-bundle": "^2.15",
         "loevgaard/sylius-brand-plugin": "^2.1",
-        "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
+        "matthiasnoback/symfony-config-test": "^4.3",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.3",
         "phpunit/phpunit": "^9.5",
-        "psalm/plugin-symfony": "^3.0",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+        "psalm/plugin-phpunit": "^0.16",
+        "psalm/plugin-symfony": "^3.1",
         "roave/security-advisories": "dev-latest",
-        "setono/code-quality-pack": "^2.1.2",
+        "setono/code-quality-pack": "^2.2",
         "setono/sylius-behat-pack": "^0.2",
-        "sylius/sylius": "~1.7.0",
-        "symfony/debug-bundle": "^4.4 || ^5.0",
-        "symfony/dotenv": "^4.4 || ^5.0",
-        "symfony/intl": "^4.4 || ^5.0",
-        "symfony/web-profiler-bundle": "^4.4 || ^5.0"
+        "sylius/admin-api-bundle": "^1.11",
+        "sylius/sylius": "~1.10.14",
+        "symfony/debug-bundle": "^4.4 || ^5.4 || ^6.0",
+        "symfony/dotenv": "^4.4 || ^5.4 || ^6.0",
+        "symfony/intl": "^4.4 || ^5.4 || ^6.0",
+        "symfony/property-info": "^4.4 || ^5.4 || ^6.0",
+        "symfony/serializer": "^4.4 || ^5.4 || ^6.0",
+        "symfony/web-profiler-bundle": "^4.4 || ^5.4 || ^6.0",
+        "symfony/webpack-encore-bundle": "^1.14"
     },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "3.0-dev"
-        }
-    },
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Setono\\SyliusAnalyticsPlugin\\": "src/"
@@ -64,7 +66,14 @@
             "tests/Application/Kernel.php"
         ]
     },
-    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "ergebnis/composer-normalize": true,
+            "symfony/thanks": false
+        },
+        "sort-packages": true
+    },
     "scripts": {
         "analyse": [
             "@ensure-test-container-exists",
@@ -73,11 +82,6 @@
         "check-style": "ecs check",
         "ensure-test-container-exists": "[[ -f tests/Application/var/cache/test/ApplicationTests_Setono_SyliusAnalyticsPlugin_Application_KernelTestDebugContainer.xml ]] || tests/Application/bin/console cache:warmup --env=test",
         "fix-style": "ecs check --fix",
-        "phpspec": "phpspec run",
-        "phpunit": "phpunit",
-        "test": [
-            "@phpunit",
-            "@phpspec"
-        ]
+        "phpunit": "phpunit"
     }
 }
