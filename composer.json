@@ -31,7 +31,7 @@
     "require-dev": {
         "api-platform/core": "^2.6",
         "friendsofsymfony/oauth-server-bundle": ">2.0.0-alpha.0 ^2.0@dev",
-        "lexik/jwt-authentication-bundle": "^2.15",
+        "lexik/jwt-authentication-bundle": "^2.16",
         "loevgaard/sylius-brand-plugin": "^2.1",
         "matthiasnoback/symfony-config-test": "^4.3",
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
