@@ -2,7 +2,7 @@ name: "build"
 on:
     push:
         branches:
-            - "master"
+            - "*.x"
         paths-ignore:
             - "**/*.md"
     pull_request:
