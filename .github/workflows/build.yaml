@@ -246,6 +246,14 @@ jobs:
                 
             -   name: "Run behat"
                 run: "vendor/bin/behat --strict -vvv --no-interaction || vendor/bin/behat --strict -vvv --no-interaction --rerun"
+                
+            -   name: "Upload Behat logs"
+                uses: "actions/upload-artifact@v2"
+                if: "failure()"
+                with:
+                    name: "Behat logs"
+                    path: "etc/build/"
+                    if-no-files-found: "ignore"
 
     code-coverage:
         name: "Code Coverage (PHP${{ matrix.php-version }} | Deps: ${{ matrix.dependencies }})"
