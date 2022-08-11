@@ -7,6 +7,7 @@
                  class="Setono\SyliusAnalyticsPlugin\EventListener\AddToCartSubscriber">
             <argument type="service" id="setono_google_analytics_server_side_tracking.factory.hit_builder"/>
             <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="sylius.context.cart"/>
 
             <tag name="kernel.event_subscriber"/>
         </service>
