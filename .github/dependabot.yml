@@ -8,6 +8,7 @@ updates:
             prefix: "composer"
         directory: "/"
         ignore:
+            -   dependency-name: "setono/google-analytics-server-side-tracking-bundle"
             -   dependency-name: "symfony*"
             -   dependency-name: "sylius/resource-bundle"
             -   dependency-name: "sylius/sylius"
