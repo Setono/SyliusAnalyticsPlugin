@@ -4,16 +4,31 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\EventListener;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\DTO\Event\AddToCartEventData;
 use Setono\GoogleAnalyticsMeasurementProtocol\DTO\ProductData;
+use Setono\GoogleAnalyticsServerSideTrackingBundle\Factory\HitBuilderFactoryInterface;
 use Setono\SyliusAnalyticsPlugin\Event\GenericDataEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
 final class AddToCartSubscriber extends UpdateCartSubscriber
 {
     use FormatAmountTrait;
+
+    private CartContextInterface $cartContext;
+
+    public function __construct(
+        HitBuilderFactoryInterface $hitBuilderFactory,
+        EventDispatcherInterface $eventDispatcher,
+        CartContextInterface $cartContext
+    ) {
+        parent::__construct($hitBuilderFactory, $eventDispatcher);
+
+        $this->cartContext = $cartContext;
+    }
 
     public static function getSubscribedEvents(): array
     {
@@ -24,7 +39,7 @@ final class AddToCartSubscriber extends UpdateCartSubscriber
 
     public function _track(OrderItemInterface $orderItem): void
     {
-        $order = $orderItem->getOrder();
+        $order = $this->cartContext->getCart();
         if (!$order instanceof OrderInterface) {
             return;
         }
