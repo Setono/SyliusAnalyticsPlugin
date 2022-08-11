@@ -1,7 +1,6 @@
 # Sylius Analytics Plugin
 
 [![Latest Version][ico-version]][link-packagist]
-[![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-github-actions]][link-github-actions]
 
@@ -142,7 +141,6 @@ Ways you can contribute:
 Thank you!
 
 [ico-version]: https://poser.pugx.org/setono/sylius-analytics-plugin/v/stable
-[ico-unstable-version]: https://poser.pugx.org/setono/sylius-analytics-plugin/v/unstable
 [ico-license]: https://poser.pugx.org/setono/sylius-analytics-plugin/license
 [ico-github-actions]: https://github.com/Setono/SyliusAnalyticsPlugin/workflows/build/badge.svg
 
