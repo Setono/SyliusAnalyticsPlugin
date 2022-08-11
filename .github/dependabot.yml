@@ -9,6 +9,7 @@ updates:
         directory: "/"
         ignore:
             -   dependency-name: "symfony*"
+            -   dependency-name: "sylius/resource-bundle"
             -   dependency-name: "sylius/sylius"
         open-pull-requests-limit: 10
         package-ecosystem: "composer"
