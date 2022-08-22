@@ -13,7 +13,7 @@
     "require": {
         "php": ">=7.4",
         "ext-json": "*",
-        "doctrine/collections": "^1.6",
+        "doctrine/collections": "^1.7",
         "knplabs/knp-menu": "^3.3",
         "psr/event-dispatcher": "^1.0",
         "setono/google-analytics-measurement-protocol": "^0.4",
