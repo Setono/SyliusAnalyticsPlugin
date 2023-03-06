@@ -34,7 +34,7 @@
         "lexik/jwt-authentication-bundle": "^2.18",
         "matthiasnoback/symfony-config-test": "^4.3",
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^10.0",
         "psalm/plugin-phpunit": "^0.18",
         "psalm/plugin-symfony": "^5.0",
         "roave/security-advisories": "dev-latest",
