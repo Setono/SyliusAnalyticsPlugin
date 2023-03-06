@@ -44,7 +44,7 @@ final class RemoveFromCartSubscriber extends UpdateCartSubscriber
             $variant
                 ->getOptionValues()
                 ->map(static fn (ProductOptionValueInterface $productOptionValue) => $productOptionValue->getValue())
-                ->toArray()
+                ->toArray(),
         );
 
         $productData = ProductData::createAsProductType((string) $product->getCode(), (string) $product->getName());

@@ -23,7 +23,7 @@ final class AddToCartSubscriber extends UpdateCartSubscriber
     public function __construct(
         HitBuilderFactoryInterface $hitBuilderFactory,
         EventDispatcherInterface $eventDispatcher,
-        CartContextInterface $cartContext
+        CartContextInterface $cartContext,
     ) {
         parent::__construct($hitBuilderFactory, $eventDispatcher);
 
@@ -59,7 +59,7 @@ final class AddToCartSubscriber extends UpdateCartSubscriber
             $variant
                 ->getOptionValues()
                 ->map(static fn (ProductOptionValueInterface $productOptionValue) => $productOptionValue->getValue())
-                ->toArray()
+                ->toArray(),
         );
 
         $productData = ProductData::createAsProductType((string) $product->getCode(), (string) $product->getName());

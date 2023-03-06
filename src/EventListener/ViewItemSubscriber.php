@@ -27,7 +27,7 @@ final class ViewItemSubscriber extends PageviewSubscriber
         HitBuilder $pageviewHitBuilder,
         EventDispatcherInterface $eventDispatcher,
         ProductVariantResolverInterface $productVariantResolver,
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
     ) {
         parent::__construct($pageviewHitBuilder, $eventDispatcher);
 

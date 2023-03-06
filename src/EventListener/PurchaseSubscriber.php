@@ -19,7 +19,6 @@ use Webmozart\Assert\Assert;
 final class PurchaseSubscriber extends PageviewSubscriber
 {
     use MainRequestTrait;
-
     use FormatAmountTrait;
 
     private OrderRepositoryInterface $orderRepository;
@@ -27,7 +26,7 @@ final class PurchaseSubscriber extends PageviewSubscriber
     public function __construct(
         HitBuilder $pageviewHitBuilder,
         EventDispatcherInterface $eventDispatcher,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ) {
         parent::__construct($pageviewHitBuilder, $eventDispatcher);
 
@@ -96,7 +95,7 @@ final class PurchaseSubscriber extends PageviewSubscriber
             (string) $order->getCurrencyCode(),
             self::formatAmount($order->getTaxTotal()),
             self::formatAmount($order->getShippingTotal()),
-            $items
+            $items,
         );
 
         $this->eventDispatcher->dispatch(new GenericDataEvent($data, $order));

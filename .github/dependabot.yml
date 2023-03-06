@@ -9,11 +9,10 @@ updates:
         directory: "/"
         ignore:
             -   dependency-name: "setono/google-analytics-server-side-tracking-bundle"
-            -   dependency-name: "symfony*"
+            -   dependency-name: "symfony/*"
             -   dependency-name: "sylius/resource-bundle"
             -   dependency-name: "sylius/sylius"
-        open-pull-requests-limit: 10
         package-ecosystem: "composer"
         schedule:
             interval: "weekly"
-        versioning-strategy: "increase"
+        versioning-strategy: "increase-if-necessary"
