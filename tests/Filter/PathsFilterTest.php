@@ -16,6 +16,7 @@ final class PathsFilterTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider urls
      */
     public function it_filters(string $url, bool $expected): void

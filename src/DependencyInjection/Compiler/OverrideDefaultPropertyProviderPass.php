@@ -25,7 +25,7 @@ final class OverrideDefaultPropertyProviderPass implements CompilerPassInterface
 
         $container->setDefinition(
             'setono_google_analytics_server_side_tracking.provider.default_property_provider',
-            $definition
+            $definition,
         );
     }
 }

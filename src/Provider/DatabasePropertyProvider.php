@@ -25,7 +25,7 @@ final class DatabasePropertyProvider implements PropertyProviderInterface
     {
         return array_map(
             static fn (PropertyInterface $property) => (string) $property->getTrackingId(),
-            $this->propertyRepository->findEnabledByChannel($this->channelContext->getChannel())
+            $this->propertyRepository->findEnabledByChannel($this->channelContext->getChannel()),
         );
     }
 }

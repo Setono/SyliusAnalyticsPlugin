@@ -8,5 +8,4 @@
 /tests/Application/yarn.lock
 
 /behat.yml
-/phpspec.yml
 /.phpunit.result.cache

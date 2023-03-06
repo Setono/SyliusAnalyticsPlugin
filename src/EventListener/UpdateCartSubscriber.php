@@ -18,7 +18,7 @@ abstract class UpdateCartSubscriber implements EventSubscriberInterface
 
     public function __construct(
         HitBuilderFactoryInterface $hitBuilderFactory,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
     ) {
         $this->hitBuilderFactory = $hitBuilderFactory;
         $this->eventDispatcher = $eventDispatcher;

@@ -24,7 +24,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "7.4" # Always use the lowest version of PHP since a higher version would create actual syntax errors in lower versions
+                    - "8.1" # Always use the lowest version of PHP since a higher version would create actual syntax errors in lower versions
 
                 dependencies:
                     - "highest"
@@ -68,16 +68,15 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "7.4"
-                    - "8.0"
                     - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
 
                 symfony:
-                    - "^4.4"
                     - "^5.4"
+                    - "^6.0"
 
         steps:
             -   name: "Checkout"
@@ -112,16 +111,15 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "7.4"
-                    - "8.0"
                     - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
 
                 symfony:
-                    - "^4.4"
                     - "^5.4"
+                    - "^6.0"
 
         steps:
             -   name: "Checkout"
@@ -156,16 +154,15 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "7.4"
-                    - "8.0"
                     - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
 
                 symfony:
-                    - "^4.4"
                     - "^5.4"
+                    - "^6.0"
 
         steps:
             -   name: "Checkout"
@@ -197,16 +194,15 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "7.4"
-                    - "8.0"
                     - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
 
                 symfony:
-                    - "^4.4"
                     - "^5.4"
+                    - "^6.0"
 
         steps:
             -   name: "Start MySQL"
@@ -223,11 +219,6 @@ jobs:
                     php-version: "${{ matrix.php-version }}"
                     tools: "flex"
                     
-            -   name: "Setup node"
-                uses: "actions/setup-node@v3"
-                with:
-                    node-version: 14
-
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v2"
                 env:
@@ -236,39 +227,17 @@ jobs:
                     dependency-versions: "${{ matrix.dependencies }}"
 
             -   name: "Lint container"
-                # Do not lint on SF4 because we get this error: Invalid definition for service "doctrine.migrations.dependency_factory": argument 2 of "Doctrine\Migrations\DependencyFactory::setDefinition()" accepts "callable", "SyliusLabs\DoctrineMigrationsExtraBundle\Factory\ContainerAwareVersionFactory" passed.
-                # Note: We cannot use the if statement here, because of https://github.community/t/matrix-cannot-be-used-in-jobs-level-if/17177/10
-                run: 'if [ "${{ matrix.symfony }}" != "^4.4" ]; then (cd tests/Application && bin/console lint:container); fi'
+                run: "(cd tests/Application && bin/console lint:container)"
 
             -   name: "Create database"
-                run: "(cd tests/Application && bin/console doctrine:database:create -vvv)"
+                run: "(cd tests/Application && bin/console doctrine:database:create)"
 
             -   name: "Create database schema"
-                run: "(cd tests/Application && bin/console doctrine:schema:create -vvv)"
+                run: "(cd tests/Application && bin/console doctrine:schema:create)"
 
             -   name: "Validate Doctrine mapping"
-                run: "(cd tests/Application && bin/console doctrine:schema:validate -vvv)"
+                run: "(cd tests/Application && bin/console doctrine:schema:validate)"
                 
-            -   name: "Install JS dependencies"
-                run: "(cd tests/Application && yarn install)"
-
-            -   name: "Install assets"
-                run: "(cd tests/Application && bin/console assets:install public -vvv)"
-
-            -   name: "Build assets"
-                run: "(cd tests/Application && yarn build)"
-                
-            -   name: "Run behat"
-                run: "vendor/bin/behat --strict -vvv --no-interaction || vendor/bin/behat --strict -vvv --no-interaction --rerun"
-                
-            -   name: "Upload Behat logs"
-                uses: "actions/upload-artifact@v2"
-                if: "failure()"
-                with:
-                    name: "Behat logs"
-                    path: "etc/build/"
-                    if-no-files-found: "ignore"
-
     code-coverage:
         name: "Code Coverage (PHP${{ matrix.php-version }} | Deps: ${{ matrix.dependencies }})"
 
@@ -277,7 +246,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
