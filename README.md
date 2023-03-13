@@ -44,7 +44,17 @@ $bundles = [
 ];
 ```
 
-### Step 3: Configure plugin
+### Step 3: Add a mandatory parameter
+
+```yaml
+# config/packages/_sylius.yaml
+
+parameters:
+    # ...
+    setono_sylius_analytics.model.property.class: Setono\SyliusAnalyticsPlugin\Model\Property
+```
+
+### Step 4: Configure plugin
 
 ```yaml
 # config/packages/_sylius.yaml
@@ -54,28 +64,28 @@ imports:
     # ...
 ```
 
-### Step 4: Import routing
+### Step 5: Import routing
 
 ```yaml
 # config/routes/setono_sylius_analytics.yaml
 setono_sylius_analytics:
-    resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routing.yaml"
+    resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routes.yaml"
 ```
 
-### Step 5: Update your database schema
+### Step 6: Update your database schema
 
 ```bash
 $ php bin/console doctrine:migrations:diff
 $ php bin/console doctrine:migrations:migrate
 ```
 
-### Step 6: Create a property
+### Step 7: Create a property
 When you create a property in Google Analytics you receive a tracking id which looks something like UA-12345678-1.
 
 Now create a new property in your Sylius shop by navigating to `/admin/properties/new`.
 Remember to enable the property and enable the channels you want to track. 
 
-### Step 7: You're ready!
+### Step 8: You're ready!
 The events that are tracked are located in the [EventListener folder](src/EventListener).
 To make your tracking even better you should create event listeners listening to the 
 builder events fired in i.e. the [PurchaseSubscriber](src/EventListener/PurchaseSubscriber.php).
