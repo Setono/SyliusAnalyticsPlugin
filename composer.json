@@ -13,12 +13,11 @@
     "require": {
         "php": ">=8.1",
         "ext-json": "*",
-        "doctrine/collections": "^1.6",
+        "doctrine/collections": "^1.8",
         "knplabs/knp-menu": "^3.3",
         "psr/event-dispatcher": "^1.0",
-        "setono/google-analytics-measurement-protocol": "^0.4",
-        "setono/google-analytics-server-side-tracking-bundle": "^0.2 || ^0.3",
-        "setono/symfony-main-request-trait": "^1.0",
+        "setono/google-analytics-bundle": "dev-master",
+        "setono/google-analytics-measurement-protocol": "^1.0@alpha",
         "sylius/resource-bundle": "^1.10",
         "symfony/config": "^5.4 || ^6.0",
         "symfony/dependency-injection": "^5.4 || ^6.0",
@@ -26,18 +25,17 @@
         "symfony/form": "^5.4 || ^6.0",
         "symfony/http-foundation": "^5.4 || ^6.0",
         "symfony/http-kernel": "^5.4 || ^6.0",
+        "symfony/mailer": "^5.4 || ^6.0",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
         "api-platform/core": "^2.7",
         "behat/behat": "^3.12",
-        "lexik/jwt-authentication-bundle": "^2.18",
         "matthiasnoback/symfony-config-test": "^4.3",
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.18",
         "psalm/plugin-symfony": "^5.0",
-        "roave/security-advisories": "dev-latest",
         "setono/code-quality-pack": "^2.4",
         "sylius/sylius": "~1.12.3",
         "symfony/debug-bundle": "^5.4 || ^6.0",
@@ -67,7 +65,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": false,
             "ergebnis/composer-normalize": true,
             "symfony/thanks": false,
-            "php-http/discovery": true
+            "php-http/discovery": false
         },
         "sort-packages": true
     },

@@ -6,23 +6,22 @@
     <class name="Setono\SyliusAnalyticsPlugin\Model\Property">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">
-                <value>trackingId</value>
+                <value>measurementId</value>
             </option>
-            <option name="message">setono_sylius_analytics.property.tracking_id.unique</option>
+            <option name="message">setono_sylius_analytics.property.measurement_id.unique</option>
             <option name="groups">
                 <value>setono_sylius_analytics</value>
             </option>
         </constraint>
-        <property name="trackingId">
+        <property name="apiSecret">
             <constraint name="NotBlank">
-                <option name="message">setono_sylius_analytics.property.tracking_id.not_blank</option>
                 <option name="groups">
                     <value>setono_sylius_analytics</value>
                 </option>
             </constraint>
-            <constraint name="Length">
-                <option name="min">1</option>
-                <option name="minMessage">setono_sylius_analytics.property.tracking_id.min_length</option>
+        </property>
+        <property name="measurementId">
+            <constraint name="NotBlank">
                 <option name="groups">
                     <value>setono_sylius_analytics</value>
                 </option>

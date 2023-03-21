@@ -6,9 +6,9 @@ sylius_grid:
                 options:
                     class: "%setono_sylius_analytics.model.property.class%"
             fields:
-                trackingId:
+                measurementId:
                     type: string
-                    label: setono_sylius_analytics.ui.tracking_id
+                    label: setono_sylius_analytics.ui.measurement_id
                 enabled:
                     type: twig
                     label: sylius.ui.enabled

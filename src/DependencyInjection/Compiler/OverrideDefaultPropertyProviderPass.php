@@ -14,7 +14,7 @@ final class OverrideDefaultPropertyProviderPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->has('setono_google_analytics_server_side_tracking.provider.default_property_provider')) {
+        if (!$container->has('setono_google_analytics.property_provider.default')) {
             return;
         }
 
@@ -23,9 +23,6 @@ final class OverrideDefaultPropertyProviderPass implements CompilerPassInterface
             new Reference('setono_sylius_analytics.repository.property'),
         ]);
 
-        $container->setDefinition(
-            'setono_google_analytics_server_side_tracking.provider.default_property_provider',
-            $definition,
-        );
+        $container->setDefinition('setono_google_analytics.property_provider.default', $definition);
     }
 }

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\DependencyInjection;
 
-use Setono\SyliusAnalyticsPlugin\Doctrine\ORM\PropertyRepository;
 use Setono\SyliusAnalyticsPlugin\Form\Type\PropertyType;
 use Setono\SyliusAnalyticsPlugin\Model\Property;
+use Setono\SyliusAnalyticsPlugin\Repository\PropertyRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -20,15 +19,6 @@ final class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('setono_sylius_analytics');
         $rootNode = $treeBuilder->getRootNode();
-
-        /** @psalm-suppress PossiblyUndefinedMethod,PossiblyNullReference */
-        $rootNode
-            ->addDefaultsIfNotSet()
-            ->children()
-                ->scalarNode('driver')
-                    ->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)
-                    ->cannotBeEmpty()
-        ;
 
         $this->addResourcesSection($rootNode);
 
@@ -55,13 +45,6 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->defaultValue(PropertyRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PropertyType::class)->cannotBeEmpty()->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
         ;
     }
 }

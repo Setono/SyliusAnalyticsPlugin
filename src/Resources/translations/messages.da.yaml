@@ -1,5 +1,7 @@
 setono_sylius_analytics:
     ui:
+        api_secret: API Secret
+        api_secret_placeholder: Indsæt din API Secret...
         edit_property: Rediger ejendom
         enabled: Aktiveret
         google_analytics: Google analytics
@@ -8,5 +10,5 @@ setono_sylius_analytics:
         properties: Ejendomme
         property: Ejendom
         property_index: Ejendomsindeks
-        tracking_id: Sporings-id
-        tracking_id_placeholder: Indsæt dit sporings-id, f.eks. UA-12345678-1...
+        measurement_id: Sporings-id
+        measurement_id_placeholder: Indsæt dit sporings-id, f.eks. G-12345678...

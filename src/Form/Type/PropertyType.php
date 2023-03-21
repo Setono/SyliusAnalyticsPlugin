@@ -15,10 +15,16 @@ final class PropertyType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('trackingId', TextType::class, [
-                'label' => 'setono_sylius_analytics.ui.tracking_id',
+            ->add('measurementId', TextType::class, [
+                'label' => 'setono_sylius_analytics.ui.measurement_id',
                 'attr' => [
-                    'placeholder' => 'setono_sylius_analytics.ui.tracking_id_placeholder',
+                    'placeholder' => 'setono_sylius_analytics.ui.measurement_id_placeholder',
+                ],
+            ])
+            ->add('apiSecret', TextType::class, [
+                'label' => 'setono_sylius_analytics.ui.api_secret',
+                'attr' => [
+                    'placeholder' => 'setono_sylius_analytics.ui.api_secret_placeholder',
                 ],
             ])
             ->add('enabled', CheckboxType::class, [

@@ -7,11 +7,10 @@ namespace Tests\Setono\SyliusAnalyticsPlugin\DependencyInjection;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Setono\SyliusAnalyticsPlugin\DependencyInjection\Configuration;
-use Setono\SyliusAnalyticsPlugin\Doctrine\ORM\PropertyRepository;
 use Setono\SyliusAnalyticsPlugin\Form\Type\PropertyType;
 use Setono\SyliusAnalyticsPlugin\Model\Property;
+use Setono\SyliusAnalyticsPlugin\Repository\PropertyRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
 
 final class ConfigurationTest extends TestCase
@@ -29,7 +28,6 @@ final class ConfigurationTest extends TestCase
     public function processed_value_contains_required_value(): void
     {
         $this->assertProcessedConfigurationEquals([], [
-            'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
             'resources' => [
                 'property' => [
                     'classes' => [

@@ -12,19 +12,11 @@ and hence does not depend on third party tools like Google Tag Manager.
 ### Step 1: Download the plugin
 
 This plugin uses the [TagBagBundle](https://github.com/Setono/TagBagBundle) to inject scripts onto your page.
-
-Open a command console, enter your project directory and execute the following command to download the latest stable version of this plugin:
+Please install that bundle before installing this plugin.
 
 ```bash
-$ composer require setono/sylius-analytics-plugin
-
-# Omit this line if you want to override layout.html.twig as described at https://github.com/Setono/TagBagBundle#usage
-$ composer require setono/sylius-tag-bag-plugin
-
+composer require setono/sylius-analytics-plugin
 ```
-
-This command requires you to have Composer installed globally, as explained in the [installation chapter](https://getcomposer.org/doc/00-intro.md) of the Composer documentation.
-
 
 ### Step 2: Enable the plugin
 
@@ -34,11 +26,6 @@ in `config/bundles.php` file of your project before (!) `SyliusGridBundle`:
 ```php
 <?php
 $bundles = [
-    Setono\TagBagBundle\SetonoTagBagBundle::class => ['all' => true],
-    
-    // Omit this line if you didn't install the SyliusTagBagPlugin in step 1
-    Setono\SyliusTagBagPlugin\SetonoSyliusTagBagPlugin::class => ['all' => true],
-    
     Setono\SyliusAnalyticsPlugin\SetonoSyliusAnalyticsPlugin::class => ['all' => true],
     Sylius\Bundle\GridBundle\SyliusGridBundle::class => ['all' => true],
 ];
@@ -47,7 +34,7 @@ $bundles = [
 ### Step 3: Configure plugin
 
 ```yaml
-# config/packages/_sylius.yaml
+# config/packages/setono_sylius_analytics.yaml
 imports:
     # ...
     - { resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/app/config.yaml" }
@@ -59,82 +46,28 @@ imports:
 ```yaml
 # config/routes/setono_sylius_analytics.yaml
 setono_sylius_analytics:
-    resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routing.yaml"
+    resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/routes.yaml"
 ```
 
 ### Step 5: Update your database schema
 
 ```bash
-$ php bin/console doctrine:migrations:diff
-$ php bin/console doctrine:migrations:migrate
+php bin/console doctrine:migrations:diff
+php bin/console doctrine:migrations:migrate
 ```
 
 ### Step 6: Create a property
-When you create a property in Google Analytics you receive a tracking id which looks something like UA-12345678-1.
+When you create a property in Google Analytics you receive a measurement id which looks something like G-12345678.
 
-Now create a new property in your Sylius shop by navigating to `/admin/properties/new`.
+Now create a new property in your Sylius shop by navigating to `/admin/google-analytics/properties/new`.
 Remember to enable the property and enable the channels you want to track. 
 
 ### Step 7: You're ready!
-The events that are tracked are located in the [EventListener folder](src/EventListener).
-To make your tracking even better you should create event listeners listening to the 
-builder events fired in i.e. the [PurchaseSubscriber](src/EventListener/PurchaseSubscriber.php).
-
-Let's say you use the [Brand plugin](https://github.com/loevgaard/SyliusBrandPlugin) and want to enrich the items
-tracked with the brand of the product. That would look like this:
-
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace App\EventListener;
-
-use Loevgaard\SyliusBrandPlugin\Model\BrandAwareInterface;
-use Setono\SyliusAnalyticsPlugin\Builder\ItemBuilder;
-use Setono\SyliusAnalyticsPlugin\Event\PurchaseEvent;
-use Sylius\Component\Core\Model\OrderItemInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-
-
-final class AddBrandSubscriber implements EventSubscriberInterface
-{
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            PurchaseEvent::class => [
-                'addBrand',
-            ],
-        ];
-    }
-
-    public function addBrand(PurchaseEvent $event): void
-    {
-        $builder = $event->getBuilder();
-        if(!$builder instanceof ItemBuilder) {
-            return;
-        }
-        
-        $subject = $event->getSubject();
-        
-        if(!$subject instanceof OrderItemInterface) {
-            return;
-        }
-        
-        $product = $subject->getProduct();
-        if(!$product instanceof BrandAwareInterface) {
-            return;
-        }
-        
-        $builder->setBrand($product->getBrand()->getName());
-    }
-}
-
-```
+The events that are tracked are located in the [EventSubscriber folder](src/EventSubscriber).
 
 ## Contribute
 Ways you can contribute:
-* Translate [messages](src/Resources/translations/messages.en.yaml) and [validators](src/Resources/translations/validators.en.yaml) to your mother tongue
+* Translate [messages](src/Resources/translations/messages.en.yaml) and [validators](src/Resources/translations/validators.en.yaml) into your mother tongue
 * Create Behat tests that verifies the scripts are outputted on the respective pages
 * Create new event subscribers that handle Analytics events which are not implemented
 

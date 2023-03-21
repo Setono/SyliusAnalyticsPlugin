@@ -1,5 +1,7 @@
 setono_sylius_analytics:
     ui:
+        api_secret: API Secret
+        api_secret_placeholder: Insert your API Secret...
         edit_property: Edit property
         enabled: Enabled
         google_analytics: Google analytics
@@ -8,5 +10,5 @@ setono_sylius_analytics:
         properties: Properties
         property: Property
         property_index: Property index
-        tracking_id: Tracking id
-        tracking_id_placeholder: Insert your tracking id, i.e. UA-12345678-1...
+        measurement_id: Measurement id
+        measurement_id_placeholder: Insert your measurement id, i.e. G-12345678...

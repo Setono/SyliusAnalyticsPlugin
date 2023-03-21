@@ -12,7 +12,11 @@ interface PropertyInterface extends ResourceInterface, ToggleableInterface, Chan
 {
     public function getId(): ?int;
 
-    public function getTrackingId(): ?string;
+    public function getApiSecret(): ?string;
 
-    public function setTrackingId(string $trackingId): void;
+    public function setApiSecret(string $apiSecret): void;
+
+    public function getMeasurementId(): ?string;
+
+    public function setMeasurementId(string $measurementId): void;
 }

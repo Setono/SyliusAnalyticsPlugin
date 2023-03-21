@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Setono\SyliusAnalyticsPlugin\Doctrine\ORM;
+namespace Setono\SyliusAnalyticsPlugin\Repository;
 
 use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
-use Setono\SyliusAnalyticsPlugin\Repository\PropertyRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Webmozart\Assert\Assert;

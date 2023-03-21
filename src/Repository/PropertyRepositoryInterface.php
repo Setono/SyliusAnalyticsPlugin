@@ -8,6 +8,9 @@ use Setono\SyliusAnalyticsPlugin\Model\PropertyInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @extends RepositoryInterface<PropertyInterface>
+ */
 interface PropertyRepositoryInterface extends RepositoryInterface
 {
     /**

@@ -15,7 +15,9 @@ class Property implements PropertyInterface
 
     protected ?int $id = null;
 
-    protected ?string $trackingId = null;
+    protected ?string $apiSecret = null;
+
+    protected ?string $measurementId = null;
 
     /**
      * @var Collection|BaseChannelInterface[]
@@ -34,14 +36,24 @@ class Property implements PropertyInterface
         return $this->id;
     }
 
-    public function getTrackingId(): ?string
+    public function getApiSecret(): ?string
     {
-        return $this->trackingId;
+        return $this->apiSecret;
     }
 
-    public function setTrackingId(string $trackingId): void
+    public function setApiSecret(string $apiSecret): void
     {
-        $this->trackingId = $trackingId;
+        $this->apiSecret = $apiSecret;
+    }
+
+    public function getMeasurementId(): ?string
+    {
+        return $this->measurementId;
+    }
+
+    public function setMeasurementId(string $measurementId): void
+    {
+        $this->measurementId = $measurementId;
     }
 
     public function getChannels(): Collection
