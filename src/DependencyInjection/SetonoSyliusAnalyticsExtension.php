@@ -17,12 +17,21 @@ final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension
         /**
          * @psalm-suppress PossiblyNullArgument
          *
-         * @var array{resources: array<string, mixed>} $config
+         * @var array{events: array<string, bool>, resources: array<string, mixed>} $config
          */
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
+        $container->setParameter('setono_sylius_analytics.events', $config['events']);
+
         $loader->load('services.xml');
+
+        $events = ['add_payment_info', 'add_shipping_info', 'add_to_cart', 'begin_checkout', 'purchase', 'view_cart', 'view_item'];
+        foreach ($events as $event) {
+            if (isset($config['events'][$event]) && true === $config['events'][$event]) {
+                $loader->load('services/conditional/events/' . $event . '.xml');
+            }
+        }
 
         $this->registerResources('setono_sylius_analytics', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, $config['resources'], $container);
     }

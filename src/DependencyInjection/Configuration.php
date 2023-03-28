@@ -20,6 +20,22 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('setono_sylius_analytics');
         $rootNode = $treeBuilder->getRootNode();
 
+        /** @psalm-suppress MixedMethodCall,PossiblyNullReference,PossiblyUndefinedMethod */
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('events')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('add_payment_info')->defaultTrue()->end()
+                        ->booleanNode('add_shipping_info')->defaultTrue()->end()
+                        ->booleanNode('add_to_cart')->defaultTrue()->end()
+                        ->booleanNode('begin_checkout')->defaultTrue()->end()
+                        ->booleanNode('purchase')->defaultTrue()->end()
+                        ->booleanNode('view_cart')->defaultTrue()->end()
+                        ->booleanNode('view_item')->defaultTrue()->end()
+        ;
+
         $this->addResourcesSection($rootNode);
 
         return $treeBuilder;

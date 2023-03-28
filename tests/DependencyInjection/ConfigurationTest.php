@@ -28,6 +28,15 @@ final class ConfigurationTest extends TestCase
     public function processed_value_contains_required_value(): void
     {
         $this->assertProcessedConfigurationEquals([], [
+            'events' => [
+                'add_payment_info' => true,
+                'add_shipping_info' => true,
+                'add_to_cart' => true,
+                'begin_checkout' => true,
+                'purchase' => true,
+                'view_cart' => true,
+                'view_item' => true,
+            ],
             'resources' => [
                 'property' => [
                     'classes' => [

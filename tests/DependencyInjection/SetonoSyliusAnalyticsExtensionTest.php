@@ -24,6 +24,15 @@ final class SetonoSyliusAnalyticsExtensionTest extends AbstractExtensionTestCase
     {
         $this->load();
 
+        $this->assertContainerBuilderHasParameter('setono_sylius_analytics.events', [
+            'add_payment_info' => true,
+            'add_shipping_info' => true,
+            'add_to_cart' => true,
+            'begin_checkout' => true,
+            'purchase' => true,
+            'view_cart' => true,
+            'view_item' => true,
+        ]);
         $this->assertContainerBuilderHasParameter('setono_sylius_analytics.driver', SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
     }
 }
