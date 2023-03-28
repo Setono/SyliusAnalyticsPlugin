@@ -28,6 +28,7 @@
         "Sylius\\Component\\Core\\Model\\ProductVariantInterface",
         "Sylius\\Component\\Order\\Context\\CartContextInterface",
         "Sylius\\Component\\Order\\Repository\\OrderRepositoryInterface",
-        "Sylius\\Component\\Product\\Resolver\\ProductVariantResolverInterface"
+        "Sylius\\Component\\Product\\Resolver\\ProductVariantResolverInterface",
+        "Sylius\\Component\\Core\\Calculator\\ProductVariantPricesCalculatorInterface"
     ]
 }

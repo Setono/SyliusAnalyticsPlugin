@@ -4,7 +4,11 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="setono_sylius_analytics.resolver.item"
-                 class="Setono\SyliusAnalyticsPlugin\Resolver\ItemResolver"/>
+                 class="Setono\SyliusAnalyticsPlugin\Resolver\ItemResolver">
+            <argument type="service" id="sylius.product_variant_resolver.default"/>
+            <argument type="service" id="sylius.context.channel"/>
+            <argument type="service" id="sylius.calculator.product_variant_price"/>
+        </service>
 
         <service id="setono_sylius_analytics.resolver.items"
                  class="Setono\SyliusAnalyticsPlugin\Resolver\ItemsResolver">
