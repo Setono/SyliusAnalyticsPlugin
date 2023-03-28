@@ -17,7 +17,7 @@
         "knplabs/knp-menu": "^3.3",
         "psr/event-dispatcher": "^1.0",
         "psr/log": "^2.0 || ^3.0",
-        "setono/google-analytics-bundle": "dev-master",
+        "setono/google-analytics-bundle": "^1.0@alpha",
         "setono/google-analytics-measurement-protocol": "^1.0@alpha",
         "sylius/resource-bundle": "^1.8",
         "symfony/config": "^5.4 || ^6.0",
