@@ -51,7 +51,7 @@ final class ViewItemSubscriber implements EventSubscriberInterface, LoggerAwareI
                     ViewItemEvent::create()
                         ->setValue($item->getPrice())
                         //->setCurrency('USD') todo set the currency. I don't think we can just use the currency context because the currency context is not used when calculating the price (which is also wrong)
-                        ->addItem($this->itemResolver->resolveFromProduct($product)),
+                        ->addItem($item),
                 ),
             );
         } catch (\Throwable $e) {
