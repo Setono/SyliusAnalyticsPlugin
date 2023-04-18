@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\SyliusAnalyticsPlugin\Resolver;
+namespace Setono\SyliusAnalyticsPlugin\Resolver\Item;
 
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Item\Item;
 use Sylius\Component\Core\Model\OrderItemInterface;

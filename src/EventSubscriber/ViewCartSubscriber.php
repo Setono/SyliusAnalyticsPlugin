@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\ViewCartEvent;
-use Setono\SyliusAnalyticsPlugin\Resolver\ItemsResolverInterface;
+use Setono\SyliusAnalyticsPlugin\Resolver\Items\ItemsResolverInterface;
 use Setono\SyliusAnalyticsPlugin\Util\FormatAmountTrait;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;

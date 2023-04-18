@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin;
 
+use Setono\CompositeCompilerPass\CompositeCompilerPass;
 use Setono\SyliusAnalyticsPlugin\DependencyInjection\Compiler\OverrideDefaultPropertyProviderPass;
 use Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
@@ -26,5 +27,13 @@ final class SetonoSyliusAnalyticsPlugin extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new OverrideDefaultPropertyProviderPass());
+        $container->addCompilerPass(new CompositeCompilerPass(
+            'setono_sylius_analytics.resolver.brand.composite',
+            'setono_sylius_analytics.brand_resolver',
+        ));
+        $container->addCompilerPass(new CompositeCompilerPass(
+            'setono_sylius_analytics.resolver.variant.composite',
+            'setono_sylius_analytics.variant_resolver',
+        ));
     }
 }
