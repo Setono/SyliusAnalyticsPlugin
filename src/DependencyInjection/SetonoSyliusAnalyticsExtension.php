@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\DependencyInjection;
 
+use Setono\SyliusAnalyticsPlugin\Resolver\Brand\BrandResolverInterface;
+use Setono\SyliusAnalyticsPlugin\Resolver\Variant\VariantResolverInterface;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\FileLocator;
@@ -34,5 +36,13 @@ final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension
         }
 
         $this->registerResources('setono_sylius_analytics', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, $config['resources'], $container);
+
+        $container->registerForAutoconfiguration(BrandResolverInterface::class)
+            ->addTag('setono_sylius_analytics.brand_resolver')
+        ;
+
+        $container->registerForAutoconfiguration(VariantResolverInterface::class)
+            ->addTag('setono_sylius_analytics.variant_resolver')
+        ;
     }
 }

@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\ViewItemEvent;
-use Setono\SyliusAnalyticsPlugin\Resolver\ItemResolverInterface;
+use Setono\SyliusAnalyticsPlugin\Resolver\Item\ItemResolverInterface;
 use Setono\SyliusAnalyticsPlugin\Util\FormatAmountTrait;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\ProductInterface;

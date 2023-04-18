@@ -3,16 +3,39 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="setono_sylius_analytics.resolver.category"
+                 class="Setono\SyliusAnalyticsPlugin\Resolver\Category\CategoryResolver"/>
+
         <service id="setono_sylius_analytics.resolver.item"
-                 class="Setono\SyliusAnalyticsPlugin\Resolver\ItemResolver">
+                 class="Setono\SyliusAnalyticsPlugin\Resolver\Item\ItemResolver">
+            <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="sylius.product_variant_resolver.default"/>
             <argument type="service" id="sylius.context.channel"/>
             <argument type="service" id="sylius.calculator.product_variant_price"/>
+            <argument type="service" id="setono_sylius_analytics.resolver.variant.composite"/>
+            <argument type="service" id="setono_sylius_analytics.resolver.category"/>
+            <argument type="service" id="setono_sylius_analytics.resolver.brand.composite"/>
         </service>
 
         <service id="setono_sylius_analytics.resolver.items"
-                 class="Setono\SyliusAnalyticsPlugin\Resolver\ItemsResolver">
+                 class="Setono\SyliusAnalyticsPlugin\Resolver\Items\ItemsResolver">
             <argument type="service" id="setono_sylius_analytics.resolver.item"/>
         </service>
+
+        <service id="setono_sylius_analytics.resolver.variant.composite"
+                 class="Setono\SyliusAnalyticsPlugin\Resolver\Variant\CompositeVariantResolver"/>
+
+        <service id="setono_sylius_analytics.resolver.variant.name_based"
+                 class="Setono\SyliusAnalyticsPlugin\Resolver\Variant\NameBasedVariantResolver">
+            <tag name="setono_sylius_analytics.variant_resolver" priority="-100"/>
+        </service>
+
+        <service id="setono_sylius_analytics.resolver.variant.option_based"
+                 class="Setono\SyliusAnalyticsPlugin\Resolver\Variant\OptionBasedVariantResolver">
+            <tag name="setono_sylius_analytics.variant_resolver" priority="-90"/>
+        </service>
+
+        <service id="setono_sylius_analytics.resolver.brand.composite"
+                 class="Setono\SyliusAnalyticsPlugin\Resolver\Brand\CompositeBrandResolver"/>
     </services>
 </container>

@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Setono\SyliusAnalyticsPlugin\Resolver;
+namespace Setono\SyliusAnalyticsPlugin\Resolver\Items;
 
+use Setono\SyliusAnalyticsPlugin\Resolver\Item\ItemResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class ItemsResolver implements ItemsResolverInterface

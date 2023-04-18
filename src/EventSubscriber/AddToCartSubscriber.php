@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\AddToCartEvent;
-use Setono\SyliusAnalyticsPlugin\Resolver\ItemResolverInterface;
+use Setono\SyliusAnalyticsPlugin\Resolver\Item\ItemResolverInterface;
 use Setono\SyliusAnalyticsPlugin\Util\FormatAmountTrait;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -52,7 +52,7 @@ final class AddToCartSubscriber implements EventSubscriberInterface, LoggerAware
              * https://github.com/Sylius/Sylius/issues/9407
              *
              * That issue was fixed in Sylius 1.12, but we can't require the order bundle because Sylius doesn't handle
-             * GitHub repository subtree splits the correct way with regards to packagist therefore we are keeping this
+             * GitHub repository subtree splits the correct way with regard to packagist therefore we are keeping this
              */
             $order = $this->cartContext->getCart();
             if (!$order instanceof OrderInterface) {
