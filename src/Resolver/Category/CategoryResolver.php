@@ -17,6 +17,27 @@ final class CategoryResolver implements CategoryResolverInterface
             return [];
         }
 
+        return self::resolveFromTaxon($taxon);
+    }
+
+    public function resolveFromProductVariant(ProductVariantInterface $productVariant): array
+    {
+        $product = $productVariant->getProduct();
+        if (!$product instanceof ProductInterface) {
+            return [];
+        }
+
+        return $this->resolveFromProduct($product);
+    }
+
+    /**
+     * This static method is added as a helper for people wanting to override the category resolver, but still
+     * want to easily be able to resolve the category tree from a taxon of their choosing
+     *
+     * @return list<string>
+     */
+    public static function resolveFromTaxon(TaxonInterface $taxon): array
+    {
         /**
          * Presume the $product has this taxon hierarchy: Apparel > Shirts > Crew > Short sleeve
          * After the call below, $hierarchy will be ['Crew', 'Shirts', 'Apparel']. Notice that the values will
@@ -40,15 +61,5 @@ final class CategoryResolver implements CategoryResolverInterface
             },
             array_reverse($hierarchy),
         ));
-    }
-
-    public function resolveFromProductVariant(ProductVariantInterface $productVariant): array
-    {
-        $product = $productVariant->getProduct();
-        if (!$product instanceof ProductInterface) {
-            return [];
-        }
-
-        return $this->resolveFromProduct($product);
     }
 }
