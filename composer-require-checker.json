@@ -27,9 +27,11 @@
         "Sylius\\Component\\Core\\Model\\OrderItemInterface",
         "Sylius\\Component\\Core\\Model\\ProductInterface",
         "Sylius\\Component\\Core\\Model\\ProductVariantInterface",
+        "Sylius\\Component\\Locale\\Context\\LocaleContextInterface",
         "Sylius\\Component\\Order\\Context\\CartContextInterface",
         "Sylius\\Component\\Order\\Repository\\OrderRepositoryInterface",
         "Sylius\\Component\\Product\\Resolver\\ProductVariantResolverInterface",
-        "Sylius\\Component\\Taxonomy\\Model\\TaxonInterface"
+        "Sylius\\Component\\Taxonomy\\Model\\TaxonInterface",
+        "Sylius\\Component\\Taxonomy\\Repository\\TaxonRepositoryInterface"
     ]
 }
