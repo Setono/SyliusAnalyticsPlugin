@@ -72,5 +72,30 @@
 
             <tag name="kernel.event_subscriber"/>
         </service>
+
+        <service id="setono_sylius_analytics.event_subscriber.view_item_list"
+                 class="Setono\SyliusAnalyticsPlugin\EventSubscriber\ViewItemListSubscriber">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="setono_sylius_analytics.resolver.item"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="sylius.repository.taxon"/>
+            <argument type="service" id="sylius.context.locale"/>
+            <call method="setLogger">
+                <argument type="service" id="logger"/>
+            </call>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="setono_sylius_analytics.event_subscriber.view_item"
+                 class="Setono\SyliusAnalyticsPlugin\EventSubscriber\ViewItemSubscriber">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="setono_sylius_analytics.resolver.item"/>
+            <call method="setLogger">
+                <argument type="service" id="logger"/>
+            </call>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
     </services>
 </container>
