@@ -23,11 +23,15 @@ final class AddShippingInfoSubscriber implements EventSubscriberInterface, Logge
 
     private LoggerInterface $logger;
 
-    public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly ItemsResolverInterface $itemsResolver,
-    ) {
+    private EventDispatcherInterface $eventDispatcher;
+
+    private ItemsResolverInterface $itemsResolver;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher, ItemsResolverInterface $itemsResolver)
+    {
         $this->logger = new NullLogger();
+        $this->eventDispatcher = $eventDispatcher;
+        $this->itemsResolver = $itemsResolver;
     }
 
     public static function getSubscribedEvents(): array
@@ -44,18 +48,23 @@ final class AddShippingInfoSubscriber implements EventSubscriberInterface, Logge
             $order = $resourceControllerEvent->getSubject();
             Assert::isInstanceOf($order, OrderInterface::class);
 
-            $shippingMethod = null;
+            $shippingMethodCode = null;
             foreach ($order->getShipments() as $shipment) {
-                $shippingMethod = $shipment->getMethod()?->getCode();
+                $shippingMethod = $shipment->getMethod();
+                if (null === $shippingMethod) {
+                    continue;
+                }
+
+                $shippingMethodCode = $shippingMethod->getCode();
             }
-            Assert::notNull($shippingMethod);
+            Assert::notNull($shippingMethodCode);
 
             $this->eventDispatcher->dispatch(
                 new ClientSideEvent(
                     AddShippingInfoEvent::create()
                         ->setValue(self::formatAmount($order->getTotal()))
                         ->setCurrency($order->getCurrencyCode())
-                        ->setShippingTier($shippingMethod)
+                        ->setShippingTier($shippingMethodCode)
                         ->setItems($this->itemsResolver->resolveFromOrder($order)),
                 ),
             );

@@ -13,12 +13,21 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 final class ItemListViewed
 {
-    public function __construct(
-        public string $listId,
-        public string $listName,
-        /** @var list<ProductInterface> $products */
-        public array $products,
-    ) {
+    public string $listId;
+
+    public string $listName;
+
+    /** @var list<ProductInterface> */
+    public array $products;
+
+    /**
+     * @param list<ProductInterface> $products
+     */
+    public function __construct(string $listId, string $listName, array $products)
+    {
+        $this->listId = $listId;
+        $this->listName = $listName;
+        $this->products = $products;
     }
 
     /**

@@ -29,14 +29,29 @@ final class ViewItemListSubscriber implements EventSubscriberInterface, LoggerAw
 
     private LoggerInterface $logger;
 
+    private EventDispatcherInterface $eventDispatcher;
+
+    private ItemResolverInterface $itemResolver;
+
+    private RequestStack $requestStack;
+
+    private TaxonRepositoryInterface $taxonRepository;
+
+    private LocaleContextInterface $localeContext;
+
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly ItemResolverInterface $itemResolver,
-        private readonly RequestStack $requestStack,
-        private readonly TaxonRepositoryInterface $taxonRepository,
-        private readonly LocaleContextInterface $localeContext,
+        EventDispatcherInterface $eventDispatcher,
+        ItemResolverInterface $itemResolver,
+        RequestStack $requestStack,
+        TaxonRepositoryInterface $taxonRepository,
+        LocaleContextInterface $localeContext
     ) {
         $this->logger = new NullLogger();
+        $this->eventDispatcher = $eventDispatcher;
+        $this->itemResolver = $itemResolver;
+        $this->requestStack = $requestStack;
+        $this->taxonRepository = $taxonRepository;
+        $this->localeContext = $localeContext;
     }
 
     public static function getSubscribedEvents(): array
@@ -100,7 +115,11 @@ final class ViewItemListSubscriber implements EventSubscriberInterface, LoggerAw
 
     private function resolveTaxon(): ?TaxonInterface
     {
-        $slug = $this->requestStack->getMainRequest()?->attributes->get('slug');
+        $request = $this->requestStack->getMainRequest();
+        if (null === $request) {
+            return null;
+        }
+        $slug = $request->attributes->get('slug');
         if (!is_string($slug)) {
             return  null;
         }

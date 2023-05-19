@@ -25,12 +25,21 @@ final class PurchaseSubscriber implements EventSubscriberInterface, LoggerAwareI
 
     private LoggerInterface $logger;
 
+    private EventDispatcherInterface $eventDispatcher;
+
+    private OrderRepositoryInterface $orderRepository;
+
+    private ItemsResolverInterface $itemsResolver;
+
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly OrderRepositoryInterface $orderRepository,
-        private readonly ItemsResolverInterface $itemsResolver,
+        EventDispatcherInterface $eventDispatcher,
+        OrderRepositoryInterface $orderRepository,
+        ItemsResolverInterface $itemsResolver
     ) {
         $this->logger = new NullLogger();
+        $this->eventDispatcher = $eventDispatcher;
+        $this->orderRepository = $orderRepository;
+        $this->itemsResolver = $itemsResolver;
     }
 
     public static function getSubscribedEvents(): array

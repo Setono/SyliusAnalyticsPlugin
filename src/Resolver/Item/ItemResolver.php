@@ -23,15 +23,36 @@ final class ItemResolver implements ItemResolverInterface
 {
     use FormatAmountTrait;
 
+    private EventDispatcherInterface $eventDispatcher;
+
+    private ProductVariantResolverInterface $productVariantResolver;
+
+    private ChannelContextInterface $channelContext;
+
+    private ProductVariantPricesCalculatorInterface $productVariantPricesCalculator;
+
+    private VariantResolverInterface $variantResolver;
+
+    private CategoryResolverInterface $categoryResolver;
+
+    private BrandResolverInterface $brandResolver;
+
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly ProductVariantResolverInterface $productVariantResolver,
-        private readonly ChannelContextInterface $channelContext,
-        private readonly ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
-        private readonly VariantResolverInterface $variantResolver,
-        private readonly CategoryResolverInterface $categoryResolver,
-        private readonly BrandResolverInterface $brandResolver,
+        EventDispatcherInterface $eventDispatcher,
+        ProductVariantResolverInterface $productVariantResolver,
+        ChannelContextInterface $channelContext,
+        ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
+        VariantResolverInterface $variantResolver,
+        CategoryResolverInterface $categoryResolver,
+        BrandResolverInterface $brandResolver
     ) {
+        $this->eventDispatcher = $eventDispatcher;
+        $this->productVariantResolver = $productVariantResolver;
+        $this->channelContext = $channelContext;
+        $this->productVariantPricesCalculator = $productVariantPricesCalculator;
+        $this->variantResolver = $variantResolver;
+        $this->categoryResolver = $categoryResolver;
+        $this->brandResolver = $brandResolver;
     }
 
     public function resolveFromOrderItem(OrderItemInterface $orderItem): Item
@@ -74,7 +95,7 @@ final class ItemResolver implements ItemResolverInterface
             $item->setPrice(self::formatAmount($this->productVariantPricesCalculator->calculate($variant, [
                 'channel' => $this->channelContext->getChannel(),
             ])));
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
         }
 
         $this->populateCategories($item, $this->categoryResolver->resolveFromProduct($product));

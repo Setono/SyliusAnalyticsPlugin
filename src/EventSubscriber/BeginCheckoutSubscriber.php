@@ -25,12 +25,21 @@ final class BeginCheckoutSubscriber implements EventSubscriberInterface, LoggerA
 
     private LoggerInterface $logger;
 
+    private EventDispatcherInterface $eventDispatcher;
+
+    private CartContextInterface $cartContext;
+
+    private ItemsResolverInterface $itemsResolver;
+
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly CartContextInterface $cartContext,
-        private readonly ItemsResolverInterface $itemsResolver,
+        EventDispatcherInterface $eventDispatcher,
+        CartContextInterface $cartContext,
+        ItemsResolverInterface $itemsResolver
     ) {
         $this->logger = new NullLogger();
+        $this->eventDispatcher = $eventDispatcher;
+        $this->cartContext = $cartContext;
+        $this->itemsResolver = $itemsResolver;
     }
 
     public static function getSubscribedEvents(): array

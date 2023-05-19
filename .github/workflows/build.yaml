@@ -24,7 +24,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1" # Always use the lowest version of PHP since a higher version could create actual syntax errors in lower versions
+                    - "7.4" # Always use the lowest version of PHP since a higher version could create actual syntax errors in lower versions
 
                 dependencies:
                     - "highest"
@@ -68,15 +68,12 @@ jobs:
         strategy:
             matrix:
                 php-version:
+                    - "7.4"
                     - "8.1"
                     - "8.2"
 
                 dependencies:
                     - "highest"
-
-                symfony:
-                    - "^5.4"
-                    - "^6.0"
 
         steps:
             -   name: "Checkout"
@@ -111,15 +108,12 @@ jobs:
         strategy:
             matrix:
                 php-version:
+                    - "7.4"
                     - "8.1"
                     - "8.2"
 
                 dependencies:
                     - "highest"
-
-                symfony:
-                    - "^5.4"
-                    - "^6.0"
 
         steps:
             -   name: "Checkout"
@@ -154,15 +148,12 @@ jobs:
         strategy:
             matrix:
                 php-version:
+                    - "7.4"
                     - "8.1"
                     - "8.2"
 
                 dependencies:
                     - "highest"
-
-                symfony:
-                    - "^5.4"
-                    - "^6.0"
 
         steps:
             -   name: "Checkout"
@@ -194,15 +185,12 @@ jobs:
         strategy:
             matrix:
                 php-version:
+                    - "7.4"
                     - "8.1"
                     - "8.2"
 
                 dependencies:
                     - "highest"
-
-                symfony:
-                    - "^5.4"
-                    - "^6.0"
 
         steps:
             -   name: "Start MySQL"
@@ -218,7 +206,7 @@ jobs:
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
                     tools: "flex"
-                    
+
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v2"
                 env:
@@ -237,7 +225,7 @@ jobs:
 
             -   name: "Validate Doctrine mapping"
                 run: "(cd tests/Application && bin/console doctrine:schema:validate)"
-                
+    
     code-coverage:
         name: "Code Coverage (PHP${{ matrix.php-version }} | Deps: ${{ matrix.dependencies }})"
 

@@ -11,10 +11,17 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Item\Item;
  */
 final class ItemResolved
 {
-    public function __construct(
-        public Item $item,
-        /** @var array<string, mixed> $context */
-        public array $context = [],
-    ) {
+    public Item $item;
+
+    /** @var array<string, mixed> */
+    public array $context = [];
+
+    /**
+     * @param array<string, mixed> $context
+     */
+    public function __construct(Item $item, array $context = [])
+    {
+        $this->item = $item;
+        $this->context = $context;
     }
 }

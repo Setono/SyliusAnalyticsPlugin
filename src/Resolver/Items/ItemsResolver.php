@@ -9,8 +9,11 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class ItemsResolver implements ItemsResolverInterface
 {
-    public function __construct(private readonly ItemResolverInterface $itemResolver)
+    private ItemResolverInterface $itemResolver;
+
+    public function __construct(ItemResolverInterface $itemResolver)
     {
+        $this->itemResolver = $itemResolver;
     }
 
     public function resolveFromOrder(OrderInterface $order): array

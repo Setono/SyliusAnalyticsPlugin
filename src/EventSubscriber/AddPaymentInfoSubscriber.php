@@ -23,11 +23,15 @@ final class AddPaymentInfoSubscriber implements EventSubscriberInterface, Logger
 
     private LoggerInterface $logger;
 
-    public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly ItemsResolverInterface $itemsResolver,
-    ) {
+    private EventDispatcherInterface $eventDispatcher;
+
+    private ItemsResolverInterface $itemsResolver;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher, ItemsResolverInterface $itemsResolver)
+    {
         $this->logger = new NullLogger();
+        $this->eventDispatcher = $eventDispatcher;
+        $this->itemsResolver = $itemsResolver;
     }
 
     public static function getSubscribedEvents(): array
@@ -44,15 +48,21 @@ final class AddPaymentInfoSubscriber implements EventSubscriberInterface, Logger
             $order = $resourceControllerEvent->getSubject();
             Assert::isInstanceOf($order, OrderInterface::class);
 
-            $paymentMethod = $order->getLastPayment()?->getMethod()?->getCode();
+            $lastPayment = $order->getLastPayment();
+            Assert::notNull($lastPayment);
+
+            $paymentMethod = $lastPayment->getMethod();
             Assert::notNull($paymentMethod);
+
+            $paymentMethodCode = $paymentMethod->getCode();
+            Assert::notNull($paymentMethodCode);
 
             $this->eventDispatcher->dispatch(
                 new ClientSideEvent(
                     AddPaymentInfoEvent::create()
                         ->setValue(self::formatAmount($order->getTotal()))
                         ->setCurrency($order->getCurrencyCode())
-                        ->setPaymentType($paymentMethod)
+                        ->setPaymentType($paymentMethodCode)
                         ->setItems($this->itemsResolver->resolveFromOrder($order)),
                 ),
             );
