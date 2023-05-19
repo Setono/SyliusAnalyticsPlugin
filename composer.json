@@ -27,7 +27,6 @@
         "symfony/form": "^5.4 || ^6.0",
         "symfony/http-foundation": "^5.4 || ^6.0",
         "symfony/http-kernel": "^5.4 || ^6.0",
-        "symfony/mailer": "^5.4 || ^6.0",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
