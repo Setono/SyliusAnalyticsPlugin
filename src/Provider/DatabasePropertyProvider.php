@@ -20,10 +20,8 @@ final class DatabasePropertyProvider implements PropertyProviderInterface
 
     private PropertyRepositoryInterface $propertyRepository;
 
-    public function __construct(
-        ChannelContextInterface $channelContext,
-        PropertyRepositoryInterface $propertyRepository,
-    ) {
+    public function __construct(ChannelContextInterface $channelContext, PropertyRepositoryInterface $propertyRepository)
+    {
         $this->channelContext = $channelContext;
         $this->propertyRepository = $propertyRepository;
     }

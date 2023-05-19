@@ -25,12 +25,21 @@ final class AddToCartSubscriber implements EventSubscriberInterface, LoggerAware
 
     private LoggerInterface $logger;
 
+    private EventDispatcherInterface $eventDispatcher;
+
+    private CartContextInterface $cartContext;
+
+    private ItemResolverInterface $itemResolver;
+
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly CartContextInterface $cartContext,
-        private readonly ItemResolverInterface $itemResolver,
+        EventDispatcherInterface $eventDispatcher,
+        CartContextInterface $cartContext,
+        ItemResolverInterface $itemResolver
     ) {
         $this->logger = new NullLogger();
+        $this->eventDispatcher = $eventDispatcher;
+        $this->cartContext = $cartContext;
+        $this->itemResolver = $itemResolver;
     }
 
     public static function getSubscribedEvents(): array

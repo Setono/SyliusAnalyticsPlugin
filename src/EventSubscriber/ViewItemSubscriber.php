@@ -23,11 +23,15 @@ final class ViewItemSubscriber implements EventSubscriberInterface, LoggerAwareI
 
     private LoggerInterface $logger;
 
-    public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly ItemResolverInterface $itemResolver,
-    ) {
+    private EventDispatcherInterface $eventDispatcher;
+
+    private ItemResolverInterface $itemResolver;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher, ItemResolverInterface $itemResolver)
+    {
         $this->logger = new NullLogger();
+        $this->eventDispatcher = $eventDispatcher;
+        $this->itemResolver = $itemResolver;
     }
 
     public static function getSubscribedEvents(): array
