@@ -20,7 +20,7 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('setono_sylius_analytics');
         $rootNode = $treeBuilder->getRootNode();
 
-        /** @psalm-suppress MixedMethodCall,PossiblyNullReference,PossiblyUndefinedMethod,UndefinedInterfaceMethod */
+        /** @psalm-suppress MixedMethodCall,PossiblyNullReference,UndefinedInterfaceMethod */
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
@@ -43,7 +43,7 @@ final class Configuration implements ConfigurationInterface
 
     private function addResourcesSection(ArrayNodeDefinition $node): void
     {
-        /** @psalm-suppress MixedMethodCall,PossiblyNullReference,PossiblyUndefinedMethod,UndefinedInterfaceMethod */
+        /** @psalm-suppress MixedMethodCall,PossiblyNullReference,UndefinedInterfaceMethod */
         $node
             ->children()
                 ->arrayNode('resources')
