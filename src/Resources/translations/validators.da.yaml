@@ -1,4 +1,9 @@
 setono_sylius_analytics:
+    container:
+        channels:
+            min_count: Du bedes vælge {{ limit }} eller flere kanaler.
+        container_id:
+            unique: Du har allerede en eksisterende container med dette container-id
     property:
         channels:
             min_count: Du bedes vælge {{ limit }} eller flere kanaler.

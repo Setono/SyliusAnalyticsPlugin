@@ -3,11 +3,21 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
+        <parameter key="setono_sylius_analytics.form.container.validation_groups" type="collection">
+            <parameter>setono_sylius_analytics</parameter>
+        </parameter>
+
         <parameter key="setono_sylius_analytics.form.property.validation_groups" type="collection">
             <parameter>setono_sylius_analytics</parameter>
         </parameter>
     </parameters>
     <services>
+        <service id="setono_sylius_analytics.form.container" class="Setono\SyliusAnalyticsPlugin\Form\Type\ContainerType">
+            <argument>%setono_sylius_analytics.model.container.class%</argument>
+            <argument>%setono_sylius_analytics.form.container.validation_groups%</argument>
+            <tag name="form.type"/>
+        </service>
+
         <service id="setono_sylius_analytics.form.property" class="Setono\SyliusAnalyticsPlugin\Form\Type\PropertyType">
             <argument>%setono_sylius_analytics.model.property.class%</argument>
             <argument>%setono_sylius_analytics.form.property.validation_groups%</argument>

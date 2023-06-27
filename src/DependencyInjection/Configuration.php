@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\DependencyInjection;
 
+use Setono\SyliusAnalyticsPlugin\Form\Type\ContainerType;
 use Setono\SyliusAnalyticsPlugin\Form\Type\PropertyType;
+use Setono\SyliusAnalyticsPlugin\Model\Container;
 use Setono\SyliusAnalyticsPlugin\Model\Property;
+use Setono\SyliusAnalyticsPlugin\Repository\ContainerRepository;
 use Setono\SyliusAnalyticsPlugin\Repository\PropertyRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\Factory\Factory;
@@ -49,6 +52,22 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->arrayNode('container')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(Container::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ContainerRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('form')->defaultValue(ContainerType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
                         ->arrayNode('property')
                             ->addDefaultsIfNotSet()
                             ->children()

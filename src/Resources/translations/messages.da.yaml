@@ -2,13 +2,20 @@ setono_sylius_analytics:
     ui:
         api_secret: API Secret
         api_secret_placeholder: Indsæt din API Secret...
+        container: Container
+        container_id: Container-id
+        container_id_placeholder: Indsæt container-id, f.eks. GTM-MKA3FA...
+        container_index: Containere
+        containers: Containere
+        edit_container: Rediger container
         edit_property: Rediger ejendom
         enabled: Aktiveret
         google_analytics: Google analytics
+        measurement_id: Sporings-id
+        measurement_id_placeholder: Indsæt dit sporings-id, f.eks. G-12345678...
+        new_container: Ny container
         new_property: Ny ejendom
         no_channels: Ingen kanaler
         properties: Ejendomme
         property: Ejendom
         property_index: Ejendomsindeks
-        measurement_id: Sporings-id
-        measurement_id_placeholder: Indsæt dit sporings-id, f.eks. G-12345678...

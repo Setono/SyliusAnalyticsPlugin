@@ -1,3 +1,18 @@
+setono_sylius_analytics_admin_container:
+    resource: |
+        section: admin
+        alias: setono_sylius_analytics.container
+        permission: true
+        templates: "@SyliusAdmin\\Crud"
+        redirect: update
+        grid: setono_sylius_analytics_admin_container
+        vars:
+            all:
+                subheader: setono_sylius_analytics.ui.container
+            index:
+                icon: 'google'
+    type: sylius.resource
+    
 setono_sylius_analytics_admin_property:
     resource: |
         section: admin

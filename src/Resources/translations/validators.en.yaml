@@ -1,4 +1,9 @@
 setono_sylius_analytics:
+    container:
+        channels:
+            min_count: You must select {{ limit }} or more channels.
+        measurement_id:
+            unique: You already have one container with this container id
     property:
         channels:
             min_count: You must select {{ limit }} or more channels.

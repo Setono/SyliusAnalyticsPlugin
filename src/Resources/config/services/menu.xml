@@ -5,6 +5,7 @@
     <services>
         <service id="setono_sylius_analytics_plugin.listener.menu.google_analytic_config"
                  class="Setono\SyliusAnalyticsPlugin\Menu\AdminMenuListener">
+            <argument>%setono_google_analytics.gtag_enabled%</argument>
             <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addAdminMenuItems"/>
         </service>
     </services>
