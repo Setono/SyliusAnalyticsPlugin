@@ -18,7 +18,7 @@
         "psr/event-dispatcher": "^1.0",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
         "setono/composite-compiler-pass": "^1.1",
-        "setono/google-analytics-bundle": "^1.0@alpha",
+        "setono/google-analytics-bundle": "^1.0.0-alpha.5",
         "setono/google-analytics-measurement-protocol": "^1.0@alpha",
         "sylius/resource-bundle": "^1.8",
         "symfony/config": "^5.4 || ^6.0",

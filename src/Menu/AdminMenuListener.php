@@ -9,6 +9,13 @@ use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
 final class AdminMenuListener
 {
+    private bool $gtagEnabled;
+
+    public function __construct(bool $gtagEnabled)
+    {
+        $this->gtagEnabled = $gtagEnabled;
+    }
+
     public function addAdminMenuItems(MenuBuilderEvent $event): void
     {
         $menu = $event->getMenu();
@@ -26,7 +33,7 @@ final class AdminMenuListener
     {
         $item
             ->addChild('analytics', [
-                'route' => 'setono_sylius_analytics_admin_property_index',
+                'route' => $this->gtagEnabled ? 'setono_sylius_analytics_admin_property_index' : 'setono_sylius_analytics_admin_container_index',
             ])
             ->setLabel('setono_sylius_analytics.ui.google_analytics')
             ->setLabelAttribute('icon', 'google')

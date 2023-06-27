@@ -2,13 +2,20 @@ setono_sylius_analytics:
     ui:
         api_secret: API Secret
         api_secret_placeholder: Insert your API Secret...
+        container: Container
+        container_id: Container id
+        container_id_placeholder: Insert your container id, i.e. GTM-MKA3FA...
+        container_index: Container index
+        containers: Containers
+        edit_container: Edit container
         edit_property: Modifier la propriété
         enabled: Actif
         google_analytics: Google analytics
+        measurement_id: Measurement id
+        measurement_id_placeholder: Insérez votre tracking id, i.e. G-12345678...
+        new_container: New container
         new_property: Nouvelle propriété
         no_channels: Aucun canal
         properties: Propriétés
         property: Propriété
         property_index: Liste des Propriétés
-        measurement_id: Measurement id
-        measurement_id_placeholder: Insérez votre tracking id, i.e. G-12345678...
