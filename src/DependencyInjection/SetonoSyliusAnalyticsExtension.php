@@ -28,21 +28,33 @@ final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension
 
         $loader->load('services.xml');
 
-        $events = ['add_payment_info', 'add_shipping_info', 'add_to_cart', 'begin_checkout', 'purchase', 'view_cart', 'view_item'];
+        $events = [
+            'add_payment_info',
+            'add_shipping_info',
+            'add_to_cart',
+            'begin_checkout',
+            'purchase',
+            'view_cart',
+            'view_item_list',
+            'view_item',
+        ];
         foreach ($events as $event) {
             if (isset($config['events'][$event]) && true === $config['events'][$event]) {
                 $loader->load('services/conditional/events/' . $event . '.xml');
             }
         }
 
-        $this->registerResources('setono_sylius_analytics', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, $config['resources'], $container);
+        $this->registerResources(
+            'setono_sylius_analytics',
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
+            $config['resources'],
+            $container
+        );
 
         $container->registerForAutoconfiguration(BrandResolverInterface::class)
-            ->addTag('setono_sylius_analytics.brand_resolver')
-        ;
+            ->addTag('setono_sylius_analytics.brand_resolver');
 
         $container->registerForAutoconfiguration(VariantResolverInterface::class)
-            ->addTag('setono_sylius_analytics.variant_resolver')
-        ;
+            ->addTag('setono_sylius_analytics.variant_resolver');
     }
 }

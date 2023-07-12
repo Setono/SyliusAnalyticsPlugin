@@ -31,8 +31,32 @@ final class SetonoSyliusAnalyticsExtensionTest extends AbstractExtensionTestCase
             'begin_checkout' => true,
             'purchase' => true,
             'view_cart' => true,
+            'view_item_list' => true,
             'view_item' => true,
         ]);
         $this->assertContainerBuilderHasParameter('setono_sylius_analytics.driver', SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
+    }
+
+    /**
+     * @test
+     */
+    public function event_subscribers_are_registered_by_default(): void
+    {
+        $this->load();
+
+        $events = [
+            'add_payment_info',
+            'add_shipping_info',
+            'add_to_cart',
+            'begin_checkout',
+            'purchase',
+            'view_cart',
+            'view_item_list',
+            'view_item',
+        ];
+
+        foreach ($events as $event) {
+            $this->assertContainerBuilderHasService(sprintf('setono_sylius_analytics.event_subscriber.%s', $event));
+        }
     }
 }

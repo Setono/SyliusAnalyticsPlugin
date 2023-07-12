@@ -36,6 +36,7 @@ final class Configuration implements ConfigurationInterface
                         ->booleanNode('begin_checkout')->defaultTrue()->end()
                         ->booleanNode('purchase')->defaultTrue()->end()
                         ->booleanNode('view_cart')->defaultTrue()->end()
+                        ->booleanNode('view_item_list')->defaultTrue()->end()
                         ->booleanNode('view_item')->defaultTrue()->end()
         ;
 

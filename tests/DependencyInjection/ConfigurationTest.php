@@ -38,6 +38,7 @@ final class ConfigurationTest extends TestCase
                 'begin_checkout' => true,
                 'purchase' => true,
                 'view_cart' => true,
+                'view_item_list' => true,
                 'view_item' => true,
             ],
             'resources' => [
