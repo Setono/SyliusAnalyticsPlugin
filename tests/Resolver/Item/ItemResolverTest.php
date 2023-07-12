@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Setono\SyliusAnalyticsPlugin\Resolver;
+namespace Tests\Setono\SyliusAnalyticsPlugin\Resolver\Item;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
