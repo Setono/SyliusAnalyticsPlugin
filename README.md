@@ -66,7 +66,17 @@ Click the Google Analytics link in your backend and create a new property/contai
 ### Step 7: You're ready!
 Your Sylius store will start tracking now!
 
-The events that are tracked are located in the [EventSubscriber folder](src/EventSubscriber).
+The events that are available are:
+- add_payment_info
+- add_shipping_info
+- add_to_cart
+- begin_checkout
+- purchase
+- view_cart
+- view_item_list
+- view_item
+
+and can be found in the [EventSubscriber folder](src/EventSubscriber).
 
 Read on if you want to enrich events with more data.
 
