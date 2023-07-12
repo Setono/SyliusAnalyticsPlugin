@@ -18,31 +18,38 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
+    /**
+     * Holds the Google Analytics events available in this plugin
+     */
+    public const EVENTS = [
+        'add_payment_info',
+        'add_shipping_info',
+        'add_to_cart',
+        'begin_checkout',
+        'purchase',
+        'view_cart',
+        'view_item_list',
+        'view_item',
+    ];
+
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('setono_sylius_analytics');
         $rootNode = $treeBuilder->getRootNode();
 
-        /** @psalm-suppress MixedMethodCall,PossiblyNullReference,UndefinedInterfaceMethod */
-        $rootNode
-            ->addDefaultsIfNotSet()
-            ->children()
-                ->arrayNode('events')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->booleanNode('add_payment_info')->defaultTrue()->end()
-                        ->booleanNode('add_shipping_info')->defaultTrue()->end()
-                        ->booleanNode('add_to_cart')->defaultTrue()->end()
-                        ->booleanNode('begin_checkout')->defaultTrue()->end()
-                        ->booleanNode('purchase')->defaultTrue()->end()
-                        ->booleanNode('view_cart')->defaultTrue()->end()
-                        ->booleanNode('view_item_list')->defaultTrue()->end()
-                        ->booleanNode('view_item')->defaultTrue()->end()
-        ;
-
+        $this->addEventsSection($rootNode);
         $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
+    }
+
+    private function addEventsSection(ArrayNodeDefinition $node): void
+    {
+        $eventsNode = $node->addDefaultsIfNotSet()->children()->arrayNode('events')->addDefaultsIfNotSet()->children();
+
+        foreach (self::EVENTS as $event) {
+            $eventsNode->booleanNode($event)->defaultTrue();
+        }
     }
 
     private function addResourcesSection(ArrayNodeDefinition $node): void

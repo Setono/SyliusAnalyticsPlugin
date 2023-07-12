@@ -28,20 +28,12 @@ final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension
 
         $loader->load('services.xml');
 
-        $events = [
-            'add_payment_info',
-            'add_shipping_info',
-            'add_to_cart',
-            'begin_checkout',
-            'purchase',
-            'view_cart',
-            'view_item_list',
-            'view_item',
-        ];
-        foreach ($events as $event) {
-            if (isset($config['events'][$event]) && true === $config['events'][$event]) {
-                $loader->load('services/conditional/events/' . $event . '.xml');
+        foreach ($config['events'] as $event => $enabled) {
+            if (!$enabled) {
+                continue;
             }
+
+            $loader->load('services/conditional/events/' . $event . '.xml');
         }
 
         $this->registerResources(

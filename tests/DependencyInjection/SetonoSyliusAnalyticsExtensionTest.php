@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Setono\SyliusAnalyticsPlugin\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Setono\SyliusAnalyticsPlugin\DependencyInjection\Configuration;
 use Setono\SyliusAnalyticsPlugin\DependencyInjection\SetonoSyliusAnalyticsExtension;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
@@ -24,16 +25,12 @@ final class SetonoSyliusAnalyticsExtensionTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->assertContainerBuilderHasParameter('setono_sylius_analytics.events', [
-            'add_payment_info' => true,
-            'add_shipping_info' => true,
-            'add_to_cart' => true,
-            'begin_checkout' => true,
-            'purchase' => true,
-            'view_cart' => true,
-            'view_item_list' => true,
-            'view_item' => true,
-        ]);
+        $events = [];
+        foreach (Configuration::EVENTS as $event) {
+            $events[$event] = true;
+        }
+
+        $this->assertContainerBuilderHasParameter('setono_sylius_analytics.events', $events);
         $this->assertContainerBuilderHasParameter('setono_sylius_analytics.driver', SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
     }
 
@@ -44,18 +41,7 @@ final class SetonoSyliusAnalyticsExtensionTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $events = [
-            'add_payment_info',
-            'add_shipping_info',
-            'add_to_cart',
-            'begin_checkout',
-            'purchase',
-            'view_cart',
-            'view_item_list',
-            'view_item',
-        ];
-
-        foreach ($events as $event) {
+        foreach (Configuration::EVENTS as $event) {
             $this->assertContainerBuilderHasService(sprintf('setono_sylius_analytics.event_subscriber.%s', $event));
         }
     }
