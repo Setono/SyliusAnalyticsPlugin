@@ -51,7 +51,7 @@ class Property implements PropertyInterface
         return $this->measurementId;
     }
 
-    public function setMeasurementId(string $measurementId): void
+    public function setMeasurementId(?string $measurementId): void
     {
         $this->measurementId = $measurementId;
     }

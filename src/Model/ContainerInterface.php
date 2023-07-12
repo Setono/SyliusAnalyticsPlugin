@@ -14,5 +14,5 @@ interface ContainerInterface extends ResourceInterface, ToggleableInterface, Cha
 
     public function getContainerId(): ?string;
 
-    public function setContainerId(string $containerId): void;
+    public function setContainerId(?string $containerId): void;
 }

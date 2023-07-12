@@ -39,7 +39,7 @@ class Container implements ContainerInterface
         return $this->containerId;
     }
 
-    public function setContainerId(string $containerId): void
+    public function setContainerId(?string $containerId): void
     {
         $this->containerId = $containerId;
     }
