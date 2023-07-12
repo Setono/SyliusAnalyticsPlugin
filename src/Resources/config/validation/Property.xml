@@ -13,13 +13,6 @@
                 <value>setono_sylius_analytics</value>
             </option>
         </constraint>
-        <property name="apiSecret">
-            <constraint name="NotBlank">
-                <option name="groups">
-                    <value>setono_sylius_analytics</value>
-                </option>
-            </constraint>
-        </property>
         <property name="measurementId">
             <constraint name="NotBlank">
                 <option name="groups">

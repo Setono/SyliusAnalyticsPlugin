@@ -23,6 +23,7 @@ final class PropertyType extends AbstractResourceType
             ])
             ->add('apiSecret', TextType::class, [
                 'label' => 'setono_sylius_analytics.ui.api_secret',
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'setono_sylius_analytics.ui.api_secret_placeholder',
                 ],

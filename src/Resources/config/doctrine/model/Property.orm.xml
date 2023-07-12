@@ -13,8 +13,8 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="apiSecret" type="string"/>
         <field name="measurementId" type="string" unique="true"/>
+        <field name="apiSecret" type="string" nullable="true"/>
         <field name="enabled" column="enabled" type="boolean"/>
 
         <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">

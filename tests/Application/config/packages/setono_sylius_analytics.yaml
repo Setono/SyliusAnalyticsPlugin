@@ -2,4 +2,4 @@ imports:
     - { resource: "@SetonoSyliusAnalyticsPlugin/Resources/config/app/config.yaml" }
 
 setono_google_analytics:
-    tag_manager: ~
+    gtag: ~

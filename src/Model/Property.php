@@ -41,7 +41,7 @@ class Property implements PropertyInterface
         return $this->apiSecret;
     }
 
-    public function setApiSecret(string $apiSecret): void
+    public function setApiSecret(?string $apiSecret): void
     {
         $this->apiSecret = $apiSecret;
     }
