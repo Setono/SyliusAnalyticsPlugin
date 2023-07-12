@@ -35,6 +35,7 @@
     "require-dev": {
         "api-platform/core": "^2.7.13",
         "behat/behat": "^3.13",
+        "icanhazstring/composer-unused": "^0.8.10",
         "matthiasnoback/symfony-config-test": "^4.3",
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
         "php-http/message-factory": "^1.1",
