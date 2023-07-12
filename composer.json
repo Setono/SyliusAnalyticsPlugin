@@ -75,6 +75,11 @@
         },
         "sort-packages": true
     },
+    "extra": {
+        "branch-alias": {
+            "4.x-dev": "4.0-dev"
+        }
+    },
     "scripts": {
         "analyse": [
             "@ensure-test-container-exists",
