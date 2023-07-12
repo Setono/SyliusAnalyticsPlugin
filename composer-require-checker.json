@@ -16,7 +16,6 @@
         "true",
         "void",
         "Sylius\\Bundle\\ChannelBundle\\Form\\Type\\ChannelChoiceType",
-        "Sylius\\Bundle\\CoreBundle\\Application\\SyliusPluginTrait",
         "Sylius\\Bundle\\UiBundle\\Menu\\Event\\MenuBuilderEvent",
         "Sylius\\Component\\Channel\\Context\\ChannelContextInterface",
         "Sylius\\Component\\Channel\\Model\\ChannelInterface",
