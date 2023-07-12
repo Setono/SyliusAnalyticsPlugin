@@ -16,8 +16,10 @@ This plugin uses the [TagBagBundle](https://github.com/Setono/TagBagBundle) to i
 Please install that bundle before installing this plugin.
 
 ```bash
-composer require setono/sylius-analytics-plugin
+composer require setono/sylius-analytics-plugin:"^4.0@alpha"
 ```
+
+**NOTICE** that the v4 of this plugin is still in alpha and hence breaking changes can occur.
 
 ### Step 2: Enable the plugin
 
