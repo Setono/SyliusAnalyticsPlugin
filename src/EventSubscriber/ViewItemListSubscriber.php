@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\EventSubscriber;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\ViewItemListEvent;
 use Setono\SyliusAnalyticsPlugin\Event\ItemListViewed;
@@ -19,15 +16,12 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
-final class ViewItemListSubscriber implements EventSubscriberInterface, LoggerAwareInterface
+final class ViewItemListSubscriber extends AbstractEventSubscriber
 {
     use FormatAmountTrait;
-
-    private LoggerInterface $logger;
 
     private EventDispatcherInterface $eventDispatcher;
 
@@ -46,7 +40,8 @@ final class ViewItemListSubscriber implements EventSubscriberInterface, LoggerAw
         TaxonRepositoryInterface $taxonRepository,
         LocaleContextInterface $localeContext
     ) {
-        $this->logger = new NullLogger();
+        parent::__construct();
+
         $this->eventDispatcher = $eventDispatcher;
         $this->itemResolver = $itemResolver;
         $this->requestStack = $requestStack;
@@ -109,7 +104,7 @@ final class ViewItemListSubscriber implements EventSubscriberInterface, LoggerAw
 
             $this->eventDispatcher->dispatch(new ClientSideEvent($event));
         } catch (\Throwable $e) {
-            $this->logger->error($e->getMessage());
+            $this->log(ViewItemListEvent::NAME, $e);
         }
     }
 
@@ -125,10 +120,5 @@ final class ViewItemListSubscriber implements EventSubscriberInterface, LoggerAw
         }
 
         return $this->taxonRepository->findOneBySlug($slug, $this->localeContext->getLocaleCode());
-    }
-
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
     }
 }

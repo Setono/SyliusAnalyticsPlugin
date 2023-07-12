@@ -5,23 +5,17 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\EventSubscriber;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\ViewItemEvent;
 use Setono\SyliusAnalyticsPlugin\Resolver\Item\ItemResolverInterface;
 use Setono\SyliusAnalyticsPlugin\Util\FormatAmountTrait;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Webmozart\Assert\Assert;
 
-final class ViewItemSubscriber implements EventSubscriberInterface, LoggerAwareInterface
+final class ViewItemSubscriber extends AbstractEventSubscriber
 {
     use FormatAmountTrait;
-
-    private LoggerInterface $logger;
 
     private EventDispatcherInterface $eventDispatcher;
 
@@ -29,7 +23,8 @@ final class ViewItemSubscriber implements EventSubscriberInterface, LoggerAwareI
 
     public function __construct(EventDispatcherInterface $eventDispatcher, ItemResolverInterface $itemResolver)
     {
-        $this->logger = new NullLogger();
+        parent::__construct();
+
         $this->eventDispatcher = $eventDispatcher;
         $this->itemResolver = $itemResolver;
     }
@@ -59,12 +54,7 @@ final class ViewItemSubscriber implements EventSubscriberInterface, LoggerAwareI
                 ),
             );
         } catch (\Throwable $e) {
-            $this->logger->error($e->getMessage());
+            $this->log(ViewItemEvent::NAME, $e);
         }
-    }
-
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
     }
 }
