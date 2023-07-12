@@ -162,6 +162,10 @@ final class ProductNameBasedVariantResolver implements VariantResolverInterface
 }
 ```
 
+When you implement the `VariantResolverInterface` and register your class as a service it will automatically
+be tagged with `setono_sylius_analytics.variant_resolver` and used when tracking. Notice that the two existing
+variant resolver will remain as fallbacks.
+
 ## Contribute
 Ways you can contribute:
 * Translate [messages](src/Resources/translations/messages.en.yaml) and [validators](src/Resources/translations/validators.en.yaml) into your mother tongue
