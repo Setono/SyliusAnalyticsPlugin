@@ -19,7 +19,7 @@ final class CompositeBrandResolver extends CompositeService implements BrandReso
     {
         foreach ($this->services as $brandResolver) {
             $val = $brandResolver->resolveFromProduct($product);
-            if (null !== $val) {
+            if (null !== $val && '' !== $val) {
                 return $val;
             }
         }
@@ -31,7 +31,7 @@ final class CompositeBrandResolver extends CompositeService implements BrandReso
     {
         foreach ($this->services as $brandResolver) {
             $val = $brandResolver->resolveFromProductVariant($productVariant);
-            if (null !== $val) {
+            if (null !== $val && '' !== $val) {
                 return $val;
             }
         }
