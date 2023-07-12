@@ -4,15 +4,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="setono_sylius_analytics.event_subscriber.view_item_list"
-                 class="Setono\SyliusAnalyticsPlugin\EventSubscriber\ViewItemListSubscriber">
+                 class="Setono\SyliusAnalyticsPlugin\EventSubscriber\ViewItemListSubscriber"
+                 parent="setono_sylius_analytics.event_subscriber.abstract">
             <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="setono_sylius_analytics.resolver.item"/>
             <argument type="service" id="request_stack"/>
             <argument type="service" id="sylius.repository.taxon"/>
             <argument type="service" id="sylius.context.locale"/>
-            <call method="setLogger">
-                <argument type="service" id="logger"/>
-            </call>
 
             <tag name="kernel.event_subscriber"/>
         </service>
