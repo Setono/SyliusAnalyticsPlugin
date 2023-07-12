@@ -20,6 +20,7 @@
         "setono/composite-compiler-pass": "^1.1",
         "setono/google-analytics-bundle": "^1.0.0-alpha.5",
         "setono/google-analytics-measurement-protocol": "^1.0@alpha",
+        "sylius/grid-bundle": "^1.10",
         "sylius/resource-bundle": "^1.8",
         "symfony/config": "^5.4 || ^6.0",
         "symfony/dependency-injection": "^5.4 || ^6.0",
