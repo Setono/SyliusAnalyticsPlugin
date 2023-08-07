@@ -54,6 +54,9 @@ jobs:
             -   name: "Check style"
                 run: "composer check-style"
 
+            -   name: "Rector"
+                run: "vendor/bin/rector process --dry-run"
+
             -   name: "Lint yaml files"
                 run: "(cd tests/Application && bin/console lint:yaml ../../src/Resources)"
 
@@ -74,8 +77,17 @@ jobs:
                     - "8.2"
 
                 dependencies:
+                    - "lowest"
                     - "highest"
-
+                
+                symfony:
+                    - "^5.4"
+                    - "^6.0"
+                
+                exclude:
+                    -   php-version: "7.4"
+                        symfony: "^6.0"      
+        
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v3"
@@ -88,6 +100,9 @@ jobs:
                     php-version: "${{ matrix.php-version }}"
                     tools: "composer-require-checker, composer-unused, flex"
 
+            -   name: "Remove require-dev section in composer.json"
+                run: "composer config --unset require-dev"
+
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v2"
                 env:
@@ -96,11 +111,11 @@ jobs:
                     dependency-versions: "${{ matrix.dependencies }}"
 
             -   name: "Run maglnet/composer-require-checker"
-                run: "composer-require-checker check --config-file=$(pwd)/composer-require-checker.json"
+                run: "composer-require-checker check"
 
             -   name: "Run composer-unused/composer-unused"
                 run: "composer-unused"
-
+    
     static-code-analysis:
         name: "Static Code Analysis (PHP${{ matrix.php-version }} | Deps: ${{ matrix.dependencies }} | SF${{ matrix.symfony }})"
 
@@ -109,14 +124,21 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "7.4"
-                    - "8.0"
                     - "8.1"
                     - "8.2"
 
                 dependencies:
+                    - "lowest"
                     - "highest"
 
+                symfony:
+                    - "^5.4"
+                    - "^6.0"
+                
+                exclude:
+                    -   php-version: "7.4"
+                        symfony: "^6.0"
+        
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v3"
@@ -128,6 +150,9 @@ jobs:
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
                     tools: "flex"
+                    
+            -   name: "Remove sylius/sylius from composer.json"
+                run: "composer remove --dev sylius/sylius --no-update --no-install"
 
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v2"
@@ -135,9 +160,6 @@ jobs:
                     SYMFONY_REQUIRE: "${{ matrix.symfony }}"
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
-
-            -   name: "Cache warmup"
-                run: "(cd tests/Application && bin/console cache:warmup)"
 
             -   name: "Static analysis"
                 run: "vendor/bin/psalm --php-version=${{ matrix.php-version }}"
@@ -154,10 +176,18 @@ jobs:
                     - "8.0"
                     - "8.1"
                     - "8.2"
-
+                
                 dependencies:
                     - "highest"
 
+                symfony:
+                    - "^5.4"
+                    - "^6.0"
+                
+                exclude:
+                    -   php-version: "7.4"
+                        symfony: "^6.0"
+        
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v3"
@@ -169,6 +199,9 @@ jobs:
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
                     tools: "flex"
+                    
+            -   name: "Remove sylius/sylius from composer.json"
+                run: "composer remove --dev sylius/sylius --no-update --no-install"
 
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v2"
@@ -188,14 +221,11 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "7.4"
-                    - "8.0"
-                    - "8.1"
-                    - "8.2"
+                    - "7.4" # We only do the integration tests on the lowest PHP requirement because the maintenance burden for doing this for all PHP versions requires a lot of Sylius application changes
 
                 dependencies:
                     - "highest"
-
+        
         steps:
             -   name: "Start MySQL"
                 run: "sudo /etc/init.d/mysql start"

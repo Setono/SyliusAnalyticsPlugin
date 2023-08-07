@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
-    findUnusedPsalmSuppress="true"
+    findUnusedPsalmSuppress="false"
     findUnusedCode="false"
     findUnusedBaselineEntry="true"
     phpVersion="7.4"
@@ -15,12 +15,12 @@
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
-    <plugins>
-        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
-            <containerXml>tests/Application/var/cache/test/Tests_Setono_SyliusAnalyticsPlugin_Application_KernelTestDebugContainer.xml</containerXml>
-        </pluginClass>
-    </plugins>
     <issueHandlers>
         <PluginIssue name="QueryBuilderSetParameter" errorLevel="info"/>
+        <MissingTemplateParam>
+            <errorLevel type="suppress">
+                <directory name="src/Repository"/>
+            </errorLevel>
+        </MissingTemplateParam>
     </issueHandlers>
 </psalm>
