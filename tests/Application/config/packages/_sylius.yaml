@@ -13,9 +13,3 @@ sylius_shop:
 
 sylius_api:
     enabled: true
-
-sylius_order:
-    resources:
-        order:
-            classes:
-                model: Tests\Setono\SyliusAnalyticsPlugin\Application\Model\Order

@@ -10,9 +10,11 @@
             </call>
         </service>
 
-        <service id="setono_sylius_analytics.event_listener.update_client_id_on_order"
-                 class="Setono\SyliusAnalyticsPlugin\EventSubscriber\UpdateClientIdOnOrderListener">
+        <service id="setono_sylius_analytics.event_subscriber.dispatch_send_purchase_request"
+                 class="Setono\SyliusAnalyticsPlugin\EventSubscriber\DispatchSendPurchaseRequestSubscriber">
             <argument type="service" id="setono_google_analytics.context.client_id"/>
+            <argument type="service" id="setono_sylius_analytics.command_bus"/>
+            <argument type="service" id="setono_sylius_analytics.resolver.items"/>
 
             <tag name="kernel.event_subscriber"/>
         </service>
