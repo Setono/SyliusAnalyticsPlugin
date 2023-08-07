@@ -9,5 +9,12 @@
                 <argument type="service" id="logger"/>
             </call>
         </service>
+
+        <service id="setono_sylius_analytics.event_listener.update_client_id_on_order"
+                 class="Setono\SyliusAnalyticsPlugin\EventSubscriber\UpdateClientIdOnOrderListener">
+            <argument type="service" id="setono_google_analytics.context.client_id"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
     </services>
 </container>
