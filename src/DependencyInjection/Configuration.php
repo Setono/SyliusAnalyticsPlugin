@@ -35,6 +35,8 @@ final class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('setono_sylius_analytics');
+
+        /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
 
         $this->addEventsSection($rootNode);
@@ -54,7 +56,7 @@ final class Configuration implements ConfigurationInterface
 
     private function addResourcesSection(ArrayNodeDefinition $node): void
     {
-        /** @psalm-suppress MixedMethodCall,PossiblyNullReference,UndefinedInterfaceMethod */
+        /** @psalm-suppress MixedMethodCall,PossiblyNullReference,PossiblyUndefinedMethod,UndefinedInterfaceMethod */
         $node
             ->children()
                 ->arrayNode('resources')
