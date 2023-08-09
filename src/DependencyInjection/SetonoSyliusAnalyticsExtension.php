@@ -10,9 +10,10 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension
+final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -48,5 +49,16 @@ final class SetonoSyliusAnalyticsExtension extends AbstractResourceExtension
 
         $container->registerForAutoconfiguration(VariantResolverInterface::class)
             ->addTag('setono_sylius_analytics.variant_resolver');
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        $container->prependExtensionConfig('framework', [
+            'messenger' => [
+                'buses' => [
+                    'setono_sylius_analytics.command_bus' => null,
+                ],
+            ],
+        ]);
     }
 }
