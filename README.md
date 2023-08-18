@@ -13,7 +13,7 @@ will populate the `dataLayer` with event data.
 ### Step 1: Download the plugin
 
 This plugin uses the [TagBagBundle](https://github.com/Setono/TagBagBundle) to inject scripts onto your page.
-Please install that bundle before installing this plugin.
+Please read and follow the installation instructions for that bundle before installing this plugin.
 
 ```bash
 composer require setono/sylius-analytics-plugin:"^4.0@alpha"
