@@ -75,7 +75,7 @@ final class DispatchSendPurchaseRequestSubscriber implements EventSubscriberInte
                 (int) $order->getId(),
                 $clientId
             ),
-            [new DelayStamp($this->delay)]
+            [DelayStamp::delayFor(new \DateInterval(sprintf('PT%dS', $this->delay)))]
         ));
     }
 }
