@@ -6,7 +6,7 @@ namespace Setono\SyliusAnalyticsPlugin\EventSubscriber;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\AddPaymentInfoEvent;
+use Setono\GoogleAnalyticsEvents\Event\AddPaymentInfoEvent;
 use Setono\SyliusAnalyticsPlugin\Resolver\Items\ItemsResolverInterface;
 use Setono\SyliusAnalyticsPlugin\Util\FormatAmountTrait;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
@@ -62,7 +62,7 @@ final class AddPaymentInfoSubscriber extends AbstractEventSubscriber
                 ),
             );
         } catch (\Throwable $e) {
-            $this->log(AddPaymentInfoEvent::NAME, $e);
+            $this->log(AddPaymentInfoEvent::getName(), $e);
         }
     }
 }

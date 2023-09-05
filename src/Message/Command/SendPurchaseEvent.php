@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Message\Command;
 
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\PurchaseEvent;
+use Setono\GoogleAnalyticsEvents\Event\PurchaseEvent;
 
 final class SendPurchaseEvent implements CommandInterface
 {

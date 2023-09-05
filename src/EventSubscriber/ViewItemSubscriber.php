@@ -6,7 +6,7 @@ namespace Setono\SyliusAnalyticsPlugin\EventSubscriber;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\ViewItemEvent;
+use Setono\GoogleAnalyticsEvents\Event\ViewItemEvent;
 use Setono\SyliusAnalyticsPlugin\Resolver\Item\ItemResolverInterface;
 use Setono\SyliusAnalyticsPlugin\Util\FormatAmountTrait;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
@@ -54,7 +54,7 @@ final class ViewItemSubscriber extends AbstractEventSubscriber
                 ),
             );
         } catch (\Throwable $e) {
-            $this->log(ViewItemEvent::NAME, $e);
+            $this->log(ViewItemEvent::getName(), $e);
         }
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Setono\SyliusAnalyticsPlugin\EventSubscriber;
 
 use Setono\GoogleAnalyticsBundle\Context\ClientIdContextInterface;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\PurchaseEvent;
+use Setono\GoogleAnalyticsEvents\Event\PurchaseEvent;
 use Setono\SyliusAnalyticsPlugin\Message\Command\SendPurchaseEvent;
 use Setono\SyliusAnalyticsPlugin\Resolver\Items\ItemsResolverInterface;
 use Setono\SyliusAnalyticsPlugin\Util\FormatAmountTrait;
