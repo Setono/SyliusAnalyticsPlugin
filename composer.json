@@ -21,7 +21,7 @@
         "psr/log": "^1.1 || ^2.0 || ^3.0",
         "setono/composite-compiler-pass": "^1.1",
         "setono/google-analytics-bundle": "^2.0@alpha",
-        "setono/google-analytics-events": "^1.0@beta",
+        "setono/google-analytics-events": "^1.0@rc",
         "setono/google-analytics-measurement-protocol": "^2.0@beta",
         "sylius/channel": "^1.0",
         "sylius/channel-bundle": "^1.0",

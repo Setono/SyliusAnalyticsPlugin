@@ -61,12 +61,12 @@ final class ItemResolverTest extends TestCase
         $orderItem->getVariant()->willReturn($productVariant->reveal());
         $item = $resolver->resolveFromOrderItem($orderItem->reveal());
 
-        self::assertSame('T_SHIRT', $item->getId());
-        self::assertSame('PHP T-shirt', $item->getName());
+        self::assertSame('T_SHIRT', $item->getItemId());
+        self::assertSame('PHP T-shirt', $item->getItemName());
         self::assertSame(2, $item->getQuantity());
-        self::assertSame('Large', $item->getVariant());
-        self::assertSame('PHP', $item->getBrand());
-        self::assertSame('Apparel', $item->getCategory());
-        self::assertSame('T-shirts', $item->getCategory2());
+        self::assertSame('Large', $item->getItemVariant());
+        self::assertSame('PHP', $item->getItemBrand());
+        self::assertSame('Apparel', $item->getItemCategory());
+        self::assertSame('T-shirts', $item->getItemCategory2());
     }
 }
