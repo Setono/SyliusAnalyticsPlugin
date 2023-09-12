@@ -6,7 +6,7 @@ namespace Setono\SyliusAnalyticsPlugin\EventSubscriber;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\ViewCartEvent;
+use Setono\GoogleAnalyticsEvents\Event\ViewCartEvent;
 use Setono\SyliusAnalyticsPlugin\Resolver\Items\ItemsResolverInterface;
 use Setono\SyliusAnalyticsPlugin\Util\FormatAmountTrait;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -70,7 +70,7 @@ final class ViewCartSubscriber extends AbstractEventSubscriber
                 ),
             );
         } catch (\Throwable $e) {
-            $this->log(ViewCartEvent::NAME, $e);
+            $this->log(ViewCartEvent::getName(), $e);
         }
     }
 }

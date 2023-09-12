@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Event;
 
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Item\Item;
+use Setono\GoogleAnalyticsEvents\Event\Item\Item;
 
 /**
  * Is fired when an item has been resolved. Use this to do common manipulations on the item before it's sent to Google

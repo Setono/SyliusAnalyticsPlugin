@@ -6,7 +6,7 @@ namespace Setono\SyliusAnalyticsPlugin\EventSubscriber;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\AddToCartEvent;
+use Setono\GoogleAnalyticsEvents\Event\AddToCartEvent;
 use Setono\SyliusAnalyticsPlugin\Resolver\Item\ItemResolverInterface;
 use Setono\SyliusAnalyticsPlugin\Util\FormatAmountTrait;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
@@ -71,7 +71,7 @@ final class AddToCartSubscriber extends AbstractEventSubscriber
                 ),
             );
         } catch (\Throwable $e) {
-            $this->log(AddToCartEvent::NAME, $e);
+            $this->log(AddToCartEvent::getName(), $e);
         }
     }
 }

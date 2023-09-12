@@ -28,9 +28,8 @@
 {{ sylius_template_event('sylius.shop.layout.before_body') }}
 <div class="pusher" data-route="{{ app.request.get('_route') }}">
     {% block top %}
-        <div id="menu" class="top-menu">
-            <a href="#" class="top-menu__link">{{ 'sylius.top_bar'|trans }}</a>
-            <div class="top-bar">{{ sylius_template_event('sylius.shop.layout.topbar') }}</div>
+        <div id="menu" class="ui large sticky inverted stackable menu">
+            {{ sylius_template_event('sylius.shop.layout.topbar') }}
         </div>
     {% endblock %}
 

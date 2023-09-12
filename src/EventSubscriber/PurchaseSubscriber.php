@@ -6,7 +6,7 @@ namespace Setono\SyliusAnalyticsPlugin\EventSubscriber;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\PurchaseEvent;
+use Setono\GoogleAnalyticsEvents\Event\PurchaseEvent;
 use Setono\SyliusAnalyticsPlugin\Resolver\Items\ItemsResolverInterface;
 use Setono\SyliusAnalyticsPlugin\Util\FormatAmountTrait;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -87,7 +87,7 @@ final class PurchaseSubscriber extends AbstractEventSubscriber
                 ),
             );
         } catch (\Throwable $e) {
-            $this->log(PurchaseEvent::NAME, $e);
+            $this->log(PurchaseEvent::getName(), $e);
         }
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusAnalyticsPlugin\Resolver\Items;
 
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Item\Item;
+use Setono\GoogleAnalyticsEvents\Event\Item\Item;
 use Sylius\Component\Core\Model\OrderInterface;
 
 interface ItemsResolverInterface

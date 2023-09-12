@@ -6,7 +6,7 @@ namespace Setono\SyliusAnalyticsPlugin\EventSubscriber;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\BeginCheckoutEvent;
+use Setono\GoogleAnalyticsEvents\Event\BeginCheckoutEvent;
 use Setono\SyliusAnalyticsPlugin\Resolver\Items\ItemsResolverInterface;
 use Setono\SyliusAnalyticsPlugin\Util\FormatAmountTrait;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -70,7 +70,7 @@ final class BeginCheckoutSubscriber extends AbstractEventSubscriber
                 ),
             );
         } catch (\Throwable $e) {
-            $this->log(BeginCheckoutEvent::NAME, $e);
+            $this->log(BeginCheckoutEvent::getName(), $e);
         }
     }
 }
