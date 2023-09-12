@@ -61,10 +61,10 @@ final class ItemResolver implements ItemResolverInterface
         Assert::notNull($variant);
 
         $item = Item::create()
-            ->setId($variant->getCode())
-            ->setName($orderItem->getProductName())
-            ->setVariant($this->variantResolver->resolve($variant))
-            ->setBrand($this->brandResolver->resolveFromProductVariant($variant))
+            ->setItemId($variant->getCode())
+            ->setItemName($orderItem->getProductName())
+            ->setItemVariant($this->variantResolver->resolve($variant))
+            ->setItemBrand($this->brandResolver->resolveFromProductVariant($variant))
             ->setQuantity($orderItem->getQuantity())
             ->setPrice(self::formatAmount($orderItem->getFullDiscountedUnitPrice()))
         ;
@@ -86,9 +86,9 @@ final class ItemResolver implements ItemResolverInterface
         Assert::isInstanceOf($variant, ProductVariantInterface::class);
 
         $item = Item::create()
-            ->setId($product->getCode())
-            ->setName($product->getName())
-            ->setBrand($this->brandResolver->resolveFromProduct($product))
+            ->setItemId($product->getCode())
+            ->setItemName($product->getName())
+            ->setItemBrand($this->brandResolver->resolveFromProduct($product))
         ;
 
         try {
@@ -119,7 +119,7 @@ final class ItemResolver implements ItemResolverInterface
                 break;
             }
 
-            $method = sprintf('setCategory%s', 0 === $idx ? '' : (string) ($idx + 1));
+            $method = sprintf('setItemCategory%s', 0 === $idx ? '' : (string) ($idx + 1));
             $item->{$method}($category);
         }
     }

@@ -61,8 +61,8 @@ final class ViewItemListSubscriber extends AbstractEventSubscriber
     {
         try {
             $event = ViewItemListEvent::create()
-                ->setListId($viewItemListEvent->listId)
-                ->setListName($viewItemListEvent->listName)
+                ->setItemListId($viewItemListEvent->listId)
+                ->setItemListName($viewItemListEvent->listName)
             ;
 
             foreach ($viewItemListEvent->products as $product) {
@@ -93,8 +93,8 @@ final class ViewItemListSubscriber extends AbstractEventSubscriber
             $taxon = $this->resolveTaxon();
             if (null !== $taxon) {
                 $event
-                    ->setListId($taxon->getCode())
-                    ->setListName($taxon->getName())
+                    ->setItemListId($taxon->getCode())
+                    ->setItemListName($taxon->getName())
                 ;
             }
 
