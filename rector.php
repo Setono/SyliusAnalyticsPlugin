@@ -13,8 +13,9 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->sets([
-        DowngradeLevelSetList::DOWN_TO_PHP_74
+        LevelSetList::UP_TO_PHP_74
     ]);
+
     $rectorConfig->skip([
         'tests/Application/**'
     ]);
