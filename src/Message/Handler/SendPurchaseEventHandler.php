@@ -29,15 +29,22 @@ class SendPurchaseEventHandler
 
     private EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(OrderRepositoryInterface $orderRepository, PropertyRepositoryInterface $propertyRepository, EventDispatcherInterface $eventDispatcher)
+    private bool $gtagEnabled;
+
+    public function __construct(OrderRepositoryInterface $orderRepository, PropertyRepositoryInterface $propertyRepository, EventDispatcherInterface $eventDispatcher, bool $gtagEnabled)
     {
         $this->orderRepository = $orderRepository;
         $this->propertyRepository = $propertyRepository;
         $this->eventDispatcher = $eventDispatcher;
+        $this->gtagEnabled = $gtagEnabled;
     }
 
     public function __invoke(SendPurchaseEvent $message): void
     {
+        if (false === $this->gtagEnabled) {
+            return;
+        }
+
         $order = $this->orderRepository->find($message->orderId);
         if (!$order instanceof OrderInterface) {
             throw new UnrecoverableMessageHandlingException(sprintf(
